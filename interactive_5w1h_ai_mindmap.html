@@ -1,0 +1,1602 @@
+<!doctype html>
+<html lang="vi" class="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mindmap 5W1H — AI và Tương Lai Việc Làm</title>
+<meta name="description" content="Khung tư duy 5W1H tương tác trực quan về AI và việc làm dựa trên dữ liệu ILO, WEF và IMF.">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            bg: '#050c18',
+            surface: '#0b192e',
+            card: '#0f223d',
+            border: '#1b385a',
+            cyan: '#38bdf8',
+            emerald: '#34d399',
+            amber: '#fbbf24',
+            rose: '#fb7185',
+            violet: '#a78bfa'
+          }
+        },
+        fontFamily: {
+          sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif']
+        }
+      }
+    }
+  }
+</script>
+<style>
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: #050c18; }
+  ::-webkit-scrollbar-thumb { background: #1b385a; border-radius: 999px; }
+  ::-webkit-scrollbar-thumb:hover { background: #2a537f; }
+
+  /* Smooth SVG branch transitions */
+  .branch-line {
+    transition: stroke 0.3s ease, stroke-width 0.3s ease, stroke-dashoffset 0.5s ease;
+  }
+  .branch-line.active {
+    stroke-dasharray: 6 3;
+    animation: dashMove 20s linear infinite;
+  }
+  @keyframes dashMove {
+    to { stroke-dashoffset: -100; }
+  }
+
+  /* Canvas panning cursor */
+  .canvas-grab { cursor: grab; }
+  .canvas-grabbing { cursor: grabbing; user-select: none; }
+
+  /* Node hover glow */
+  .node-card {
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .node-card:hover {
+    transform: translateY(-3px) scale(1.015);
+  }
+
+  /* Pulse highlight for search match */
+  @keyframes searchPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
+    50% { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
+  }
+  .highlight-match {
+    animation: searchPulse 1.8s infinite;
+    border-color: #38bdf8 !important;
+  }
+</style>
+</head>
+<body class="bg-brand-bg text-slate-100 min-h-screen font-sans selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden">
+
+  <!-- Top Announcement Bar / Quick Navigation -->
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-brand-bg/85 border-b border-brand-border/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Brand & Title -->
+      <div class="flex items-center gap-3 min-w-max">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 text-white font-black text-sm">
+          5W
+        </div>
+        <div>
+          <h1 class="text-sm font-bold tracking-tight text-white flex items-center gap-2">
+            Mindmap 5W1H <span class="hidden sm:inline text-xs font-normal text-slate-400">| AI & Tương lai Việc làm</span>
+          </h1>
+          <p class="text-[11px] text-cyan-400 font-medium">Báo cáo: ILO 2025 · WEF 2025 · IMF 2024</p>
+        </div>
+      </div>
+
+      <!-- Center: Search filter input -->
+      <div class="hidden md:flex items-center relative flex-1 max-w-xs">
+        <svg class="w-4 h-4 absolute left-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        <input 
+          id="mindmap-search" 
+          type="text" 
+          placeholder="Tìm từ khóa: clerical, kỹ năng, WEF..." 
+          class="w-full bg-brand-surface/90 text-xs text-white pl-9 pr-7 py-2 rounded-xl border border-brand-border/80 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition"
+        >
+        <button id="clear-search" class="hidden absolute right-2.5 text-slate-400 hover:text-white text-xs">✕</button>
+      </div>
+
+      <!-- Right: View switchers & Quick Action buttons -->
+      <div class="flex items-center gap-2">
+        <!-- View Toggle Pills -->
+        <div class="flex items-center bg-brand-surface p-1 rounded-xl border border-brand-border text-xs font-medium">
+          <button id="view-interactive-btn" class="px-2.5 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold transition flex items-center gap-1.5" title="Sơ đồ tư duy mở rộng">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+            <span class="hidden sm:inline">Mindmap</span>
+          </button>
+          <button id="view-matrix-btn" class="px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5" title="Khung 5W1H trực quan">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+            <span class="hidden sm:inline">Ma trận 6 Nhánh</span>
+          </button>
+          <button id="view-tree-btn" class="px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5" title="Dạng cây phân cấp">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
+            <span class="hidden sm:inline">Cây cây thư mục</span>
+          </button>
+        </div>
+
+        <!-- Presentation Mode Button -->
+        <button id="presentation-btn" class="p-2 rounded-xl bg-brand-surface border border-brand-border text-slate-300 hover:text-cyan-300 hover:border-cyan-500/50 transition flex items-center gap-1 text-xs" title="Chế độ Thuyết trình từng bước">
+          <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <span class="hidden lg:inline font-medium">Thuyết trình</span>
+        </button>
+
+        <!-- Quick Copy Summary Button -->
+        <button id="copy-summary-btn" class="p-2 rounded-xl bg-brand-surface border border-brand-border text-slate-300 hover:text-white hover:border-slate-500 transition text-xs" title="Sao chép luận điểm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Floating Presentation Mode Controller (Hidden by default) -->
+  <div id="presentation-banner" class="hidden sticky top-16 z-30 bg-gradient-to-r from-cyan-950 via-slate-900 to-indigo-950 border-b border-cyan-500/40 px-4 py-2.5 transition">
+    <div class="max-w-7xl mx-auto flex items-center justify-between text-xs">
+      <div class="flex items-center gap-3">
+        <span class="px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 font-bold text-[10px] uppercase tracking-wider">Slide Mode</span>
+        <span id="pres-step-title" class="font-semibold text-cyan-200">Đang xem: Tổng quan trung tâm</span>
+        <span id="pres-step-counter" class="text-slate-400 text-[11px]">(1/7)</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="pres-prev-btn" class="px-2.5 py-1 rounded-lg bg-brand-card hover:bg-slate-700 text-white font-medium border border-brand-border text-xs flex items-center gap-1">
+          ‹ Trước
+        </button>
+        <button id="pres-next-btn" class="px-3 py-1 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-1">
+          Tiếp theo ›
+        </button>
+        <button id="pres-exit-btn" class="ml-2 text-slate-400 hover:text-white text-xs">
+          ✕ Thoát
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-8">
+
+    <!-- Hero Header with Context Chips -->
+    <section class="space-y-4 pt-2">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 text-xs font-semibold tracking-wide shadow-inner">
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+        PHÂN TÍCH TƯ DUY ĐA CHIỀU · KHUNG 5W1H
+      </div>
+
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <div class="max-w-3xl space-y-2">
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.1]">
+            AI có làm mất việc làm <br class="hidden sm:block"><span class="bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent">trong vài năm tới hay không?</span>
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Phân tích câu hỏi hóc búa bằng khung <b>5W1H</b>, phân định rành mạch giữa <b>“mức độ phơi nhiễm (task exposure)”</b> và <b>“nguy cơ mất việc làm hàng loạt (job displacement)”</b>. Dữ liệu chuẩn hóa từ ILO, WEF và IMF.
+          </p>
+        </div>
+
+        <!-- Meta badges -->
+        <div class="flex flex-wrap gap-2 lg:max-w-sm lg:justify-end">
+          <span class="px-2.5 py-1 text-xs rounded-lg bg-brand-surface border border-brand-border text-slate-300 font-medium">Báo cáo ILO 2025</span>
+          <span class="px-2.5 py-1 text-xs rounded-lg bg-brand-surface border border-brand-border text-slate-300 font-medium">WEF Future of Jobs 2025</span>
+          <span class="px-2.5 py-1 text-xs rounded-lg bg-brand-surface border border-brand-border text-slate-300 font-medium">IMF Gen-AI 2024</span>
+          <span class="px-2.5 py-1 text-xs rounded-lg bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 font-semibold">Tương tác trực quan 2D</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 Core Stats Cards with Context Clarity -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-gradient-to-b from-brand-card/90 to-brand-surface/90 border border-brand-border rounded-2xl p-5 shadow-xl relative overflow-hidden group hover:border-cyan-500/40 transition">
+        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition"></div>
+        <div class="text-3xl sm:text-4xl font-black text-cyan-400 tracking-tight">1 / 4</div>
+        <div class="font-bold text-white text-sm mt-1">Lao động toàn cầu phơi nhiễm GenAI</div>
+        <p class="text-slate-400 text-xs leading-relaxed mt-2">
+          <b>ILO (2025):</b> Thuộc các nghề có nhiệm vụ trùng khớp năng lực của GenAI. Báo cáo khẳng định đa số sẽ <b>biến đổi quy trình làm việc</b> chứ không làm xóa sổ toàn bộ vị trí.
+        </p>
+      </div>
+
+      <div class="bg-gradient-to-b from-brand-card/90 to-brand-surface/90 border border-brand-border rounded-2xl p-5 shadow-xl relative overflow-hidden group hover:border-violet-500/40 transition">
+        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-violet-500/10 rounded-full blur-2xl group-hover:bg-violet-500/20 transition"></div>
+        <div class="text-3xl sm:text-4xl font-black text-violet-400 tracking-tight">40% — 60%</div>
+        <div class="font-bold text-white text-sm mt-1">Mức phơi nhiễm theo nhóm quốc gia</div>
+        <p class="text-slate-400 text-xs leading-relaxed mt-2">
+          <b>IMF (2024):</b> Khoảng 40% việc làm toàn cầu chịu ảnh hưởng; con số tăng lên gần 60% ở các nền kinh tế phát triển nhờ cơ sở hạ tầng số và hàm lượng việc làm nhận thức cao.
+        </p>
+      </div>
+
+      <div class="bg-gradient-to-b from-brand-card/90 to-brand-surface/90 border border-brand-border rounded-2xl p-5 shadow-xl relative overflow-hidden group hover:border-emerald-500/40 transition">
+        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition"></div>
+        <div class="text-3xl sm:text-4xl font-black text-emerald-400 tracking-tight">170M ↗ / 92M ↘</div>
+        <div class="font-bold text-white text-sm mt-1">Chuyển dịch việc làm đến 2030</div>
+        <p class="text-slate-400 text-xs leading-relaxed mt-2">
+          <b>WEF (2025):</b> 170 triệu việc làm được kiến tạo mới so với 92 triệu việc làm bị dịch chuyển do tổ hợp các đại xu hướng (AI, chuyển đổi xanh, cấu trúc địa kinh tế).
+        </p>
+      </div>
+    </section>
+
+    <!-- VIEW 1: Interactive Mindmap Canvas (Pan & Zoom & Collapsible Nodes) -->
+    <section id="interactive-mindmap-container" class="space-y-3">
+      
+      <!-- Toolbar controls for canvas -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-brand-surface px-4 py-2.5 rounded-2xl border border-brand-border text-xs">
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-white flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            Không gian Mindmap Tương tác
+          </span>
+          <span class="text-slate-400 hidden sm:inline">| Kéo để di chuyển, cuộn để zoom, nhấp vào thẻ để mở chi tiết</span>
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <button id="btn-zoom-in" class="p-1.5 rounded-lg bg-brand-card border border-brand-border hover:text-cyan-300 text-slate-300 transition" title="Phóng to">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+          </button>
+          <button id="btn-zoom-out" class="p-1.5 rounded-lg bg-brand-card border border-brand-border hover:text-cyan-300 text-slate-300 transition" title="Thu nhỏ">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
+          </button>
+          <button id="btn-zoom-reset" class="px-2.5 py-1.5 rounded-lg bg-brand-card border border-brand-border hover:text-cyan-300 text-slate-300 transition text-[11px] font-medium" title="Đặt lại góc nhìn">
+            Reset
+          </button>
+          <div class="h-4 w-px bg-brand-border mx-1"></div>
+          <button id="btn-expand-all" class="px-2.5 py-1.5 rounded-lg bg-brand-card border border-brand-border hover:text-cyan-300 text-slate-300 transition text-[11px] font-medium">
+            Mở tất cả
+          </button>
+          <button id="btn-collapse-all" class="px-2.5 py-1.5 rounded-lg bg-brand-card border border-brand-border hover:text-cyan-300 text-slate-300 transition text-[11px] font-medium">
+            Thu gọn
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive Mindmap Viewport -->
+      <div id="mindmap-viewport" class="relative w-full h-[620px] sm:h-[680px] lg:h-[720px] rounded-3xl bg-[#071324] border border-brand-border overflow-hidden canvas-grab shadow-2xl select-none">
+        
+        <!-- Background Grid Pattern -->
+        <div class="absolute inset-0 bg-[radial-gradient(#1e3a5f_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none"></div>
+
+        <!-- Transformable Mindmap World -->
+        <div id="mindmap-world" class="absolute inset-0 origin-center transition-transform duration-75" style="transform: translate(0px, 0px) scale(1);">
+          
+          <!-- SVG Connecting Bezier Lines -->
+          <svg id="mindmap-svg" class="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="grad-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#0284c7" stop-opacity="0.2"/>
+              </linearGradient>
+              <linearGradient id="grad-amber" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#d97706" stop-opacity="0.2"/>
+              </linearGradient>
+              <linearGradient id="grad-violet" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.2"/>
+              </linearGradient>
+              <linearGradient id="grad-emerald" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#34d399" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#059669" stop-opacity="0.2"/>
+              </linearGradient>
+              <linearGradient id="grad-rose" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fb7185" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#e11d48" stop-opacity="0.2"/>
+              </linearGradient>
+            </defs>
+            <g id="svg-connections"></g>
+          </svg>
+
+          <!-- Nodes Container -->
+          <div id="mindmap-nodes" class="relative w-full h-full z-10">
+            
+            <!-- CENTER NODE: Question & Core Thesis -->
+            <div id="node-center" data-id="center" class="node-card absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[310px] sm:w-[350px] p-5 rounded-2xl bg-gradient-to-b from-[#132d4d] to-[#0c1f36] border-2 border-cyan-400/80 shadow-[0_0_40px_rgba(56,189,248,0.25)] text-center cursor-pointer">
+              <span class="inline-block px-2.5 py-0.5 rounded-full bg-cyan-400/20 text-cyan-300 font-extrabold text-[10px] tracking-widest uppercase">
+                TRỤ CỘT TRUNG TÂM
+              </span>
+              <h3 class="text-lg sm:text-xl font-black text-white mt-2 leading-snug">
+                AI có làm mất việc làm trong vài năm tới?
+              </h3>
+              <p class="text-slate-300 text-xs mt-2 leading-relaxed">
+                <b>Khẳng định then chốt:</b> Có nguy cơ mất ở một số <i>nhiệm vụ</i> và <i>vị trí</i> cụ thể, nhưng bản chất bức tranh toàn cầu là <b>“chuyển đổi nhiệm vụ & cộng tác người–máy”</b> hơn là làn sóng xóa sổ diện rộng.
+              </p>
+              <div class="mt-3.5 pt-3 border-t border-brand-border/60 flex items-center justify-between text-[11px] text-cyan-300 font-semibold">
+                <span>Nhấn để xem phân tích sâu</span>
+                <span>6 chiều 5W1H ➔</span>
+              </div>
+            </div>
+
+            <!-- 1. WHAT Node -->
+            <div id="node-what" data-id="what" class="node-card absolute w-[260px] sm:w-[280px] p-4 rounded-2xl bg-brand-surface/95 border border-cyan-500/50 shadow-xl cursor-pointer" style="left: 12%; top: 12%;">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-black tracking-widest text-cyan-400 uppercase">WHAT · CÁI GÌ?</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-mono">Tác vụ lặp</span>
+              </div>
+              <h4 class="text-base font-bold text-white mt-1">Cái gì bị mất & biến đổi?</h4>
+              <p class="text-slate-300 text-xs mt-1.5 line-clamp-2">
+                Không phải toàn bộ nghề, mà là các tác vụ lặp lại, xử lý văn bản, tóm tắt dữ liệu quy chuẩn.
+              </p>
+              <div class="mt-2 flex items-center gap-1.5 text-[11px] text-cyan-300">
+                <span>Xem 3 nhóm nhiệm vụ</span>
+                <span class="font-mono">⊕</span>
+              </div>
+            </div>
+
+            <!-- 2. WHY Node -->
+            <div id="node-why" data-id="why" class="node-card absolute w-[260px] sm:w-[280px] p-4 rounded-2xl bg-brand-surface/95 border border-amber-500/50 shadow-xl cursor-pointer" style="left: 64%; top: 10%;">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-black tracking-widest text-amber-400 uppercase">WHY · TẠI SAO?</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono">Động lực</span>
+              </div>
+              <h4 class="text-base font-bold text-white mt-1">Vì sao doanh nghiệp triển khai?</h4>
+              <p class="text-slate-300 text-xs mt-1.5 line-clamp-2">
+                Tối ưu hóa năng suất biên, giảm độ trễ, phục vụ 24/7 và giải phóng sức lao động sáng tạo.
+              </p>
+              <div class="mt-2 flex items-center gap-1.5 text-[11px] text-amber-300">
+                <span>Xem chỉ số ROI</span>
+                <span class="font-mono">⊕</span>
+              </div>
+            </div>
+
+            <!-- 3. WHERE Node -->
+            <div id="node-where" data-id="where" class="node-card absolute w-[260px] sm:w-[280px] p-4 rounded-2xl bg-brand-surface/95 border border-violet-500/50 shadow-xl cursor-pointer" style="left: 72%; top: 48%;">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-black tracking-widest text-violet-400 uppercase">WHERE · Ở ĐÂU?</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-violet-500/20 text-violet-300 font-mono">Ngành & Vùng</span>
+              </div>
+              <h4 class="text-base font-bold text-white mt-1">Ngành & Quốc gia nào?</h4>
+              <p class="text-slate-300 text-xs mt-1.5 line-clamp-2">
+                Nghề văn phòng/hành chính (clerical) chịu áp lực cao nhất; khối OECD phơi nhiễm 60%.
+              </p>
+              <div class="mt-2 flex items-center gap-1.5 text-[11px] text-violet-300">
+                <span>Xem bản đồ phơi nhiễm</span>
+                <span class="font-mono">⊕</span>
+              </div>
+            </div>
+
+            <!-- 4. WHO Node -->
+            <div id="node-who" data-id="who" class="node-card absolute w-[260px] sm:w-[280px] p-4 rounded-2xl bg-brand-surface/95 border border-emerald-500/50 shadow-xl cursor-pointer" style="left: 10%; top: 52%;">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-black tracking-widest text-emerald-400 uppercase">WHO · AI?</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono">4 Chủ thể</span>
+              </div>
+              <h4 class="text-base font-bold text-white mt-1">Ai chịu tác động trực tiếp?</h4>
+              <p class="text-slate-300 text-xs mt-1.5 line-clamp-2">
+                Lao động trí thức trẻ, cơ sở giáo dục, doanh nghiệp và các nhà hoạch định an sinh xã hội.
+              </p>
+              <div class="mt-2 flex items-center gap-1.5 text-[11px] text-emerald-300">
+                <span>Xem trách nhiệm 4 bên</span>
+                <span class="font-mono">⊕</span>
+              </div>
+            </div>
+
+            <!-- 5. WHEN Node -->
+            <div id="node-when" data-id="when" class="node-card absolute w-[260px] sm:w-[280px] p-4 rounded-2xl bg-brand-surface/95 border border-rose-500/50 shadow-xl cursor-pointer" style="left: 20%; top: 82%;">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-black tracking-widest text-rose-400 uppercase">WHEN · KHI NÀO?</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono">2025–2030</span>
+              </div>
+              <h4 class="text-base font-bold text-white mt-1">Lộ trình diễn tiến thời gian</h4>
+              <p class="text-slate-300 text-xs mt-1.5 line-clamp-2">
+                Không phải chuyện xa xôi: Làn sóng tích hợp đang diễn ra và bước vào cao điểm 2026–2030.
+              </p>
+              <div class="mt-2 flex items-center gap-1.5 text-[11px] text-rose-300">
+                <span>Xem timeline 3 giai đoạn</span>
+                <span class="font-mono">⊕</span>
+              </div>
+            </div>
+
+            <!-- 6. HOW Node -->
+            <div id="node-how" data-id="how" class="node-card absolute w-[260px] sm:w-[280px] p-4 rounded-2xl bg-brand-surface/95 border border-sky-500/50 shadow-xl cursor-pointer" style="left: 56%; top: 82%;">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-black tracking-widest text-sky-400 uppercase">HOW · NHƯ THẾ NÀO?</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 font-mono">3 Cơ chế</span>
+              </div>
+              <h4 class="text-base font-bold text-white mt-1">Cơ chế biến đổi & Thích ứng</h4>
+              <p class="text-slate-300 text-xs mt-1.5 line-clamp-2">
+                Tự động hóa nhiệm vụ + Tăng cường (Augmentation) + Tái phân bổ vai trò chiến lược.
+              </p>
+              <div class="mt-2 flex items-center gap-1.5 text-[11px] text-sky-300">
+                <span>Xem cẩm nang kỹ năng</span>
+                <span class="font-mono">⊕</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- On-screen Guide Badge -->
+        <div class="absolute bottom-4 left-4 z-20 pointer-events-none hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900/80 backdrop-blur border border-brand-border text-[11px] text-slate-400">
+          <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+          Mẹo: Dùng chuột để kéo cuộn không gian sơ đồ
+        </div>
+
+      </div>
+    </section>
+
+    <!-- VIEW 2: 5W1H Structured Matrix (Visible on tab select or responsive mobile) -->
+    <section id="matrix-view-container" class="hidden space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">Khung phân tích toàn diện</span>
+          <h3 class="text-2xl font-black text-white">Chi tiết 6 Chiều 5W1H</h3>
+        </div>
+        <p class="text-xs text-slate-400 hidden sm:block">Được đối chiếu cùng ấn phẩm nghiên cứu của ILO & WEF</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <!-- WHAT Card -->
+        <article class="bg-brand-card/90 border border-cyan-500/40 rounded-2xl p-5 shadow-lg flex flex-col justify-between hover:border-cyan-400 transition">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-brand-border/60">
+              <span class="text-xs font-extrabold text-cyan-400 uppercase tracking-widest">WHAT · CÁI GÌ?</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-500/30">Nhiệm vụ</span>
+            </div>
+            <h4 class="text-lg font-bold text-white mt-3">Cái gì bị mất & biến đổi?</h4>
+            <p class="text-slate-300 text-xs mt-2 leading-relaxed">
+              Mất ở cấp độ <b>nhiệm vụ lặp</b> chứ không lập tức làm biến mất toàn bộ mã ngành nghề:
+            </p>
+            <ul class="text-xs text-slate-300 mt-3 space-y-2">
+              <li class="flex items-start gap-2">
+                <span class="text-cyan-400 font-bold">•</span>
+                <span>Nhập liệu, xử lý văn bản, lập hồ sơ hành chính chuẩn.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-cyan-400 font-bold">•</span>
+                <span>Tóm tắt tài liệu, dịch thuật cơ bản, viết mã nguồn boilerplate.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-cyan-400 font-bold">•</span>
+                <span>Kiểm tra tuân thủ theo rule cố định không đòi hỏi phán đoán.</span>
+              </li>
+            </ul>
+          </div>
+          <button onclick="openDrawer('what')" class="mt-4 pt-3 border-t border-brand-border/60 text-xs text-cyan-300 hover:text-cyan-200 font-semibold flex items-center justify-between">
+            <span>Chi tiết luận điểm WHAT</span>
+            <span>➔</span>
+          </button>
+        </article>
+
+        <!-- WHY Card -->
+        <article class="bg-brand-card/90 border border-amber-500/40 rounded-2xl p-5 shadow-lg flex flex-col justify-between hover:border-amber-400 transition">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-brand-border/60">
+              <span class="text-xs font-extrabold text-amber-400 uppercase tracking-widest">WHY · TẠI SAO?</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-500/30">Động lực</span>
+            </div>
+            <h4 class="text-lg font-bold text-white mt-3">Vì sao tổ chức dùng AI?</h4>
+            <p class="text-slate-300 text-xs mt-2 leading-relaxed">
+              Không đơn thuần vì cắt giảm biên chế, mà là tái cấu trúc năng lực cạnh tranh:
+            </p>
+            <ul class="text-xs text-slate-300 mt-3 space-y-2">
+              <li class="flex items-start gap-2">
+                <span class="text-amber-400 font-bold">•</span>
+                <span><b>Tốc độ & Năng suất:</b> Xử lý dữ liệu đa phương thức trong tích tắc.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-400 font-bold">•</span>
+                <span><b>Vận hành 24/7:</b> Hỗ trợ khách hàng và quy trình liên tục không gián đoạn.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-400 font-bold">•</span>
+                <span><b>Áp lực thị trường:</b> Doanh nghiệp không dùng AI sẽ thua đối thủ dùng AI.</span>
+              </li>
+            </ul>
+          </div>
+          <button onclick="openDrawer('why')" class="mt-4 pt-3 border-t border-brand-border/60 text-xs text-amber-300 hover:text-amber-200 font-semibold flex items-center justify-between">
+            <span>Chi tiết luận điểm WHY</span>
+            <span>➔</span>
+          </button>
+        </article>
+
+        <!-- WHERE Card -->
+        <article class="bg-brand-card/90 border border-violet-500/40 rounded-2xl p-5 shadow-lg flex flex-col justify-between hover:border-violet-400 transition">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-brand-border/60">
+              <span class="text-xs font-extrabold text-violet-400 uppercase tracking-widest">WHERE · Ở ĐÂU?</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-violet-950 text-violet-300 border border-violet-500/30">Phân bố</span>
+            </div>
+            <h4 class="text-lg font-bold text-white mt-3">Ngành & Khối địa lý nào?</h4>
+            <p class="text-slate-300 text-xs mt-2 leading-relaxed">
+              Tác động có sự phân hóa sâu sắc theo hạ tầng số và tính chất công việc:
+            </p>
+            <ul class="text-xs text-slate-300 mt-3 space-y-2">
+              <li class="flex items-start gap-2">
+                <span class="text-violet-400 font-bold">•</span>
+                <span><b>Nhóm nghề văn phòng (clerical):</b> Tỷ lệ phơi nhiễm GenAI cao nhất theo ILO 2025.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-violet-400 font-bold">•</span>
+                <span><b>Nền kinh tế phát triển:</b> 60% việc làm phơi nhiễm (IMF 2024).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-violet-400 font-bold">•</span>
+                <span><b>Khu vực lao động chân tay/thực địa:</b> Chịu tác động chậm hơn rất nhiều.</span>
+              </li>
+            </ul>
+          </div>
+          <button onclick="openDrawer('where')" class="mt-4 pt-3 border-t border-brand-border/60 text-xs text-violet-300 hover:text-violet-200 font-semibold flex items-center justify-between">
+            <span>Chi tiết luận điểm WHERE</span>
+            <span>➔</span>
+          </button>
+        </article>
+
+        <!-- WHO Card -->
+        <article class="bg-brand-card/90 border border-emerald-500/40 rounded-2xl p-5 shadow-lg flex flex-col justify-between hover:border-emerald-400 transition">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-brand-border/60">
+              <span class="text-xs font-extrabold text-emerald-400 uppercase tracking-widest">WHO · AI?</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-500/30">4 Chủ thể</span>
+            </div>
+            <h4 class="text-lg font-bold text-white mt-3">Ai là người bị tác động?</h4>
+            <p class="text-slate-300 text-xs mt-2 leading-relaxed">
+              Mọi mắc xích trong chuỗi kinh tế tri thức đều phải tái định hình:
+            </p>
+            <ul class="text-xs text-slate-300 mt-3 space-y-2">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400 font-bold">•</span>
+                <span><b>Sinh viên & Người đi làm:</b> Phải chuyển sang tư duy cộng tác và kiểm chứng.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400 font-bold">•</span>
+                <span><b>Doanh nghiệp:</b> 77% có kế hoạch reskill nhân sự (WEF 2025).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400 font-bold">•</span>
+                <span><b>Cơ sở đào tạo:</b> Giáo trình cần thay đổi từ ghi nhớ sang thực chiến giải quyết vấn đề.</span>
+              </li>
+            </ul>
+          </div>
+          <button onclick="openDrawer('who')" class="mt-4 pt-3 border-t border-brand-border/60 text-xs text-emerald-300 hover:text-emerald-200 font-semibold flex items-center justify-between">
+            <span>Chi tiết luận điểm WHO</span>
+            <span>➔</span>
+          </button>
+        </article>
+
+        <!-- WHEN Card -->
+        <article class="bg-brand-card/90 border border-rose-500/40 rounded-2xl p-5 shadow-lg flex flex-col justify-between hover:border-rose-400 transition">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-brand-border/60">
+              <span class="text-xs font-extrabold text-rose-400 uppercase tracking-widest">WHEN · KHI NÀO?</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-500/30">Lộ trình</span>
+            </div>
+            <h4 class="text-lg font-bold text-white mt-3">Dòng thời gian biến động</h4>
+            <p class="text-slate-300 text-xs mt-2 leading-relaxed">
+              Tác động không xảy ra đột ngột chỉ sau 1 đêm mà phân bổ thành các giai đoạn:
+            </p>
+            <ul class="text-xs text-slate-300 mt-3 space-y-2">
+              <li class="flex items-start gap-2">
+                <span class="text-rose-400 font-bold">•</span>
+                <span><b>Hiện tại (2024–2026):</b> Tích hợp Copilot/GenAI vào các công cụ công sở quen thuộc.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-rose-400 font-bold">•</span>
+                <span><b>Đến 2030 (Khảo sát WEF):</b> 86% doanh nghiệp chuyển đổi sâu sắc quy trình vận hành.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-rose-400 font-bold">•</span>
+                <span><b>Sau 2030:</b> Phân công lao động người–máy trở thành tiêu chuẩn hiển nhiên.</span>
+              </li>
+            </ul>
+          </div>
+          <button onclick="openDrawer('when')" class="mt-4 pt-3 border-t border-brand-border/60 text-xs text-rose-300 hover:text-rose-200 font-semibold flex items-center justify-between">
+            <span>Chi tiết luận điểm WHEN</span>
+            <span>➔</span>
+          </button>
+        </article>
+
+        <!-- HOW Card -->
+        <article class="bg-brand-card/90 border border-sky-500/40 rounded-2xl p-5 shadow-lg flex flex-col justify-between hover:border-sky-400 transition">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-brand-border/60">
+              <span class="text-xs font-extrabold text-sky-400 uppercase tracking-widest">HOW · NHƯ THẾ NÀO?</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-500/30">Cơ chế</span>
+            </div>
+            <h4 class="text-lg font-bold text-white mt-3">Ba cơ chế tác động then chốt</h4>
+            <p class="text-slate-300 text-xs mt-2 leading-relaxed">
+              Cách thức AI thay đổi môi trường lao động hiện đại:
+            </p>
+            <ul class="text-xs text-slate-300 mt-3 space-y-2">
+              <li class="flex items-start gap-2">
+                <span class="text-sky-400 font-bold">•</span>
+                <span><b>Automation:</b> Tự động hóa những tác vụ chuẩn xác quy tắc.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-sky-400 font-bold">•</span>
+                <span><b>Augmentation:</b> Nâng tầm năng lực con người giải quyết bài toán khó.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-sky-400 font-bold">•</span>
+                <span><b>Reallocation:</b> Dịch chuyển nhân sự sang sáng tạo và giám sát đạo đức.</span>
+              </li>
+            </ul>
+          </div>
+          <button onclick="openDrawer('how')" class="mt-4 pt-3 border-t border-brand-border/60 text-xs text-sky-300 hover:text-sky-200 font-semibold flex items-center justify-between">
+            <span>Chi tiết luận điểm HOW</span>
+            <span>➔</span>
+          </button>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- VIEW 3: Collapsible Tree View -->
+    <section id="tree-view-container" class="hidden space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">Cấu trúc phân cấp</span>
+          <h3 class="text-2xl font-black text-white">Cây Phân Tích Đa Tầng</h3>
+        </div>
+        <p class="text-xs text-slate-400">Nhấp vào nhánh để đóng hoặc mở rộng các nhánh con</p>
+      </div>
+
+      <div class="bg-brand-card/90 border border-brand-border rounded-2xl p-6 shadow-xl space-y-4 text-xs font-sans">
+        
+        <!-- Root node in tree -->
+        <div class="flex items-center gap-2 text-sm font-bold text-cyan-300 pb-2 border-b border-brand-border">
+          <span class="p-1 rounded bg-cyan-950 border border-cyan-500/40 text-cyan-400">ROOT</span>
+          <span>AI có làm mất việc làm trong vài năm tới? (Cơ sở nghiên cứu ILO · WEF · IMF)</span>
+        </div>
+
+        <!-- Tree branch container -->
+        <div id="tree-root-nodes" class="space-y-3 pl-2 sm:pl-4">
+          <!-- Dynamically filled with interactive collapsibles by script -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Methodological Note Box (Phản biện học thuật) -->
+    <div class="rounded-2xl p-5 bg-gradient-to-r from-brand-surface via-[#0a1b30] to-brand-surface border border-cyan-500/30 flex items-start gap-4 shadow-lg">
+      <div class="p-2 rounded-xl bg-cyan-500/20 text-cyan-300 shrink-0 mt-0.5">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      </div>
+      <div class="text-xs text-slate-300 leading-relaxed">
+        <strong class="text-white text-sm block mb-1">Điểm phản biện quan trọng cần nắm rõ trong tranh biện:</strong>
+        Số liệu <b>“1/4 người lao động có phơi nhiễm với GenAI”</b> hoàn toàn <i>không</i> đồng nghĩa với <i>“1/4 người lao động sẽ mất việc”</i>. Theo chuẩn định nghĩa của ILO, “phơi nhiễm” (exposure) chỉ mức độ mà các tác vụ trong công việc có thể được hoàn thành hoặc hỗ trợ bởi mô hình ngôn ngữ lớn; kết quả thực tế có thể là tăng năng suất, giảm tải áp lực lao động hoặc tái cơ cấu quy trình kinh doanh.
+      </div>
+    </div>
+
+    <!-- Two Column Analysis & Student Strategy -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Left: Presentation Arguments -->
+      <div class="lg:col-span-7 bg-brand-surface border border-brand-border rounded-2xl p-6 shadow-xl space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+            3 Luận Điểm Thuyết Trình Sắc Bén
+          </h3>
+          <span class="text-[11px] text-cyan-400 font-mono">Dùng cho bài nói/slide</span>
+        </div>
+
+        <div class="space-y-3.5 text-xs text-slate-300">
+          <div class="p-3.5 rounded-xl bg-brand-card/70 border border-brand-border/60 hover:border-cyan-500/30 transition">
+            <strong class="text-white text-sm block mb-1 text-cyan-300">Luận điểm 1: Áp lực giảm nhu cầu tập trung ở cấp độ tác vụ (tasks), không phải chức danh (roles).</strong>
+            <span>Đặc biệt ở những việc có quy chuẩn thuật toán và tài liệu số hóa. WEF ghi nhận 86% doanh nghiệp dự kiến AI và xử lý dữ liệu sẽ biến đổi sâu sắc cách họ vận hành trong 5 năm tới.</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-brand-card/70 border border-brand-border/60 hover:border-cyan-500/30 transition">
+            <strong class="text-white text-sm block mb-1 text-emerald-300">Luận điểm 2: Xu thế chủ đạo là “Biến đổi nghề nghiệp” (Augmentation), không phải “Xóa sổ nghề”.</strong>
+            <span>ILO 2025 nhấn mạnh xác suất chuyển đổi nội dung nhiệm vụ cao hơn nhiều so với việc sa thải hoàn toàn. Vì vậy, yếu tố quyết định số phận việc làm là <i>tốc độ nâng cao kỹ năng (upskilling)</i> của chính người lao động.</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-brand-card/70 border border-brand-border/60 hover:border-cyan-500/30 transition">
+            <strong class="text-white text-sm block mb-1 text-amber-300">Luận điểm 3: Việc mất đi và tạo mới diễn ra đồng thời trong cơ cấu vĩ mô.</strong>
+            <span>WEF 2025 ước tính 170 triệu việc làm mới xuất hiện so với 92 triệu việc làm bị dịch chuyển. Đây là kết quả hội tụ của cả chuyển đổi số, năng lượng tái tạo và cấu trúc thương mại, không thể đổ lỗi hoàn toàn cho AI.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Implications for Students & Workers -->
+      <div class="lg:col-span-5 bg-gradient-to-b from-brand-surface to-[#0a182b] border border-brand-border rounded-2xl p-6 shadow-xl flex flex-col justify-between">
+        <div class="space-y-3 text-xs text-slate-300">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-violet-400"></span>
+            Hàm Ý Thực Chiến Cho Sinh Viên
+          </h3>
+
+          <p class="leading-relaxed">
+            <b class="text-slate-100">Thay vì hỏi bị động:</b> <i>“Nghề của mình sau này có bị AI cướp mất không?”</i>
+          </p>
+
+          <div class="p-3 rounded-xl bg-brand-card border border-brand-border space-y-2">
+            <p class="text-white font-semibold">Hãy chia nhỏ thành 3 câu hỏi chủ động:</p>
+            <ol class="space-y-1.5 list-decimal pl-4 text-slate-300">
+              <li>Công việc hàng ngày của nghề này gồm những tác vụ con cụ thể nào?</li>
+              <li>Tác vụ con nào AI hiện làm nhanh hơn, chính xác hơn con người?</li>
+              <li>Phần nào vẫn cần phán đoán đạo đức, thấu cảm, chịu trách nhiệm pháp lý hoặc thao tác thế giới thực?</li>
+            </ol>
+          </div>
+
+          <p class="text-cyan-200 font-medium">
+            <b>Công thức phát triển bền vững:</b> Chuyên môn cốt lõi + Kỹ năng điều hướng AI + Tư duy phản biện phản chứng + Trí tuệ cảm xúc & Kết nối con người.
+          </p>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-brand-border/70 flex items-center justify-between text-xs">
+          <span class="text-slate-400 font-medium">Chiến lược đối phó chủ động</span>
+          <span class="text-cyan-400 font-bold">Thích nghi > Lo sợ</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Academic References & Primary Sources -->
+    <section class="space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">Tính minh bạch dữ liệu</span>
+          <h3 class="text-xl font-bold text-white">Nguồn Tài Liệu Gốc & Phương Pháp</h3>
+        </div>
+        <span class="text-xs text-slate-400">Cập nhật tài liệu công bố</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        
+        <article class="bg-brand-surface border border-brand-border rounded-2xl p-5 shadow flex flex-col justify-between hover:border-cyan-500/40 transition">
+          <div class="space-y-2 text-xs">
+            <span class="text-[10px] font-black uppercase text-cyan-400 tracking-wider">ILO · TỔ CHỨC LAO ĐỘNG QUỐC TẾ</span>
+            <h4 class="text-base font-bold text-white">Generative AI and Jobs: A 2025 Update</h4>
+            <p class="text-slate-400 leading-relaxed">
+              Công bố 20/05/2025. Phân tích 1/4 lao động toàn cầu ở nhóm nghề phơi nhiễm; chỉ 3.3% ở nhóm phơi nhiễm cực cao. Khẳng định GenAI chủ yếu mang tính hỗ trợ (complementary).
+            </p>
+          </div>
+          <a href="https://www.ilo.org/publications/generative-ai-and-jobs-2025-update" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-cyan-300 hover:text-white transition">
+            Xem báo cáo gốc ILO ↗
+          </a>
+        </article>
+
+        <article class="bg-brand-surface border border-brand-border rounded-2xl p-5 shadow flex flex-col justify-between hover:border-violet-500/40 transition">
+          <div class="space-y-2 text-xs">
+            <span class="text-[10px] font-black uppercase text-violet-400 tracking-wider">WEF · DIỄN ĐÀN KINH TẾ THẾ GIỚI</span>
+            <h4 class="text-base font-bold text-white">The Future of Jobs Report 2025</h4>
+            <p class="text-slate-400 leading-relaxed">
+              Công bố 07/01/2025. Khảo sát 1,000+ nhà tuyển dụng với 14 triệu nhân sự tại 55 quốc gia. Dự báo 170 triệu việc làm tạo mới và 92 triệu bị dịch chuyển đến 2030.
+            </p>
+          </div>
+          <a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-violet-300 hover:text-white transition">
+            Xem báo cáo gốc WEF ↗
+          </a>
+        </article>
+
+        <article class="bg-brand-surface border border-brand-border rounded-2xl p-5 shadow flex flex-col justify-between hover:border-emerald-500/40 transition">
+          <div class="space-y-2 text-xs">
+            <span class="text-[10px] font-black uppercase text-emerald-400 tracking-wider">IMF · QUỸ TIỀN TỆ QUỐC TẾ</span>
+            <h4 class="text-base font-bold text-white">Gen-AI: AI and the Future of Work</h4>
+            <p class="text-slate-400 leading-relaxed">
+              Ấn bản phân tích. Đưa ra chỉ số phơi nhiễm 40% toàn cầu và 60% ở các nước phát triển, chỉ ra bất bình đẳng thu nhập nếu thiếu chính sách bảo trợ an sinh.
+            </p>
+          </div>
+          <a href="https://www.imf.org/en/Publications/fandd/issues/2024/01/Gen-AI-artificial-intelligence-and-the-future-of-work" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-emerald-300 hover:text-white transition">
+            Xem báo cáo gốc IMF ↗
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Final Synthesized One-line Conclusion -->
+    <section class="rounded-2xl p-6 bg-gradient-to-r from-cyan-950/40 via-brand-card to-indigo-950/40 border-2 border-cyan-500/40 shadow-2xl text-center space-y-2">
+      <span class="text-[11px] font-black text-cyan-400 tracking-widest uppercase">KẾT LUẬN TOÀN DIỆN TRONG 1 CÂU</span>
+      <p class="text-base sm:text-lg font-bold text-white max-w-4xl mx-auto leading-relaxed">
+        “AI chắc chắn sẽ làm suy giảm nhu cầu nhân sự ở một số nhiệm vụ chuẩn hóa và một số vị trí rập khuôn, nhưng bằng chứng khoa học quốc tế bác bỏ nhận định ‘AI xóa sổ hàng loạt mọi nghề nghiệp’; xu hướng quyết định tương lai là <b>tự động hóa cục bộ, cộng tác sâu giữa người và máy, và tái thiết kế kỹ năng lao động</b>.”
+      </p>
+    </section>
+
+  </main>
+
+  <!-- Slide-over Drawer for Node Details -->
+  <aside id="node-drawer" class="fixed inset-y-0 right-0 w-full sm:w-[480px] bg-[#081527] border-l border-brand-border shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+    <!-- Drawer Header -->
+    <div class="p-5 border-b border-brand-border flex items-center justify-between bg-brand-surface/70">
+      <div class="flex items-center gap-2">
+        <span id="drawer-badge" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-cyan-950 text-cyan-300 border border-cyan-500/40">
+          WHAT
+        </span>
+        <h3 id="drawer-title" class="text-base font-black text-white">Chi tiết nhánh</h3>
+      </div>
+      <button id="drawer-close-btn" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-brand-card transition text-sm">
+        ✕
+      </button>
+    </div>
+
+    <!-- Drawer Scrollable Content -->
+    <div id="drawer-content" class="p-6 overflow-y-auto space-y-5 text-xs text-slate-300 flex-1">
+      <!-- Dynamically filled with rich structured content -->
+    </div>
+
+    <!-- Drawer Footer Actions -->
+    <div class="p-4 border-t border-brand-border bg-brand-surface/70 flex items-center justify-between gap-3 text-xs">
+      <button id="drawer-copy-btn" class="flex-1 py-2 px-3 rounded-xl bg-brand-card border border-brand-border text-slate-200 hover:text-white hover:border-cyan-400 transition font-medium flex items-center justify-center gap-1.5">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+        Sao chép nhánh này
+      </button>
+      <button id="drawer-next-btn" class="py-2 px-4 rounded-xl bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition">
+        Xem nhánh tiếp ›
+      </button>
+    </div>
+  </aside>
+
+  <!-- Overlay backdrop for drawer -->
+  <div id="drawer-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden transition-opacity"></div>
+
+  <!-- Toast Notification Message Box -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-slate-900 border border-cyan-400/50 text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-xs transition transform translate-y-3">
+    <div class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></div>
+    <span id="toast-text">Đã sao chép nội dung thành công!</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-brand-border/60 mt-16 py-8 text-center text-xs text-slate-400 space-y-2">
+    <p>Hệ thống Mindmap 5W1H Trực quan · Phân tích tác động trí tuệ nhân tạo đối với việc làm</p>
+    <p class="text-[11px] text-slate-400">Thiết kế tối ưu hiển thị độc lập, tích hợp đầy đủ tương tác thu phóng và tra cứu.</p>
+  </footer>
+
+  <script>
+    // Detailed data structure for the 5W1H nodes & rich inspector details
+    const MINDMAP_DATA = {
+      center: {
+        id: 'center',
+        badge: 'CÂU HỎI TRUNG TÂM',
+        color: 'cyan',
+        title: 'AI có làm mất việc làm trong vài năm tới?',
+        subtitle: 'Bản chất: Chuyển dịch cấu trúc công việc & Phân công lao động mới',
+        quote: '“AI will not replace humans, but humans who use AI will probably replace humans who do not.”',
+        summary: 'Kết luận dựa trên bằng chứng khoa học từ ILO, WEF và IMF: Có sự sụt giảm nhân sự ở một số tác vụ và vai trò rập khuôn nhất định. Tuy nhiên, toàn bộ dữ liệu chỉ ra đây là làn sóng tái cơ cấu nội hàm công việc (task reconfiguration) thay vì sự biến mất hoàn toàn của các nghề nghiệp.',
+        sections: [
+          {
+            heading: '3 Sự Thật Cần Nắm Vững',
+            points: [
+              'Không đồng nhất "Phơi nhiễm với AI" (Exposure) với "Mất việc làm" (Job Displacement).',
+              'Sự xuất hiện của AI diễn ra đồng thời với quá trình mở rộng các ngành nghề chuyển đổi số và công nghệ mới.',
+              'Nhân tố cứu cánh của lực lượng lao động là khả năng kiểm chứng, đánh giá và trách nhiệm giải trình.'
+            ]
+          },
+          {
+            heading: 'Đối Chiếu Với Các Cuộc Cách Mạng Công Nghiệp Trước',
+            points: [
+              'Máy hơi nước: Thay thế cơ bắp nhưng mở ra hàng triệu việc làm trong logistics và sản xuất công nghiệp.',
+              'Máy vi tính cá nhân (1980s): Thay thế nhân viên đánh máy nhưng tạo ra ngành công nghệ phần mềm nghìn tỷ USD.',
+              'GenAI (Hiện tại): Thay thế tác vụ tổng hợp sơ cấp, mở rộng vai trò kiến trúc sư ý tưởng và điều phối viên dữ liệu.'
+            ]
+          }
+        ]
+      },
+      what: {
+        id: 'what',
+        badge: 'WHAT · CÁI GÌ?',
+        color: 'cyan',
+        title: 'Cái gì có thể “mất” và cái gì sẽ phát triển?',
+        subtitle: 'Phân định rõ ranh giới giữa Nhiệm vụ lặp (Tasks) và Vai trò toàn diện (Roles)',
+        quote: 'Nhiệm vụ có thể bị thay thế; giá trị con người nằm ở tính liên kết và trách nhiệm.',
+        summary: 'Các tác vụ có tính lặp lại, quy trình đóng khung và xử lý văn bản chuẩn hóa chịu tác động trực tiếp và nhanh nhất. Ngược lại, các công việc đòi hỏi trí tuệ cảm xúc, sự thấu cảm, phán đoán đa chiều và tương tác cơ học tinh vi trong môi trường thực vẫn an toàn.',
+        sections: [
+          {
+            heading: 'Nhiệm vụ có nguy cơ cao (High Exposure)',
+            points: [
+              'Nhập liệu, làm sạch dữ liệu bảng biểu, tạo báo cáo mẫu theo khuôn.',
+              'Tóm tắt tài liệu văn bản, soạn thảo email giao dịch thông thường.',
+              'Dịch thuật thô, viết code cơ bản (boilerplate code), kiểm thử phần mềm tự động sơ cấp.'
+            ]
+          },
+          {
+            heading: 'Nhiệm vụ khó có thể thay thế (Human Core)',
+            points: [
+              'Phán đoán đạo đức nghề nghiệp và chịu trách nhiệm pháp lý trước quyết định.',
+              'Tương tác con người sâu sắc: Đàm phán chiến lược, chăm sóc tâm lý, lãnh đạo truyền cảm hứng.',
+              'Sáng tạo đột phá phi logic và kỹ năng thích nghi vật lý trong thế giới thực.'
+            ]
+          },
+          {
+            heading: 'Vai trò mới xuất hiện',
+            points: [
+              'AI Prompt & Context Engineer (Kỹ sư ngữ cảnh AI).',
+              'AI Auditor & Ethicist (Chuyên viên kiểm định đạo đức và an toàn thuật toán).',
+              'Human-AI Collaboration Manager (Quản lý tích hợp quy trình người–máy).'
+            ]
+          }
+        ]
+      },
+      why: {
+        id: 'why',
+        badge: 'WHY · TẠI SAO?',
+        color: 'amber',
+        title: 'Vì sao doanh nghiệp ráo riết ứng dụng AI?',
+        subtitle: 'Động lực kinh tế học: Tối ưu chi phí biên và cạnh tranh thị trường',
+        quote: 'Trong một nền kinh tế phẳng, độ trễ phản hồi bằng 0 là lợi thế sống còn.',
+        summary: 'Doanh nghiệp tìm đến AI không chỉ để giảm thiểu chi phí quỹ lương ngắn hạn, mà chủ yếu nhằm giải quyết nút thắt về tốc độ phản hồi, xử lý lượng dữ liệu khổng lồ (Big Data) và nâng cao hiệu suất biên của nhân sự hiện hữu.',
+        sections: [
+          {
+            heading: 'Các động lực cốt lõi từ ban điều hành',
+            points: [
+              '<b>Năng suất & Tốc độ:</b> Hoàn thành bản thảo tài liệu, phân tích doanh số trong vài giây thay vì vài tuần.',
+              '<b>Khả năng mở rộng quy mô (Scalability):</b> Phục vụ hàng triệu khách hàng cùng lúc với chi phí biên gần bằng 0.',
+              '<b>Vận hành 24/7/365:</b> Xử lý giao dịch và hỗ trợ không phụ thuộc vào ca kíp hay khoảng cách địa lý.'
+            ]
+          },
+          {
+            heading: 'Sức ép cạnh tranh (FOMO & Survival)',
+            points: [
+              'Khi đối thủ cùng ngành giảm 40% thời gian ra mắt sản phẩm nhờ AI, mọi doanh nghiệp buộc phải thích ứng.',
+              'Kỳ vọng của khách hàng tăng vọt về trải nghiệm cá nhân hóa tức thời.'
+            ]
+          }
+        ]
+      },
+      where: {
+        id: 'where',
+        badge: 'WHERE · Ở ĐÂU?',
+        color: 'violet',
+        title: 'Những ngành và khu vực nào chịu áp lực lớn nhất?',
+        subtitle: 'Bản đồ phân hóa: Ngành văn phòng và các nền kinh tế phát triển',
+        quote: 'Sự phơi nhiễm tỷ lệ thuận với mức độ số hóa của nền kinh tế.',
+        summary: 'Báo cáo của ILO 2025 chỉ ra nhóm nghề hành chính/văn phòng (clerical work) là tâm điểm chịu ảnh hưởng. Đồng thời, IMF (2024) khẳng định các nước thu nhập cao có mức phơi nhiễm lên tới 60%, trong khi các nước thu nhập thấp chỉ khoảng 26%.',
+        sections: [
+          {
+            heading: 'Nhóm ngành chịu tác động mạnh nhất',
+            points: [
+              '<b>Hành chính & Trợ lý văn phòng:</b> Lập lịch, ghi chép biên bản, xử lý văn thư thông dụng.',
+              '<b>Chăm sóc khách hàng cấp độ 1:</b> Chatbot thông minh và Agentic AI giải quyết phần lớn yêu cầu căn bản.',
+              '<b>Dịch thuật, biên tập & Sản xuất nội dung đại trà:</b> Chuyển dịch sang vai trò hiệu đính chuyên sâu.'
+            ]
+          },
+          {
+            heading: 'Sự chênh lệch địa lý toàn cầu (IMF 2024)',
+            points: [
+              '<b>Nước phát triển (OECD):</b> 60% công việc phơi nhiễm; rủi ro dịch chuyển cao hơn nhưng cũng sẵn sàng hạ tầng để hấp thụ năng suất mới.',
+              '<b>Nước đang phát triển:</b> 40% việc làm phơi nhiễm; tiếp cận AI chậm hơn do hạ tầng số chưa đồng bộ.',
+              '<b>Nước thu nhập thấp:</b> Khoảng 26% do tỷ trọng nông nghiệp và kinh tế phi chính thức còn rất lớn.'
+            ]
+          }
+        ]
+      },
+      who: {
+        id: 'who',
+        badge: 'WHO · AI?',
+        color: 'emerald',
+        title: 'Ai là người chịu tác động và cần hành động?',
+        subtitle: '4 Chủ thể trong hệ sinh thái kinh tế cùng tái định vị',
+        quote: 'Không ai đứng ngoài vòng xoáy: Từ sinh viên năm nhất đến cơ quan hoạch định an sinh.',
+        summary: 'Tác động của AI không giới hạn ở một cá nhân riêng lẻ mà tạo ra chuỗi phản ứng dây chuyền trên 4 trụ cột xã hội: Người lao động, Nhà tuyển dụng, Cơ sở giáo dục và Nhà nước.',
+        sections: [
+          {
+            heading: '1. Người lao động & Sinh viên',
+            points: [
+              'Cần chuyển dịch từ "người ghi nhớ kiến thức" sang "người giám định chất lượng và đặt câu hỏi xuất sắc".',
+              'Trang bị bộ kỹ năng chữ T (T-shaped skills): Chuyên môn sâu một mảng kết hợp hiểu biết vận hành công cụ số.'
+            ]
+          },
+          {
+            heading: '2. Doanh nghiệp & Nhà tuyển dụng',
+            points: [
+              '77% doanh nghiệp trong báo cáo WEF 2025 ưu tiên tái đào tạo (Reskilling) nhân viên nội bộ.',
+              'Cần xây dựng văn hóa an toàn tâm lý và quy chuẩn đạo đức khi dùng AI của công ty.'
+            ]
+          },
+          {
+            heading: '3. Nhà trường & Cơ sở đào tạo',
+            points: [
+              'Bãi bỏ các bài kiểm tra rập khuôn chỉ đòi hỏi sao chép; hướng tới giải quyết bài toán tình huống thực tế.',
+              'Giảng dạy tư duy phản biện, phương pháp kiểm tra nguồn và đạo đức học thuật.'
+            ]
+          },
+          {
+            heading: '4. Chính phủ & An sinh xã hội',
+            points: [
+              'Thiết kế chính sách hỗ trợ chuyển đổi nghề nghiệp, bảo hiểm thất nghiệp cho lao động bị dịch chuyển.',
+              'Xây dựng khung pháp lý về bảo vệ dữ liệu và bản quyền trí tuệ.'
+            ]
+          }
+        ]
+      },
+      when: {
+        id: 'when',
+        badge: 'WHEN · KHI NÀO?',
+        color: 'rose',
+        title: 'Dòng thời gian biến chuyển: Vài năm tới hay ngay bây giờ?',
+        subtitle: 'Giai đoạn chuyển tiếp bản lề: 2025 — 2030',
+        quote: 'Tương lai không ập đến trong một ngày, nó thẩm thấu qua từng cập nhật phần mềm.',
+        summary: 'ILO và WEF chỉ rõ: Tác động đã bắt đầu hiện hữu từ 2023 và sẽ bước vào giai đoạn tái cấu trúc quy mô lớn trong khung thời gian 2025–2030 khi các hệ thống Agentic AI (AI tự hành) được thương mại hóa rộng rãi.',
+        sections: [
+          {
+            heading: 'Giai đoạn 1: Thử nghiệm & Thẩm thấu (2023 - 2025)',
+            points: [
+              'Phổ cập các mô hình như ChatGPT, Claude, Copilot vào công việc văn phòng thông thường.',
+              'Tác động chủ yếu dưới dạng hỗ trợ cá nhân (Assistant), chưa làm thay đổi toàn bộ cấu trúc phòng ban.'
+            ]
+          },
+          {
+            heading: 'Giai đoạn 2: Tự động hóa tác nhân quy trình (2026 - 2028)',
+            points: [
+              'AI Agents có khả năng tự động thực hiện chuỗi tác vụ phức tạp liên phần mềm (cross-app workflows).',
+              'Bắt đầu xuất hiện áp lực tinh giản biên chế ở các đội ngũ vận hành quy mô lớn thiếu kỹ năng công nghệ.'
+            ]
+          },
+          {
+            heading: 'Giai đoạn 3: Phân công lao động mới (2028 - 2030+)',
+            points: [
+              'Mô hình doanh nghiệp tinh gọn: Đội ngũ nhỏ kết hợp cùng hàng chục AI agents đảm đương khối lượng việc của cả tập đoàn trước đây.',
+              '170 triệu việc làm mới định hình rõ nét (dự báo WEF).'
+            ]
+          }
+        ]
+      },
+      how: {
+        id: 'how',
+        badge: 'HOW · NHƯ THẾ NÀO?',
+        color: 'sky',
+        title: 'Cơ chế biến đổi & Chiến lược thích ứng cá nhân',
+        subtitle: '3 Cơ chế vận hành: Automation, Augmentation & Reallocation',
+        quote: 'Làm việc CÙNG AI chứ không cạnh tranh VỚI AI.',
+        summary: 'Các nhà kinh tế học chỉ ra 3 cơ chế vận hành chính của AI vào thị trường lao động. Hiểu rõ cơ chế này giúp người lao động chủ động lựa chọn vị thế để hưởng lợi thay vì trở thành nạn nhân của làn sóng dịch chuyển.',
+        sections: [
+          {
+            heading: '3 Cơ chế biến đổi việc làm của AI',
+            points: [
+              '<b>1. Tự động hóa (Automation):</b> AI thay thế hoàn toàn một số tác vụ đơn lẻ, giảm thời gian tiêu tốn.',
+              '<b>2. Tăng cường (Augmentation):</b> AI như một siêu trợ lý giúp 1 chuyên viên làm việc hiệu quả gấp 3-5 lần.',
+              '<b>3. Tái phân bổ (Reallocation):</b> Doanh nghiệp chuyển nhân sự dôi dư sang các khâu chăm sóc khách hàng cao cấp, R&D hoặc phát triển thị trường mới.'
+            ]
+          },
+          {
+            heading: 'Chiến lược 4 bước để không bị đào thải',
+            points: [
+              '<b>Bước 1:</b> Phân rã công việc hàng ngày thành từng tác vụ cụ thể.',
+              '<b>Bước 2:</b> Chủ động dùng AI giải quyết 50% tác vụ nhàm chán nhất của bạn ngay hôm nay.',
+              '<b>Bước 3:</b> Dành thời gian tiết kiệm được để rèn luyện kỹ năng giải quyết vấn đề phức tạp và giao tiếp.',
+              '<b>Bước 4:</b> Trở thành chuyên gia kiểm chứng chất lượng đầu ra của AI trong lĩnh vực của mình.'
+            ]
+          }
+        ]
+      }
+    };
+
+    // Presentation sequence order
+    const PRES_ORDER = ['center', 'what', 'why', 'where', 'who', 'when', 'how'];
+    let currentPresIndex = 0;
+    let isPresentationActive = false;
+
+    // Mindmap Canvas Pan/Zoom State
+    let zoomLevel = 1;
+    let panX = 0;
+    let panY = 0;
+    let isPanning = false;
+    let startX = 0;
+    let startY = 0;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initMindmapConnections();
+      initCanvasPanZoom();
+      initViewSwitching();
+      initDrawerInteractions();
+      initSearchFilter();
+      initPresentationMode();
+      renderTreeView();
+      initCopySummary();
+
+      // Recalculate SVG lines on window resize
+      window.addEventListener('resize', () => {
+        requestAnimationFrame(updateSvgConnections);
+      });
+    });
+
+    // Helper to show custom Toast (replaces alert)
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toast-text');
+      toastText.textContent = message;
+      toast.classList.remove('hidden');
+      toast.classList.remove('translate-y-3');
+      
+      setTimeout(() => {
+        toast.classList.add('translate-y-3');
+        setTimeout(() => toast.classList.add('hidden'), 250);
+      }, 2800);
+    }
+
+    function initMindmapConnections() {
+      updateSvgConnections();
+    }
+
+    function updateSvgConnections() {
+      const svgGroup = document.getElementById('svg-connections');
+      const centerNode = document.getElementById('node-center');
+      if (!svgGroup || !centerNode) return;
+
+      const nodes = ['what', 'why', 'where', 'who', 'when', 'how'];
+      const centerRect = centerNode.getBoundingClientRect();
+      const world = document.getElementById('mindmap-world');
+      const worldRect = world.getBoundingClientRect();
+
+      // Center node relative coordinate in the world
+      const cX = (centerRect.left + centerRect.width / 2 - worldRect.left) / zoomLevel;
+      const cY = (centerRect.top + centerRect.height / 2 - worldRect.top) / zoomLevel;
+
+      let pathsHtml = '';
+
+      nodes.forEach(nodeId => {
+        const targetNode = document.getElementById(`node-${nodeId}`);
+        if (!targetNode) return;
+
+        const targetRect = targetNode.getBoundingClientRect();
+        const tX = (targetRect.left + targetRect.width / 2 - worldRect.left) / zoomLevel;
+        const tY = (targetRect.top + targetRect.height / 2 - worldRect.top) / zoomLevel;
+
+        // Smooth cubic Bezier curve calculation
+        const dx = tX - cX;
+        const dy = tY - cY;
+        const ctrlX1 = cX + dx * 0.45;
+        const ctrlY1 = cY;
+        const ctrlX2 = cX + dx * 0.55;
+        const ctrlY2 = tY;
+
+        let strokeColor = '#2e4c69';
+        if (nodeId === 'what') strokeColor = '#38bdf8';
+        if (nodeId === 'why') strokeColor = '#fbbf24';
+        if (nodeId === 'where') strokeColor = '#a78bfa';
+        if (nodeId === 'who') strokeColor = '#34d399';
+        if (nodeId === 'when') strokeColor = '#fb7185';
+        if (nodeId === 'how') strokeColor = '#38bdf8';
+
+        pathsHtml += `
+          <path 
+            id="path-${nodeId}"
+            class="branch-line" 
+            d="M ${cX} ${cY} C ${ctrlX1} ${ctrlY1}, ${ctrlX2} ${ctrlY2}, ${tX} ${tY}" 
+            fill="none" 
+            stroke="${strokeColor}" 
+            stroke-width="2.5" 
+            stroke-opacity="0.65"
+          />
+        `;
+      });
+
+      svgGroup.innerHTML = pathsHtml;
+    }
+
+    function initCanvasPanZoom() {
+      const viewport = document.getElementById('mindmap-viewport');
+      const world = document.getElementById('mindmap-world');
+
+      function applyTransform() {
+        world.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomLevel})`;
+      }
+
+      // Mouse Drag / Pan
+      viewport.addEventListener('mousedown', (e) => {
+        // Only start pan if clicking on empty viewport or world background
+        if (e.target.closest('.node-card')) return;
+        isPanning = true;
+        viewport.classList.remove('canvas-grab');
+        viewport.classList.add('canvas-grabbing');
+        startX = e.clientX - panX;
+        startY = e.clientY - panY;
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isPanning) return;
+        panX = e.clientX - startX;
+        panY = e.clientY - startY;
+        applyTransform();
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isPanning) {
+          isPanning = false;
+          viewport.classList.remove('canvas-grabbing');
+          viewport.classList.add('canvas-grab');
+        }
+      });
+
+      // Mouse Wheel Zoom
+      viewport.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const zoomDelta = e.deltaY < 0 ? 0.08 : -0.08;
+        zoomLevel = Math.min(Math.max(0.55, zoomLevel + zoomDelta), 1.6);
+        applyTransform();
+      }, { passive: false });
+
+      // Button Zoom Controls
+      document.getElementById('btn-zoom-in').addEventListener('click', () => {
+        zoomLevel = Math.min(1.6, zoomLevel + 0.15);
+        applyTransform();
+      });
+
+      document.getElementById('btn-zoom-out').addEventListener('click', () => {
+        zoomLevel = Math.max(0.55, zoomLevel - 0.15);
+        applyTransform();
+      });
+
+      document.getElementById('btn-zoom-reset').addEventListener('click', () => {
+        zoomLevel = 1;
+        panX = 0;
+        panY = 0;
+        applyTransform();
+      });
+
+      // Expand / Collapse all branches
+      document.getElementById('btn-expand-all').addEventListener('click', () => {
+        const nodes = document.querySelectorAll('.node-card:not(#node-center)');
+        nodes.forEach(n => n.classList.remove('opacity-20', 'scale-90'));
+        document.querySelectorAll('.branch-line').forEach(p => p.setAttribute('stroke-opacity', '0.7'));
+        showToast('Đã mở toàn bộ các nhánh trong sơ đồ');
+      });
+
+      document.getElementById('btn-collapse-all').addEventListener('click', () => {
+        const nodes = document.querySelectorAll('.node-card:not(#node-center)');
+        nodes.forEach(n => n.classList.add('opacity-20', 'scale-90'));
+        document.querySelectorAll('.branch-line').forEach(p => p.setAttribute('stroke-opacity', '0.15'));
+        showToast('Đã thu gọn các nhánh phụ');
+      });
+    }
+
+    function initViewSwitching() {
+      const btnInteractive = document.getElementById('view-interactive-btn');
+      const btnMatrix = document.getElementById('view-matrix-btn');
+      const btnTree = document.getElementById('view-tree-btn');
+
+      const containerInteractive = document.getElementById('interactive-mindmap-container');
+      const containerMatrix = document.getElementById('matrix-view-container');
+      const containerTree = document.getElementById('tree-view-container');
+
+      function setActiveView(view) {
+        // Reset buttons
+        [btnInteractive, btnMatrix, btnTree].forEach(b => {
+          b.className = 'px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5';
+        });
+
+        // Hide all views
+        containerInteractive.classList.add('hidden');
+        containerMatrix.classList.add('hidden');
+        containerTree.classList.add('hidden');
+
+        if (view === 'interactive') {
+          btnInteractive.className = 'px-2.5 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold transition flex items-center gap-1.5';
+          containerInteractive.classList.remove('hidden');
+          requestAnimationFrame(updateSvgConnections);
+        } else if (view === 'matrix') {
+          btnMatrix.className = 'px-2.5 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold transition flex items-center gap-1.5';
+          containerMatrix.classList.remove('hidden');
+        } else if (view === 'tree') {
+          btnTree.className = 'px-2.5 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold transition flex items-center gap-1.5';
+          containerTree.classList.remove('hidden');
+        }
+      }
+
+      btnInteractive.addEventListener('click', () => setActiveView('interactive'));
+      btnMatrix.addEventListener('click', () => setActiveView('matrix'));
+      btnTree.addEventListener('click', () => setActiveView('tree'));
+    }
+
+    let currentDrawerNodeId = null;
+
+    function initDrawerInteractions() {
+      const drawer = document.getElementById('node-drawer');
+      const backdrop = document.getElementById('drawer-backdrop');
+      const closeBtn = document.getElementById('drawer-close-btn');
+
+      // Click listener for mindmap nodes
+      document.querySelectorAll('.node-card').forEach(node => {
+        node.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const nodeId = node.getAttribute('data-id');
+          openDrawer(nodeId);
+        });
+      });
+
+      closeBtn.addEventListener('click', closeDrawer);
+      backdrop.addEventListener('click', closeDrawer);
+
+      // Next node button in drawer
+      document.getElementById('drawer-next-btn').addEventListener('click', () => {
+        if (!currentDrawerNodeId) return;
+        const currentIndex = PRES_ORDER.indexOf(currentDrawerNodeId);
+        const nextIndex = (currentIndex + 1) % PRES_ORDER.length;
+        openDrawer(PRES_ORDER[nextIndex]);
+      });
+
+      // Copy node text button in drawer
+      document.getElementById('drawer-copy-btn').addEventListener('click', () => {
+        if (!currentDrawerNodeId) return;
+        const data = MINDMAP_DATA[currentDrawerNodeId];
+        let textToCopy = `[${data.badge}] ${data.title}\n`;
+        textToCopy += `${data.subtitle}\n\n`;
+        textToCopy += `Tóm tắt: ${data.summary}\n\n`;
+        data.sections.forEach(s => {
+          textToCopy += `* ${s.heading}:\n`;
+          s.points.forEach(p => textToCopy += `  - ${p.replace(/<[^>]*>/g, '')}\n`);
+        });
+
+        copyToClipboard(textToCopy);
+        showToast('Đã sao chép nội dung nhánh vào clipboard!');
+      });
+    }
+
+    function openDrawer(nodeId) {
+      const data = MINDMAP_DATA[nodeId];
+      if (!data) return;
+
+      currentDrawerNodeId = nodeId;
+      const drawer = document.getElementById('node-drawer');
+      const backdrop = document.getElementById('drawer-backdrop');
+
+      document.getElementById('drawer-badge').textContent = data.badge;
+      document.getElementById('drawer-title').textContent = data.title;
+
+      let html = `
+        <div class="space-y-4">
+          <p class="text-cyan-200 font-semibold text-xs">${data.subtitle}</p>
+          <div class="p-3.5 rounded-xl bg-brand-surface border border-brand-border/70 text-slate-300 italic">
+            ${data.quote}
+          </div>
+          <div class="text-xs leading-relaxed text-slate-200 bg-brand-card/60 p-3.5 rounded-xl border border-brand-border/40">
+            <b>Đánh giá cốt lõi:</b> ${data.summary}
+          </div>
+        </div>
+      `;
+
+      data.sections.forEach(sec => {
+        html += `
+          <div class="space-y-2 pt-2 border-t border-brand-border/60">
+            <h5 class="font-bold text-white text-xs uppercase tracking-wide text-cyan-300">${sec.heading}</h5>
+            <ul class="space-y-2">
+              ${sec.points.map(pt => `
+                <li class="flex items-start gap-2 text-slate-300">
+                  <span class="text-cyan-400 font-bold mt-0.5">•</span>
+                  <span class="leading-relaxed">${pt}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        `;
+      });
+
+      document.getElementById('drawer-content').innerHTML = html;
+
+      // Show drawer
+      backdrop.classList.remove('hidden');
+      drawer.classList.remove('translate-x-full');
+
+      // Highlight corresponding SVG connector
+      document.querySelectorAll('.branch-line').forEach(line => line.classList.remove('active'));
+      const activeLine = document.getElementById(`path-${nodeId}`);
+      if (activeLine) activeLine.classList.add('active');
+    }
+
+    function closeDrawer() {
+      const drawer = document.getElementById('node-drawer');
+      const backdrop = document.getElementById('drawer-backdrop');
+      drawer.classList.add('translate-x-full');
+      backdrop.classList.add('hidden');
+      document.querySelectorAll('.branch-line').forEach(line => line.classList.remove('active'));
+    }
+
+    function initSearchFilter() {
+      const searchInput = document.getElementById('mindmap-search');
+      const clearBtn = document.getElementById('clear-search');
+
+      function performSearch() {
+        const query = searchInput.value.trim().toLowerCase();
+
+        if (!query) {
+          clearBtn.classList.add('hidden');
+          // Reset all nodes
+          document.querySelectorAll('.node-card').forEach(n => {
+            n.classList.remove('highlight-match', 'opacity-25');
+          });
+          return;
+        }
+
+        clearBtn.classList.remove('hidden');
+
+        let matchCount = 0;
+        Object.keys(MINDMAP_DATA).forEach(key => {
+          const item = MINDMAP_DATA[key];
+          const nodeElem = document.getElementById(`node-${key}`);
+          const textCorpus = (
+            item.title + ' ' + 
+            item.subtitle + ' ' + 
+            item.summary + ' ' + 
+            JSON.stringify(item.sections)
+          ).toLowerCase();
+
+          if (textCorpus.includes(query)) {
+            matchCount++;
+            if (nodeElem) {
+              nodeElem.classList.add('highlight-match');
+              nodeElem.classList.remove('opacity-25');
+            }
+          } else {
+            if (nodeElem) {
+              nodeElem.classList.remove('highlight-match');
+              nodeElem.classList.add('opacity-25');
+            }
+          }
+        });
+      }
+
+      searchInput.addEventListener('input', performSearch);
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        performSearch();
+      });
+    }
+
+    function initPresentationMode() {
+      const presBtn = document.getElementById('presentation-btn');
+      const presBanner = document.getElementById('presentation-banner');
+      const presExitBtn = document.getElementById('pres-exit-btn');
+      const presPrevBtn = document.getElementById('pres-prev-btn');
+      const presNextBtn = document.getElementById('pres-next-btn');
+
+      function updatePresStep() {
+        const nodeId = PRES_ORDER[currentPresIndex];
+        const data = MINDMAP_DATA[nodeId];
+
+        document.getElementById('pres-step-title').textContent = `Đang xem: ${data.badge} - ${data.title}`;
+        document.getElementById('pres-step-counter').textContent = `(${currentPresIndex + 1}/${PRES_ORDER.length})`;
+
+        // Highlight active node in mindmap
+        document.querySelectorAll('.node-card').forEach(n => {
+          n.classList.remove('ring-4', 'ring-cyan-400', 'scale-105');
+          n.classList.add('opacity-40');
+        });
+
+        const activeNode = document.getElementById(`node-${nodeId}`);
+        if (activeNode) {
+          activeNode.classList.remove('opacity-40');
+          activeNode.classList.add('ring-4', 'ring-cyan-400', 'scale-105');
+          
+          // Auto pan canvas to center the active node
+          const world = document.getElementById('mindmap-world');
+          const viewport = document.getElementById('mindmap-viewport');
+          const nodeRect = activeNode.getBoundingClientRect();
+          const vpRect = viewport.getBoundingClientRect();
+
+          const targetX = (vpRect.left + vpRect.width / 2) - (nodeRect.left + nodeRect.width / 2);
+          const targetY = (vpRect.top + vpRect.height / 2) - (nodeRect.top + nodeRect.height / 2);
+
+          panX += targetX;
+          panY += targetY;
+          world.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomLevel})`;
+        }
+
+        // Open detailed drawer for deeper focus
+        openDrawer(nodeId);
+      }
+
+      presBtn.addEventListener('click', () => {
+        isPresentationActive = true;
+        presBanner.classList.remove('hidden');
+        currentPresIndex = 0;
+        updatePresStep();
+        showToast('Đã bắt đầu chế độ Thuyết trình 5W1H');
+      });
+
+      presExitBtn.addEventListener('click', () => {
+        isPresentationActive = false;
+        presBanner.classList.add('hidden');
+        document.querySelectorAll('.node-card').forEach(n => {
+          n.classList.remove('ring-4', 'ring-cyan-400', 'scale-105', 'opacity-40');
+        });
+        closeDrawer();
+      });
+
+      presPrevBtn.addEventListener('click', () => {
+        currentPresIndex = (currentPresIndex - 1 + PRES_ORDER.length) % PRES_ORDER.length;
+        updatePresStep();
+      });
+
+      presNextBtn.addEventListener('click', () => {
+        currentPresIndex = (currentPresIndex + 1) % PRES_ORDER.length;
+        updatePresStep();
+      });
+    }
+
+    function renderTreeView() {
+      const container = document.getElementById('tree-root-nodes');
+      if (!container) return;
+
+      const keys = ['what', 'why', 'where', 'who', 'when', 'how'];
+      let treeHtml = '';
+
+      keys.forEach(key => {
+        const item = MINDMAP_DATA[key];
+        treeHtml += `
+          <div class="border border-brand-border rounded-xl bg-brand-surface/60 overflow-hidden">
+            <button 
+              onclick="toggleTreeBranch('${key}')" 
+              class="w-full text-left p-3 flex items-center justify-between hover:bg-brand-card transition text-xs font-bold text-white"
+            >
+              <div class="flex items-center gap-2">
+                <span id="tree-icon-${key}" class="text-cyan-400 font-mono transition-transform">▼</span>
+                <span class="text-cyan-400 font-black tracking-wide">${item.badge}</span>
+                <span>— ${item.title}</span>
+              </div>
+              <span class="text-[10px] text-slate-400 hidden sm:inline">Nhấp để đóng/mở</span>
+            </button>
+
+            <div id="tree-branch-${key}" class="p-3.5 bg-brand-card/30 border-t border-brand-border/60 space-y-3 text-xs text-slate-300">
+              <p class="italic text-cyan-200">${item.summary}</p>
+              ${item.sections.map(sec => `
+                <div class="space-y-1.5 pl-3 border-l-2 border-brand-border">
+                  <div class="font-bold text-white text-[11px]">${sec.heading}</div>
+                  <ul class="space-y-1 pl-2">
+                    ${sec.points.map(pt => `<li class="list-disc list-inside text-slate-400">${pt}</li>`).join('')}
+                  </ul>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = treeHtml;
+    }
+
+    function toggleTreeBranch(key) {
+      const branch = document.getElementById(`tree-branch-${key}`);
+      const icon = document.getElementById(`tree-icon-${key}`);
+      if (branch.classList.contains('hidden')) {
+        branch.classList.remove('hidden');
+        icon.style.transform = 'rotate(0deg)';
+      } else {
+        branch.classList.add('hidden');
+        icon.style.transform = 'rotate(-90deg)';
+      }
+    }
+
+    function copyToClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).catch(() => {
+          fallbackCopyText(text);
+        });
+      } else {
+        fallbackCopyText(text);
+      }
+    }
+
+    function fallbackCopyText(text) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      textArea.style.top = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+      } catch (err) {
+        console.error('Fallback copy failed', err);
+      }
+      document.body.removeChild(textArea);
+    }
+
+    function initCopySummary() {
+      const copyBtn = document.getElementById('copy-summary-btn');
+      copyBtn.addEventListener('click', () => {
+        let summaryText = `MINDMAP 5W1H: AI VÀ TƯƠNG LAI VIỆC LÀM (Dữ liệu ILO 2025, WEF 2025, IMF 2024)\n\n`;
+        summaryText += `1. CÂU HỎI TRUNG TÂM: AI có làm mất việc làm không?\n`;
+        summaryText += `   -> Có mất ở một số nhiệm vụ chuẩn hóa, nhưng bản chất là "chuyển đổi nhiệm vụ và hợp tác người-máy".\n\n`;
+        summaryText += `2. WHAT: Mất nhiệm vụ lặp lại (nhập liệu, tóm tắt cơ bản), phát triển nhiệm vụ kiểm chứng, sáng tạo và đạo đức.\n`;
+        summaryText += `3. WHY: Doanh nghiệp muốn tối ưu năng suất, xử lý big data và vận hành 24/7.\n`;
+        summaryText += `4. WHERE: Khối nghề hành chính/văn phòng (clerical) và các quốc gia phát triển chịu tác động mạnh nhất.\n`;
+        summaryText += `5. WHO: Lao động, doanh nghiệp (77% reskilling), trường đại học và chính phủ cùng vào cuộc.\n`;
+        summaryText += `6. WHEN: Đang diễn ra và tăng tốc trong giai đoạn bản lề 2025 - 2030.\n`;
+        summaryText += `7. HOW: 3 cơ chế: Tự động hóa (Automation) + Tăng cường (Augmentation) + Tái phân bổ (Reallocation).\n`;
+
+        copyToClipboard(summaryText);
+        showToast('Đã sao chép toàn bộ tóm tắt Mindmap vào Clipboard!');
+      });
+    }
+  </script>
+</body>
+</html>

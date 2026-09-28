@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mindmap 5W1H — AI & Nguy Cơ Mất Việc Làm</title>
+<title>Mindmap 5W1H â€” AI & Nguy CÆ¡ Máº¥t Viá»‡c LÃ m</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/be-vietnam-pro@latest/vietnamese-400.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/be-vietnam-pro@latest/vietnamese-600.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/be-vietnam-pro@latest/vietnamese-700.css">
@@ -11,184 +11,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/be-vietnam-pro@latest/latin-400.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/be-vietnam-pro@latest/latin-700.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-<style>
-:root{
-  --bg:#060b17; --panel:#0d1526; --panel2:#101c33; --line:rgba(148,163,184,.16);
-  --txt:#e6eefb; --mut:#8fa3c0; --red:#e11d48; --blue:#38b0f0;
-  --what:#38bdf8; --why:#a78bfa; --who:#f472b6; --when:#fbbf24; --where:#34d399; --how:#f87171;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  font-family:'Be Vietnam Pro',system-ui,-apple-system,sans-serif;
-  background:var(--bg); color:var(--txt); overflow-x:hidden;
-}
-body::before{
-  content:""; position:fixed; inset:0; z-index:-1;
-  background:
-    radial-gradient(700px 420px at 12% -5%, rgba(56,176,240,.16), transparent 60%),
-    radial-gradient(700px 420px at 92% 8%, rgba(225,29,72,.12), transparent 60%),
-    radial-gradient(900px 600px at 50% 110%, rgba(52,211,153,.08), transparent 60%);
-}
-.wrap{max-width:1280px;margin:0 auto;padding:0 22px}
-
-/* ============ HERO ============ */
-header.hero{padding:56px 0 30px}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:center}
-.badge{
-  display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:2.5px;
-  color:#ff5c7a;background:rgba(225,29,72,.12);border:1px solid rgba(225,29,72,.4);
-  padding:7px 14px;border-radius:999px;text-transform:uppercase;
-}
-.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);animation:pulse 1.6s infinite}
-@keyframes pulse{50%{opacity:.35}}
-h1.title{
-  font-size:clamp(30px,4.6vw,52px);font-weight:800;line-height:1.12;margin:16px 0 6px;
-  background:linear-gradient(92deg,#fff 10%,#9fd8ff 55%,#ff8fa3 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.subtitle{color:var(--mut);font-size:15px;max-width:560px;line-height:1.65}
-.quote-box{
-  margin:22px 0 18px;background:linear-gradient(135deg,#38b0f0,#2f9de0);
-  border-radius:22px;padding:22px 26px;color:#fff;font-size:17px;font-weight:600;line-height:1.6;
-  box-shadow:0 18px 44px -18px rgba(56,176,240,.55);position:relative;overflow:hidden;
-}
-.quote-box::after{content:"”";position:absolute;right:14px;top:-24px;font-size:110px;color:rgba(255,255,255,.18);font-weight:800}
-.quote-box small{display:block;margin-top:10px;font-size:12px;font-weight:400;color:rgba(255,255,255,.85)}
-.chips{display:flex;flex-wrap:wrap;gap:9px}
-.chip{
-  display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:#cbd9ee;
-  background:rgba(148,163,184,.08);border:1px solid var(--line);padding:7px 13px;border-radius:999px;cursor:pointer;
-  transition:.25s;
-}
-.chip:hover{transform:translateY(-2px);border-color:currentColor}
-.chip i{width:9px;height:9px;border-radius:50%;display:inline-block}
-/* hero stat panel */
-.hero-panel{
-  background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);
-  border-radius:26px;padding:26px;box-shadow:0 30px 70px -30px rgba(0,0,0,.8);
-}
-.hero-panel h3{font-size:13px;letter-spacing:2px;color:var(--mut);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:8px}
-.hero-panel h3::before{content:"";width:22px;height:2px;background:var(--red)}
-.kpi{display:flex;align-items:baseline;gap:12px;padding:13px 4px;border-bottom:1px dashed var(--line)}
-.kpi:last-child{border-bottom:none}
-.kpi .num{font-size:30px;font-weight:800;min-width:118px;letter-spacing:-.5px}
-.kpi .lbl{font-size:12.5px;color:var(--mut);line-height:1.5}
-.kpi .src{margin-left:auto;font-size:10.5px;color:#64748b;white-space:nowrap}
-
-/* ============ SECTIONS ============ */
-section{padding:44px 0}
-.sec-head{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:22px}
-.kicker{font-size:12px;font-weight:700;letter-spacing:3px;color:var(--red);text-transform:uppercase}
-h2.sec-title{font-size:clamp(22px,3vw,32px);font-weight:800;margin-top:6px}
-.sec-desc{color:var(--mut);font-size:14px;max-width:640px;line-height:1.6}
-
-/* ============ MINDMAP ============ */
-.mm-card{background:linear-gradient(170deg,#0c1424,#0a111f);border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:0 30px 80px -40px rgba(0,0,0,.9)}
-.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
-.tb-btn{
-  font-family:inherit;font-size:12.5px;font-weight:600;color:#cbd9ee;background:rgba(148,163,184,.09);
-  border:1px solid var(--line);border-radius:10px;padding:8px 13px;cursor:pointer;transition:.2s;
-}
-.tb-btn:hover{background:rgba(56,189,248,.15);border-color:rgba(56,189,248,.5);color:#fff}
-.tb-hint{margin-left:auto;font-size:11.5px;color:#64748b}
-.mm-wrap{position:relative;height:660px;overflow:hidden;cursor:grab;
-  background:radial-gradient(1200px 500px at 50% 50%, rgba(56,189,248,.05), transparent 70%);}
-.mm-wrap:active{cursor:grabbing}
-.mm-wrap svg{width:100%;height:100%;display:block;user-select:none;-webkit-user-select:none}
-.node{cursor:pointer;transition:opacity .55s ease,transform .55s cubic-bezier(.22,.9,.32,1.25);transform-box:fill-box;transform-origin:center}
-.node.pre{opacity:0;transform:scale(.55)}
-.node.off{opacity:0;transform:scale(.6);pointer-events:none}
-.node:hover{filter:drop-shadow(0 0 14px var(--c))}
-.link{fill:none;transition:opacity .5s ease}
-.link.pre{opacity:0}
-.link.off{opacity:0}
-.legend{display:flex;flex-wrap:wrap;gap:10px;padding:16px 18px;border-top:1px solid var(--line)}
-.lg{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mut);background:rgba(148,163,184,.06);border:1px solid var(--line);border-radius:999px;padding:6px 13px;cursor:pointer;transition:.2s}
-.lg:hover{color:#fff;transform:translateY(-2px)}
-.lg b{color:#fff;font-weight:700}
-.lg i{width:10px;height:10px;border-radius:3px;display:inline-block}
-
-/* ============ STAT CARDS ============ */
-.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.stat-card{
-  background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:20px;
-  padding:22px;position:relative;overflow:hidden;transition:.3s;
-}
-.stat-card:hover{transform:translateY(-5px);border-color:var(--ac,var(--blue))}
-.stat-card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--ac,var(--blue))}
-.stat-card .v{font-size:34px;font-weight:800;color:var(--ac,var(--blue));letter-spacing:-1px}
-.stat-card .l{font-size:13px;color:#c3d2e8;margin-top:8px;line-height:1.55}
-.stat-card .s{font-size:11px;color:#64748b;margin-top:10px}
-
-/* ============ CHARTS ============ */
-.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.chart-card{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:20px;padding:20px}
-.chart-card h3{font-size:15px;font-weight:700}
-.chart-card .csrc{font-size:11px;color:#64748b;margin:4px 0 14px;display:block}
-.chart-box{position:relative;height:270px}
-
-/* ============ DECLINE PILLS ============ */
-.decline{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:20px;padding:22px}
-.pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-.pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#ffd7dd;
-  background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.35);border-radius:999px;padding:9px 16px;transition:.25s}
-.pill:hover{transform:translateY(-3px);background:rgba(248,113,113,.2)}
-.pill svg{flex:none}
-
-/* ============ CONCLUSION ============ */
-.conc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.conc{border-radius:20px;padding:24px;border:1px solid var(--line);background:linear-gradient(160deg,var(--panel2),var(--panel));position:relative;overflow:hidden}
-.conc .no{font-size:44px;font-weight:800;color:rgba(148,163,184,.14);line-height:1}
-.conc h3{font-size:16px;margin:10px 0 10px;color:var(--ac)}
-.conc p{font-size:13.5px;color:var(--mut);line-height:1.7}
-
-/* ============ FOOTER ============ */
-footer{border-top:1px solid var(--line);margin-top:30px;padding:34px 0 46px;background:rgba(0,0,0,.25)}
-.src-list{display:grid;grid-template-columns:1fr 1fr;gap:8px 26px;margin-top:14px}
-.src-list a{color:#9fb6d8;font-size:12.5px;text-decoration:none;line-height:1.6;display:block;transition:.2s}
-.src-list a:hover{color:#7dd3fc}
-.src-list span.n{color:var(--red);font-weight:700;margin-right:6px}
-.note{font-size:11.5px;color:#64748b;margin-top:16px;line-height:1.6}
-
-/* ============ DRAWER ============ */
-#scrim{position:fixed;inset:0;background:rgba(3,7,15,.6);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:.35s;z-index:60}
-#scrim.on{opacity:1;pointer-events:auto}
-#drawer{
-  position:fixed;top:0;right:0;height:100%;width:min(430px,94vw);z-index:70;
-  background:linear-gradient(180deg,#0e1830,#0a1120);border-left:1px solid var(--line);
-  transform:translateX(102%);transition:transform .45s cubic-bezier(.3,.9,.3,1);
-  display:flex;flex-direction:column;box-shadow:-30px 0 80px rgba(0,0,0,.6);
-}
-#drawer.on{transform:translateX(0)}
-.dr-head{padding:24px 24px 18px;border-bottom:1px solid var(--line);position:relative}
-.dr-tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:2.5px;padding:5px 12px;border-radius:999px;margin-bottom:10px}
-.dr-title{font-size:19px;font-weight:700;line-height:1.4;padding-right:34px}
-.dr-close{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:rgba(148,163,184,.08);color:#cbd9ee;font-size:16px;cursor:pointer;transition:.2s}
-.dr-close:hover{background:rgba(225,29,72,.25);color:#fff}
-.dr-body{padding:20px 24px 34px;overflow-y:auto}
-.dr-desc{font-size:14px;color:#c3d2e8;line-height:1.75;margin-bottom:18px}
-.dr-stats{display:grid;gap:10px;margin-bottom:18px}
-.dr-stat{background:rgba(148,163,184,.07);border:1px solid var(--line);border-left:3px solid var(--ac,#38bdf8);border-radius:12px;padding:12px 14px}
-.dr-stat .v{font-size:21px;font-weight:800;color:var(--ac,#38bdf8)}
-.dr-stat .l{font-size:12px;color:var(--mut);margin-top:4px;line-height:1.55}
-.dr-src h4{font-size:11px;letter-spacing:2px;color:#64748b;text-transform:uppercase;margin-bottom:8px}
-.dr-src a{display:block;font-size:12px;color:#9fb6d8;text-decoration:none;padding:5px 0;line-height:1.5}
-.dr-src a:hover{color:#7dd3fc}
-
-@media(max-width:980px){
-  .hero-grid{grid-template-columns:1fr}
-  .stat-grid,.conc-grid{grid-template-columns:1fr 1fr}
-  .chart-grid{grid-template-columns:1fr}
-  .src-list{grid-template-columns:1fr}
-  .mm-wrap{height:560px}
-}
-@media(max-width:640px){
-  .stat-grid,.conc-grid{grid-template-columns:1fr}
-  .mm-wrap{height:480px}
-  .kpi .num{font-size:24px;min-width:92px}
-}
-</style>
+<meta name="description" content="SÆ¡ Ä‘á»“ tÆ° duy 5W1H vÃ  dá»¯ liá»‡u trá»±c quan vá» AI & nguy cÆ¡ máº¥t viá»‡c lÃ m dá»±a trÃªn bÃ¡o cÃ¡o WEF, IMF, ILO vÃ  Goldman Sachs.">
+<meta property="og:title" content="Mindmap 5W1H â€” AI & Nguy CÆ¡ Máº¥t Viá»‡c LÃ m">
+<meta property="og:description" content="PhÃ¢n tÃ­ch nháº­n Ä‘á»‹nh AI vÃ  viá»‡c lÃ m báº±ng khung 5W1H kÃ¨m sá»‘ liá»‡u kiá»ƒm chá»©ng tá»« cÃ¡c tá»• chá»©c quá»‘c táº¿.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="css/mindmap-charts.css">
 </head>
 <body>
 
@@ -196,22 +23,22 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:34px 0 46px;back
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="badge"><span class="dot"></span>THỰC HÀNH · SƠ ĐỒ TƯ DUY 5W1H</span>
-      <h1 class="title">AI &amp; NGUY CƠ MẤT VIỆC LÀM</h1>
-      <p class="subtitle">Phân tích nhận định "AI phát triển sẽ làm mất nhiều cơ hội việc làm" bằng khung tư duy <b>5W1H</b> (What – Why – Who – When – Where – How), kèm số liệu chứng minh từ các báo cáo quốc tế.</p>
+      <span class="badge"><span class="dot"></span>THá»°C HÃ€NH Â· SÆ  Äá»’ TÆ¯ DUY 5W1H</span>
+      <h1 class="title">AI &amp; NGUY CÆ  Máº¤T VIá»†C LÃ€M</h1>
+      <p class="subtitle">PhÃ¢n tÃ­ch nháº­n Ä‘á»‹nh "AI phÃ¡t triá»ƒn sáº½ lÃ m máº¥t nhiá»u cÆ¡ há»™i viá»‡c lÃ m" báº±ng khung tÆ° duy <b>5W1H</b> (What â€“ Why â€“ Who â€“ When â€“ Where â€“ How), kÃ¨m sá»‘ liá»‡u chá»©ng minh tá»« cÃ¡c bÃ¡o cÃ¡o quá»‘c táº¿.</p>
       <div class="quote-box">
-        “Hiện nay với sự phát triển AI, tôi nghĩ vài năm tới nhiều cơ hội việc làm sẽ mất.”
-        <small>— Nhận định khởi đề · slide THỰC HÀNH</small>
+        â€œHiá»‡n nay vá»›i sá»± phÃ¡t triá»ƒn AI, tÃ´i nghÄ© vÃ i nÄƒm tá»›i nhiá»u cÆ¡ há»™i viá»‡c lÃ m sáº½ máº¥t.â€
+        <small>â€” Nháº­n Ä‘á»‹nh khá»Ÿi Ä‘á» Â· slide THá»°C HÃ€NH</small>
       </div>
       <div class="chips" id="heroChips"></div>
     </div>
     <div class="hero-panel">
-      <h3>Số liệu biết nói</h3>
-      <div class="kpi"><span class="num" style="color:var(--what)" data-val="300" data-suf=" triệu">0</span><span class="lbl">việc làm toàn cầu phơi nhiễm với tự động hóa bằng AI tạo sinh</span><span class="src">Goldman Sachs</span></div>
-      <div class="kpi"><span class="num" style="color:var(--who)" data-val="40" data-suf="%">0</span><span class="lbl">việc làm toàn cầu chịu tác động của AI</span><span class="src">IMF 2024</span></div>
-      <div class="kpi"><span class="num" style="color:var(--when)" data-val="92" data-suf=" triệu">0</span><span class="lbl">việc làm sẽ bị thay thế vào năm 2030</span><span class="src">WEF 2025</span></div>
-      <div class="kpi"><span class="num" style="color:var(--where)" data-val="170" data-suf=" triệu">0</span><span class="lbl">việc làm MỚI được tạo ra cùng giai đoạn</span><span class="src">WEF 2025</span></div>
-      <div class="kpi"><span class="num" style="color:var(--how)" data-val="59" data-suf="%">0</span><span class="lbl">lực lượng lao động cần đào tạo lại trước 2030</span><span class="src">WEF 2025</span></div>
+      <h3>Sá»‘ liá»‡u biáº¿t nÃ³i</h3>
+      <div class="kpi"><span class="num" style="color:var(--what)" data-val="300" data-suf=" triá»‡u">0</span><span class="lbl">viá»‡c lÃ m toÃ n cáº§u phÆ¡i nhiá»…m vá»›i tá»± Ä‘á»™ng hÃ³a báº±ng AI táº¡o sinh</span><span class="src">Goldman Sachs</span></div>
+      <div class="kpi"><span class="num" style="color:var(--who)" data-val="40" data-suf="%">0</span><span class="lbl">viá»‡c lÃ m toÃ n cáº§u chá»‹u tÃ¡c Ä‘á»™ng cá»§a AI</span><span class="src">IMF 2024</span></div>
+      <div class="kpi"><span class="num" style="color:var(--when)" data-val="92" data-suf=" triá»‡u">0</span><span class="lbl">viá»‡c lÃ m sáº½ bá»‹ thay tháº¿ vÃ o nÄƒm 2030</span><span class="src">WEF 2025</span></div>
+      <div class="kpi"><span class="num" style="color:var(--where)" data-val="170" data-suf=" triá»‡u">0</span><span class="lbl">viá»‡c lÃ m Má»šI Ä‘Æ°á»£c táº¡o ra cÃ¹ng giai Ä‘oáº¡n</span><span class="src">WEF 2025</span></div>
+      <div class="kpi"><span class="num" style="color:var(--how)" data-val="59" data-suf="%">0</span><span class="lbl">lá»±c lÆ°á»£ng lao Ä‘á»™ng cáº§n Ä‘Ã o táº¡o láº¡i trÆ°á»›c 2030</span><span class="src">WEF 2025</span></div>
     </div>
   </div>
 </header>
@@ -222,22 +49,22 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:34px 0 46px;back
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <span class="kicker">Sơ đồ tư duy</span>
-        <h2 class="sec-title">Bản đồ 5W1H của vấn đề</h2>
+        <span class="kicker">SÆ¡ Ä‘á»“ tÆ° duy</span>
+        <h2 class="sec-title">Báº£n Ä‘á»“ 5W1H cá»§a váº¥n Ä‘á»</h2>
       </div>
-      <p class="sec-desc">6 nhánh tương ứng 6 câu hỏi 5W1H. Bấm vào <b>ô chữ nhật</b> để xem phân tích &amp; số liệu chi tiết; bấm nút <b>＋ / −</b> ở đầu nhánh để thu gọn / mở rộng.</p>
+      <p class="sec-desc">6 nhÃ¡nh tÆ°Æ¡ng á»©ng 6 cÃ¢u há»i 5W1H. Báº¥m vÃ o <b>Ã´ chá»¯ nháº­t</b> Ä‘á»ƒ xem phÃ¢n tÃ­ch &amp; sá»‘ liá»‡u chi tiáº¿t; báº¥m nÃºt <b>ï¼‹ / âˆ’</b> á»Ÿ Ä‘áº§u nhÃ¡nh Ä‘á»ƒ thu gá»n / má»Ÿ rá»™ng.</p>
     </div>
     <div class="mm-card">
       <div class="toolbar">
-        <button class="tb-btn" id="btnZoomIn">⊕ Phóng to</button>
-        <button class="tb-btn" id="btnZoomOut">⊖ Thu nhỏ</button>
-        <button class="tb-btn" id="btnReset">⟲ Căn giữa</button>
-        <button class="tb-btn" id="btnExpand">✚ Mở tất cả</button>
-        <button class="tb-btn" id="btnCollapse">✖ Thu gọn tất cả</button>
-        <span class="tb-hint">Lăn chuột để zoom · kéo nền để di chuyển</span>
+        <button class="tb-btn" id="btnZoomIn" type="button" aria-label="PhÃ³ng to sÆ¡ Ä‘á»“">âŠ• PhÃ³ng to</button>
+        <button class="tb-btn" id="btnZoomOut" type="button" aria-label="Thu nhá» sÆ¡ Ä‘á»“">âŠ– Thu nhá»</button>
+        <button class="tb-btn" id="btnReset" type="button" aria-label="CÄƒn giá»¯a sÆ¡ Ä‘á»“">âŸ² CÄƒn giá»¯a</button>
+        <button class="tb-btn" id="btnExpand" type="button" aria-label="Má»Ÿ táº¥t cáº£ cÃ¡c nhÃ¡nh">âœš Má»Ÿ táº¥t cáº£</button>
+        <button class="tb-btn" id="btnCollapse" type="button" aria-label="Thu gá»n táº¥t cáº£ cÃ¡c nhÃ¡nh">âœ– Thu gá»n táº¥t cáº£</button>
+        <span class="tb-hint">LÄƒn chuá»™t Ä‘á»ƒ zoom Â· kÃ©o ná»n Ä‘á»ƒ di chuyá»ƒn</span>
       </div>
       <div class="mm-wrap" id="mmWrap">
-        <svg id="mm" viewBox="0 0 1700 980" preserveAspectRatio="xMidYMid meet" aria-label="Sơ đồ tư duy 5W1H"></svg>
+        <svg id="mm" viewBox="0 0 1700 980" preserveAspectRatio="xMidYMid meet" aria-label="SÆ¡ Ä‘á»“ tÆ° duy 5W1H"></svg>
       </div>
       <div class="legend" id="legend"></div>
     </div>
@@ -248,16 +75,16 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:34px 0 46px;back
 <section id="stats">
   <div class="wrap">
     <div class="sec-head">
-      <div><span class="kicker">Bằng chứng thực tế</span><h2 class="sec-title">Những con số chứng minh vấn đề</h2></div>
-      <p class="sec-desc">Tổng hợp từ các báo cáo công khai của WEF, IMF, Goldman Sachs, McKinsey, ILO và Challenger, Gray &amp; Christmas.</p>
+      <div><span class="kicker">Báº±ng chá»©ng thá»±c táº¿</span><h2 class="sec-title">Nhá»¯ng con sá»‘ chá»©ng minh váº¥n Ä‘á»</h2></div>
+      <p class="sec-desc">Tá»•ng há»£p tá»« cÃ¡c bÃ¡o cÃ¡o cÃ´ng khai cá»§a WEF, IMF, Goldman Sachs, McKinsey, ILO vÃ  Challenger, Gray &amp; Christmas.</p>
     </div>
     <div class="stat-grid">
-      <div class="stat-card" style="--ac:var(--what)"><div class="v">300 triệu</div><div class="l">việc làm toàn cầu (quy đổi toàn thời gian) phơi nhiễm với tự động hóa bằng AI tạo sinh.</div><div class="s">Nguồn: Goldman Sachs, 03/2023 [2]</div></div>
-      <div class="stat-card" style="--ac:var(--who)"><div class="v">40% / 60%</div><div class="l">việc làm toàn cầu phơi nhiễm với AI; riêng các nền kinh tế phát triển lên tới ~60%.</div><div class="s">Nguồn: IMF, 01/2024 [3]</div></div>
-      <div class="stat-card" style="--ac:var(--when)"><div class="v">92 triệu</div><div class="l">việc làm hiện tại sẽ bị thay thế vào năm 2030 — tương đương 22% tổng số việc làm bị xáo trộn.</div><div class="s">Nguồn: WEF Future of Jobs 2025 [1]</div></div>
-      <div class="stat-card" style="--ac:var(--where)"><div class="v">20,8%</div><div class="l">việc làm tại Việt Nam (~11,5 triệu lao động) chịu tác động của AI tạo sinh; nữ 24,1% so với nam 17,8%.</div><div class="s">Nguồn: ILO [5]</div></div>
-      <div class="stat-card" style="--ac:var(--why)"><div class="v">2 tháng</div><div class="l">để ChatGPT đạt 100 triệu người dùng — tốc độ phổ cập nhanh nhất lịch sử ứng dụng, thúc đẩy làn sóng tự động hóa.</div><div class="s">Nguồn: UBS / Visual Capitalist [7]</div></div>
-      <div class="stat-card" style="--ac:var(--how)"><div class="v">59%</div><div class="l">lực lượng lao động toàn cầu cần reskilling / upskilling trước 2030 để không bị bỏ lại.</div><div class="s">Nguồn: WEF Future of Jobs 2025 [6]</div></div>
+      <div class="stat-card" style="--ac:var(--what)"><div class="v">300 triá»‡u</div><div class="l">viá»‡c lÃ m toÃ n cáº§u (quy Ä‘á»•i toÃ n thá»i gian) phÆ¡i nhiá»…m vá»›i tá»± Ä‘á»™ng hÃ³a báº±ng AI táº¡o sinh.</div><div class="s">Nguá»“n: Goldman Sachs, 03/2023 [2]</div></div>
+      <div class="stat-card" style="--ac:var(--who)"><div class="v">40% / 60%</div><div class="l">viá»‡c lÃ m toÃ n cáº§u phÆ¡i nhiá»…m vá»›i AI; riÃªng cÃ¡c ná»n kinh táº¿ phÃ¡t triá»ƒn lÃªn tá»›i ~60%.</div><div class="s">Nguá»“n: IMF, 01/2024 [3]</div></div>
+      <div class="stat-card" style="--ac:var(--when)"><div class="v">92 triá»‡u</div><div class="l">viá»‡c lÃ m hiá»‡n táº¡i sáº½ bá»‹ thay tháº¿ vÃ o nÄƒm 2030 â€” tÆ°Æ¡ng Ä‘Æ°Æ¡ng 22% tá»•ng sá»‘ viá»‡c lÃ m bá»‹ xÃ¡o trá»™n.</div><div class="s">Nguá»“n: WEF Future of Jobs 2025 [1]</div></div>
+      <div class="stat-card" style="--ac:var(--where)"><div class="v">20,8%</div><div class="l">viá»‡c lÃ m táº¡i Viá»‡t Nam (~11,5 triá»‡u lao Ä‘á»™ng) chá»‹u tÃ¡c Ä‘á»™ng cá»§a AI táº¡o sinh; ná»¯ 24,1% so vá»›i nam 17,8%.</div><div class="s">Nguá»“n: ILO [5]</div></div>
+      <div class="stat-card" style="--ac:var(--why)"><div class="v">2 thÃ¡ng</div><div class="l">Ä‘á»ƒ ChatGPT Ä‘áº¡t 100 triá»‡u ngÆ°á»i dÃ¹ng â€” tá»‘c Ä‘á»™ phá»• cáº­p nhanh nháº¥t lá»‹ch sá»­ á»©ng dá»¥ng, thÃºc Ä‘áº©y lÃ n sÃ³ng tá»± Ä‘á»™ng hÃ³a.</div><div class="s">Nguá»“n: UBS / Visual Capitalist [7]</div></div>
+      <div class="stat-card" style="--ac:var(--how)"><div class="v">59%</div><div class="l">lá»±c lÆ°á»£ng lao Ä‘á»™ng toÃ n cáº§u cáº§n reskilling / upskilling trÆ°á»›c 2030 Ä‘á»ƒ khÃ´ng bá»‹ bá» láº¡i.</div><div class="s">Nguá»“n: WEF Future of Jobs 2025 [6]</div></div>
     </div>
   </div>
 </section>
@@ -266,24 +93,24 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:34px 0 46px;back
 <section id="charts">
   <div class="wrap">
     <div class="sec-head">
-      <div><span class="kicker">Dữ liệu minh họa</span><h2 class="sec-title">Biểu đồ chứng minh</h2></div>
+      <div><span class="kicker">Dá»¯ liá»‡u minh há»a</span><h2 class="sec-title">Biá»ƒu Ä‘á»“ chá»©ng minh</h2></div>
     </div>
     <div class="chart-grid">
-      <div class="chart-card"><h3>Việc làm toàn cầu đến 2030: mất đi vs tạo mới</h3><span class="csrc">Nguồn: WEF – Future of Jobs Report 2025 (triệu việc làm)</span><div class="chart-box"><canvas id="ch1"></canvas></div></div>
-      <div class="chart-card"><h3>Mức phơi nhiễm việc làm với AI theo nhóm nền kinh tế</h3><span class="csrc">Nguồn: IMF 2024 (% việc làm); riêng Việt Nam: ILO (% việc làm phơi nhiễm GenAI)</span><div class="chart-box"><canvas id="ch2"></canvas></div></div>
-      <div class="chart-card"><h3>Tốc độ phổ cập: số tháng để đạt 100 triệu người dùng</h3><span class="csrc">Nguồn: UBS / Visual Capitalist — vì sao làn sóng AI diễn ra quá nhanh</span><div class="chart-box"><canvas id="ch3"></canvas></div></div>
-      <div class="chart-card"><h3>Lao động cần đào tạo lại kỹ năng trước 2030</h3><span class="csrc">Nguồn: WEF – Future of Jobs Report 2025</span><div class="chart-box"><canvas id="ch4"></canvas></div></div>
+      <div class="chart-card"><h3>Viá»‡c lÃ m toÃ n cáº§u Ä‘áº¿n 2030: máº¥t Ä‘i vs táº¡o má»›i</h3><span class="csrc">Nguá»“n: WEF â€“ Future of Jobs Report 2025 (triá»‡u viá»‡c lÃ m)</span><div class="chart-box"><canvas id="ch1"></canvas></div></div>
+      <div class="chart-card"><h3>Má»©c phÆ¡i nhiá»…m viá»‡c lÃ m vá»›i AI theo nhÃ³m ná»n kinh táº¿</h3><span class="csrc">Nguá»“n: IMF 2024 (% viá»‡c lÃ m); riÃªng Viá»‡t Nam: ILO (% viá»‡c lÃ m phÆ¡i nhiá»…m GenAI)</span><div class="chart-box"><canvas id="ch2"></canvas></div></div>
+      <div class="chart-card"><h3>Tá»‘c Ä‘á»™ phá»• cáº­p: sá»‘ thÃ¡ng Ä‘á»ƒ Ä‘áº¡t 100 triá»‡u ngÆ°á»i dÃ¹ng</h3><span class="csrc">Nguá»“n: UBS / Visual Capitalist â€” vÃ¬ sao lÃ n sÃ³ng AI diá»…n ra quÃ¡ nhanh</span><div class="chart-box"><canvas id="ch3"></canvas></div></div>
+      <div class="chart-card"><h3>Lao Ä‘á»™ng cáº§n Ä‘Ã o táº¡o láº¡i ká»¹ nÄƒng trÆ°á»›c 2030</h3><span class="csrc">Nguá»“n: WEF â€“ Future of Jobs Report 2025</span><div class="chart-box"><canvas id="ch4"></canvas></div></div>
     </div>
 
     <div class="decline" style="margin-top:16px">
-      <h3 style="font-size:15px">Nhóm nghề suy giảm NHANH NHẤT đến 2030 theo WEF</h3>
-      <span class="csrc" style="font-size:11px;color:#64748b;display:block;margin-top:4px">Future of Jobs Report 2025 — các nghề thiên về tác nghiệp lặp lại</span>
+      <h3 style="font-size:15px">NhÃ³m nghá» suy giáº£m NHANH NHáº¤T Ä‘áº¿n 2030 theo WEF</h3>
+      <span class="csrc" style="font-size:11px;color:#64748b;display:block;margin-top:4px">Future of Jobs Report 2025 â€” cÃ¡c nghá» thiÃªn vá» tÃ¡c nghiá»‡p láº·p láº¡i</span>
       <div class="pills">
-        <span class="pill"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 1v8M2.5 6.5L6 10l3.5-3.5" stroke="#f87171" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>Nhân viên bưu chính</span>
-        <span class="pill"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 1v8M2.5 6.5L6 10l3.5-3.5" stroke="#f87171" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>Giao dịch viên ngân hàng</span>
-        <span class="pill"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 1v8M2.5 6.5L6 10l3.5-3.5" stroke="#f87171" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>Nhân viên nhập liệu</span>
-        <span class="pill"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 1v8M2.5 6.5L6 10l3.5-3.5" stroke="#f87171" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>Thu ngân &amp; nhân viên bán vé</span>
-        <span class="pill"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 1v8M2.5 6.5L6 10l3.5-3.5" stroke="#f87171" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>Thư ký hành chính</span>
+        <span class="pill"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 1v8M2.5 6.5L6 10l3.5-3.5" stroke="#f87171" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>NhÃ¢n viÃªn bÆ°u chÃ­nh</span>
+        <span class="pill"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 1v8M2.5 6.5L6 10l3.5-3.5" stroke="#f87171" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>Giao dá»‹ch viÃªn ngÃ¢n hÃ ng</span>
+        <span class="pill"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 1v8M2.5 6.5L6 10l3.5-3.5" stroke="#f87171" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>NhÃ¢n viÃªn nháº­p liá»‡u</span>
+        <span class="pill"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 1v8M2.5 6.5L6 10l3.5-3.5" stroke="#f87171" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>Thu ngÃ¢n &amp; nhÃ¢n viÃªn bÃ¡n vÃ©</span>
+        <span class="pill"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 1v8M2.5 6.5L6 10l3.5-3.5" stroke="#f87171" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>ThÆ° kÃ½ hÃ nh chÃ­nh</span>
       </div>
     </div>
   </div>
@@ -293,12 +120,12 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:34px 0 46px;back
 <section id="conclusion">
   <div class="wrap">
     <div class="sec-head">
-      <div><span class="kicker">Tổng kết</span><h2 class="sec-title">Kết luận rút ra từ 5W1H</h2></div>
+      <div><span class="kicker">Tá»•ng káº¿t</span><h2 class="sec-title">Káº¿t luáº­n rÃºt ra tá»« 5W1H</h2></div>
     </div>
     <div class="conc-grid">
-      <div class="conc" style="--ac:var(--where)"><div class="no">01</div><h3>AI không xóa sạch việc làm — nó TÁI CƠ CẤU</h3><p>Đến 2030 thế giới mất 92 triệu việc làm nhưng tạo thêm 170 triệu việc làm mới, ròng +78 triệu (WEF 2025). Vấn đề không phải "mất hết việc" mà là <b>việc làm cũ biến đổi nhanh hơn tốc độ thích nghi</b> của người lao động.</p></div>
-      <div class="conc" style="--ac:var(--how)"><div class="no">02</div><h3>Rủi ro là THẬT với người không thích nghi</h3><p>40% việc làm toàn cầu phơi nhiễm với AI (IMF); nhóm nghề lặp lại suy giảm nhanh nhất; sa thải viện dẫn AI đã xuất hiện và tăng tốc. 59% người lao động cần đào tạo lại trước 2030 — ai đứng yên sẽ bị bỏ lại.</p></div>
-      <div class="conc" style="--ac:var(--what)"><div class="no">03</div><h3>Cơ hội nằm trong chính làn sóng này</h3><p>170 triệu việc làm mới, năng suất và GDP tăng (Goldman Sachs dự báo +7% GDP toàn cầu). Người biết dùng AI như công cụ bổ trợ — thay vì cạnh tranh với nó — sẽ nắm lợi thế lớn nhất trong thập kỷ tới.</p></div>
+      <div class="conc" style="--ac:var(--where)"><div class="no">01</div><h3>AI khÃ´ng xÃ³a sáº¡ch viá»‡c lÃ m â€” nÃ³ TÃI CÆ  Cáº¤U</h3><p>Äáº¿n 2030 tháº¿ giá»›i máº¥t 92 triá»‡u viá»‡c lÃ m nhÆ°ng táº¡o thÃªm 170 triá»‡u viá»‡c lÃ m má»›i, rÃ²ng +78 triá»‡u (WEF 2025). Váº¥n Ä‘á» khÃ´ng pháº£i "máº¥t háº¿t viá»‡c" mÃ  lÃ  <b>viá»‡c lÃ m cÅ© biáº¿n Ä‘á»•i nhanh hÆ¡n tá»‘c Ä‘á»™ thÃ­ch nghi</b> cá»§a ngÆ°á»i lao Ä‘á»™ng.</p></div>
+      <div class="conc" style="--ac:var(--how)"><div class="no">02</div><h3>Rá»§i ro lÃ  THáº¬T vá»›i ngÆ°á»i khÃ´ng thÃ­ch nghi</h3><p>40% viá»‡c lÃ m toÃ n cáº§u phÆ¡i nhiá»…m vá»›i AI (IMF); nhÃ³m nghá» láº·p láº¡i suy giáº£m nhanh nháº¥t; sa tháº£i viá»‡n dáº«n AI Ä‘Ã£ xuáº¥t hiá»‡n vÃ  tÄƒng tá»‘c. 59% ngÆ°á»i lao Ä‘á»™ng cáº§n Ä‘Ã o táº¡o láº¡i trÆ°á»›c 2030 â€” ai Ä‘á»©ng yÃªn sáº½ bá»‹ bá» láº¡i.</p></div>
+      <div class="conc" style="--ac:var(--what)"><div class="no">03</div><h3>CÆ¡ há»™i náº±m trong chÃ­nh lÃ n sÃ³ng nÃ y</h3><p>170 triá»‡u viá»‡c lÃ m má»›i, nÄƒng suáº¥t vÃ  GDP tÄƒng (Goldman Sachs dá»± bÃ¡o +7% GDP toÃ n cáº§u). NgÆ°á»i biáº¿t dÃ¹ng AI nhÆ° cÃ´ng cá»¥ bá»• trá»£ â€” thay vÃ¬ cáº¡nh tranh vá»›i nÃ³ â€” sáº½ náº¯m lá»£i tháº¿ lá»›n nháº¥t trong tháº­p ká»· tá»›i.</p></div>
     </div>
   </div>
 </section>
@@ -307,363 +134,38 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:34px 0 46px;back
 <!-- ================= FOOTER ================= -->
 <footer>
   <div class="wrap">
-    <span class="kicker">Nguồn tham khảo</span>
+    <span class="kicker">Nguá»“n tham kháº£o</span>
     <div class="src-list">
-      <a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener"><span class="n">[1]</span>WEF – Future of Jobs Report 2025 (92 triệu việc mất / 170 triệu việc mới / 22% xáo trộn).</a>
-      <a href="https://www.goldmansachs.com/insights/articles/generative-ai-could-raise-global-gdp-by-7-percent" target="_blank" rel="noopener"><span class="n">[2]</span>Goldman Sachs (03/2023) – 300 triệu việc làm phơi nhiễm tự động hóa; GDP toàn cầu +7%.</a>
-      <a href="https://www.imf.org/en/blogs/articles/2024/01/14/ai-will-transform-the-global-economy-lets-make-sure-it-benefits-humanity" target="_blank" rel="noopener"><span class="n">[3]</span>IMF (01/2024) – ~40% việc làm toàn cầu phơi nhiễm AI; nền kinh tế phát triển ~60%.</a>
-      <a href="https://www.mckinsey.com/mgi/our-research/generative-ai-and-the-future-of-work-in-america" target="_blank" rel="noopener"><span class="n">[4]</span>McKinsey Global Institute (07/2023) – tới 30% giờ làm việc tại Mỹ có thể tự động hóa vào 2030.</a>
-      <a href="https://www.ilo.org/vi/resource/tin-t%E1%BB%A9c/generative-ai-could-transform-millions-jobs-viet-nam-new-ilo-brief-shows" target="_blank" rel="noopener"><span class="n">[5]</span>ILO – GenAI có thể thay đổi hàng triệu việc làm tại Việt Nam (20,8%; nữ 24,1% / nam 17,8%).</a>
-      <a href="https://www.weforum.org/press/2025/01/future-of-jobs-report-2025-78-million-new-job-opportunities-by-2030-but-urgent-upskilling-needed-to-prepare-workforces/" target="_blank" rel="noopener"><span class="n">[6]</span>WEF Press (01/2025) – 59/100 người lao động cần reskilling/upskilling trước 2030.</a>
-      <a href="https://www.visualcapitalist.com/threads-100-million-users/" target="_blank" rel="noopener"><span class="n">[7]</span>Visual Capitalist / UBS – thời gian các ứng dụng đạt 100 triệu người dùng (ChatGPT: 2 tháng).</a>
-      <a href="https://www.challengergray.com/blog/" target="_blank" rel="noopener"><span class="n">[8]</span>Challenger, Gray &amp; Christmas – Báo cáo sa thải tại Mỹ; AI dẫn đầu lý do cắt giảm (&gt;27.000 việc 2024–2025; 38.579 việc trong tháng 5/2026 ≈ 40%).</a>
+      <a href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/" target="_blank" rel="noopener"><span class="n">[1]</span>WEF â€“ Future of Jobs Report 2025 (92 triá»‡u viá»‡c máº¥t / 170 triá»‡u viá»‡c má»›i / 22% xÃ¡o trá»™n).</a>
+      <a href="https://www.goldmansachs.com/insights/articles/generative-ai-could-raise-global-gdp-by-7-percent" target="_blank" rel="noopener"><span class="n">[2]</span>Goldman Sachs (03/2023) â€“ 300 triá»‡u viá»‡c lÃ m phÆ¡i nhiá»…m tá»± Ä‘á»™ng hÃ³a; GDP toÃ n cáº§u +7%.</a>
+      <a href="https://www.imf.org/en/blogs/articles/2024/01/14/ai-will-transform-the-global-economy-lets-make-sure-it-benefits-humanity" target="_blank" rel="noopener"><span class="n">[3]</span>IMF (01/2024) â€“ ~40% viá»‡c lÃ m toÃ n cáº§u phÆ¡i nhiá»…m AI; ná»n kinh táº¿ phÃ¡t triá»ƒn ~60%.</a>
+      <a href="https://www.mckinsey.com/mgi/our-research/generative-ai-and-the-future-of-work-in-america" target="_blank" rel="noopener"><span class="n">[4]</span>McKinsey Global Institute (07/2023) â€“ tá»›i 30% giá» lÃ m viá»‡c táº¡i Má»¹ cÃ³ thá»ƒ tá»± Ä‘á»™ng hÃ³a vÃ o 2030.</a>
+      <a href="https://www.ilo.org/vi/resource/tin-t%E1%BB%A9c/generative-ai-could-transform-millions-jobs-viet-nam-new-ilo-brief-shows" target="_blank" rel="noopener"><span class="n">[5]</span>ILO â€“ GenAI cÃ³ thá»ƒ thay Ä‘á»•i hÃ ng triá»‡u viá»‡c lÃ m táº¡i Viá»‡t Nam (20,8%; ná»¯ 24,1% / nam 17,8%).</a>
+      <a href="https://www.weforum.org/press/2025/01/future-of-jobs-report-2025-78-million-new-job-opportunities-by-2030-but-urgent-upskilling-needed-to-prepare-workforces/" target="_blank" rel="noopener"><span class="n">[6]</span>WEF Press (01/2025) â€“ 59/100 ngÆ°á»i lao Ä‘á»™ng cáº§n reskilling/upskilling trÆ°á»›c 2030.</a>
+      <a href="https://www.visualcapitalist.com/threads-100-million-users/" target="_blank" rel="noopener"><span class="n">[7]</span>Visual Capitalist / UBS â€“ thá»i gian cÃ¡c á»©ng dá»¥ng Ä‘áº¡t 100 triá»‡u ngÆ°á»i dÃ¹ng (ChatGPT: 2 thÃ¡ng).</a>
+      <a href="https://www.challengergray.com/blog/" target="_blank" rel="noopener"><span class="n">[8]</span>Challenger, Gray &amp; Christmas â€“ BÃ¡o cÃ¡o sa tháº£i táº¡i Má»¹; AI dáº«n Ä‘áº§u lÃ½ do cáº¯t giáº£m (&gt;27.000 viá»‡c 2024â€“2025; 38.579 viá»‡c trong thÃ¡ng 5/2026 â‰ˆ 40%).</a>
     </div>
-    <p class="note">Trang mindmap phục vụ học tập · số liệu trích từ các báo cáo công khai, có thể được cập nhật theo thời gian. Khung phân tích: 5W1H (What – Why – Who – When – Where – How).</p>
+    <p class="note">Trang mindmap phá»¥c vá»¥ há»c táº­p Â· sá»‘ liá»‡u trÃ­ch tá»« cÃ¡c bÃ¡o cÃ¡o cÃ´ng khai, cÃ³ thá»ƒ Ä‘Æ°á»£c cáº­p nháº­t theo thá»i gian. Khung phÃ¢n tÃ­ch: 5W1H (What â€“ Why â€“ Who â€“ When â€“ Where â€“ How).</p>
   </div>
 </footer>
 
 <!-- ================= DRAWER ================= -->
 <div id="scrim"></div>
-<aside id="drawer">
+<aside id="drawer" role="dialog" aria-modal="true" aria-labelledby="drTitle">
   <div class="dr-head">
-    <button class="dr-close" id="drClose" aria-label="Đóng">✕</button>
+    <button class="dr-close" id="drClose" type="button" aria-label="ÄÃ³ng chi tiáº¿t">âœ•</button>
     <span class="dr-tag" id="drTag">WHAT</span>
     <div class="dr-title" id="drTitle"></div>
   </div>
   <div class="dr-body">
     <p class="dr-desc" id="drDesc"></p>
     <div class="dr-stats" id="drStats"></div>
-    <div class="dr-src" id="drSrcWrap"><h4>Nguồn số liệu</h4><div id="drSrc"></div></div>
+    <div class="dr-src" id="drSrcWrap"><h4>Nguá»“n sá»‘ liá»‡u</h4><div id="drSrc"></div></div>
   </div>
 </aside>
 
-<script>
-/* =========================================================
-   DỮ LIỆU MINDMAP 5W1H
-========================================================= */
-const SRC = {
-  wef:{t:'WEF – Future of Jobs Report 2025',u:'https://www.weforum.org/publications/the-future-of-jobs-report-2025/'},
-  gs:{t:'Goldman Sachs Research (03/2023)',u:'https://www.goldmansachs.com/insights/articles/generative-ai-could-raise-global-gdp-by-7-percent'},
-  imf:{t:'IMF Blog (01/2024)',u:'https://www.imf.org/en/blogs/articles/2024/01/14/ai-will-transform-the-global-economy-lets-make-sure-it-benefits-humanity'},
-  mck:{t:'McKinsey Global Institute (07/2023)',u:'https://www.mckinsey.com/mgi/our-research/generative-ai-and-the-future-of-work-in-america'},
-  mck2:{t:'McKinsey – Economic potential of generative AI (06/2023)',u:'https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier'},
-  ilo:{t:'ILO – GenAI & việc làm tại Việt Nam',u:'https://www.ilo.org/vi/resource/tin-t%E1%BB%A9c/generative-ai-could-transform-millions-jobs-viet-nam-new-ilo-brief-shows'},
-  cg:{t:'Challenger, Gray & Christmas – Job Cuts Report',u:'https://www.challengergray.com/blog/'},
-  vc:{t:'UBS / Visual Capitalist',u:'https://www.visualcapitalist.com/threads-100-million-users/'}
-};
-
-const ROOT = {
-  tag:'VẤN ĐỀ', title:'AI & NGUY CƠ MẤT VIỆC LÀM', color:'#38bdf8',
-  detail:{
-    desc:'Nhận định khởi đề: “Hiện nay với sự phát triển AI, tôi nghĩ vài năm tới nhiều cơ hội việc làm sẽ mất.” Mindmap này mổ xẻ nhận định bằng 6 câu hỏi 5W1H, mỗi nhánh kèm số liệu kiểm chứng từ các tổ chức quốc tế.',
-    stats:[
-      {v:'22%',l:'việc làm hiện nay sẽ bị xáo trộn vào 2030 (WEF 2025)'},
-      {v:'+78 triệu',l:'việc làm ròng tăng thêm đến 2030 (170 triệu mới − 92 triệu mất)'}
-    ],
-    sources:['wef']
-  }
-};
-
-const BRANCHES = [
-{ id:'what', tag:'WHAT', q:'Chuyện gì?', title:'Chuyện gì đang xảy ra?', color:'#38bdf8', side:'right', slot:0,
-  detail:{desc:'AI tạo sinh (ChatGPT, Gemini, Copilot...) và tự động hóa đang đảm nhận những tác vụ trước đây cần con người: trả lời khách hàng, viết nội dung, dịch thuật, viết code, nhập liệu, kế toán cơ bản. Bản chất không chỉ là "mất việc" mà là TÁI CƠ CẤU thị trường lao động.',
-    stats:[{v:'22%',l:'việc làm hiện tại bị xáo trộn vào 2030 (WEF 2025)'},{v:'60–70%',l:'thời gian làm việc của nhân viên có thể được tự động hóa bởi gen AI (McKinsey)'}],
-    sources:['wef','mck2']},
-  children:[
-    {label:'AI tạo sinh & tự động hóa thay thế trực tiếp công việc của con người',
-     detail:{desc:'Chatbot chăm sóc khách hàng, AI viết nội dung – dịch thuật – lập trình, phần mềm RPA trong kế toán – văn phòng: máy móc thực hiện nhiệm vụ từng cần con người, với chi phí biên gần như bằng 0.',
-       stats:[{v:'60–70%',l:'thời gian làm việc hiện nay có thể tự động hóa bởi generative AI (McKinsey 2023)'}],sources:['mck2']}},
-    {label:'~300 triệu việc làm toàn cầu phơi nhiễm với tự động hóa bằng AI',
-     detail:{desc:'Goldman Sachs ước tính generative AI có thể phơi nhiễm lượng công việc tương đương 300 triệu lao động toàn thời gian ở Mỹ và châu Âu; extrapolate toàn cầu cho con số tương tự.',
-       stats:[{v:'300 triệu',l:'việc làm toàn cầu phơi nhiễm tự động hóa (Goldman Sachs 03/2023)'},{v:'+7%',l:'GDP toàn cầu có thể tăng thêm nhờ gen AI'}],sources:['gs']}},
-    {label:'Bản chất: tái cơ cấu việc làm chứ không chỉ "mất đi"',
-     detail:{desc:'WEF ghi nhận đến 2030 sẽ có 92 triệu việc làm mất đi nhưng 170 triệu việc làm mới sinh ra — ròng +78 triệu. Nghĩa là thị trường KHÔNG teo lại mà đổi cấu trúc rất nhanh.',
-       stats:[{v:'−92 triệu / +170 triệu',l:'việc làm mất đi / tạo mới đến 2030 (WEF 2025)'},{v:'22%',l:'tỷ lệ việc làm hiện tại bị xáo trộn'}],sources:['wef']}},
-    {label:'Quy mô: 40% việc làm toàn cầu phơi nhiễm với AI',
-     detail:{desc:'IMF (01/2024): gần 40% việc làm toàn cầu thuộc nhóm nghề phơi nhiễm cao với AI; ở các nền kinh tế phát triển tỷ lệ là ~60%. Một nửa trong số đó có thể được AI hỗ trợ tích cực, nửa còn lại đối mặt nguy cơ bị thay thế.',
-       stats:[{v:'40%',l:'việc làm toàn cầu phơi nhiễm AI (IMF 2024)'},{v:'60%',l:'tỷ lệ tương ứng ở nền kinh tế phát triển'}],sources:['imf']}}
-  ]},
-{ id:'why', tag:'WHY', q:'Vì sao?', title:'Vì sao điều này xảy ra?', color:'#a78bfa', side:'right', slot:1,
-  detail:{desc:'Động lực kinh tế: AI rẻ hơn – nhanh hơn – bền bỉ hơn lao động con người ở các tác vụ lặp lại; doanh nghiệp chịu áp lực năng suất và lợi nhuận; tốc độ phổ cập công nghệ nhanh chưa từng có khiến quá trình thay thế diễn ra dồn dập.',
-    stats:[{v:'+7% GDP',l:'động lực kinh tế khổng lồ thúc đẩy doanh nghiệp tự động hóa (Goldman Sachs)'},{v:'2 tháng',l:'ChatGPT đạt 100 triệu người dùng — phổ cập nhanh nhất lịch sử'}],
-    sources:['gs','vc']},
-  children:[
-    {label:'AI rẻ hơn, nhanh hơn và làm việc 24/7 so với con người',
-     detail:{desc:'Một mô hình AI đã huấn luyện có thể xử lý hàng triệu yêu cầu song song, không nghỉ phép, không bảo hiểm, không mệt mỏi. Chi phí biên cho mỗi tác vụ giảm liên tục theo giá compute.',
-       stats:[{v:'24/7',l:'khả năng vận hành liên tục không chi phí nhân công biên'}],sources:[]}},
-    {label:'Áp lực năng suất & lợi nhuận đẩy doanh nghiệp tự động hóa',
-     detail:{desc:'Generative AI được McKinsey ước tính tạo thêm 2,6–4,4 nghìn tỷ USD giá trị mỗi năm; Goldman Sachs dự báo GDP toàn cầu +7%. Lợi ích quá lớn khiến tự động hóa là xu hướng khó đảo ngược.',
-       stats:[{v:'2,6–4,4 nghìn tỷ USD/năm',l:'giá trị generative AI có thể bổ sung cho kinh tế toàn cầu (McKinsey 2023)'},{v:'+7%',l:'GDP toàn cầu dài hạn (Goldman Sachs)'}],sources:['mck2','gs']}},
-    {label:'Tốc độ phổ cập công nghệ nhanh chưa từng có',
-     detail:{desc:'ChatGPT đạt 100 triệu người dùng chỉ sau ~2 tháng (TikTok cần ~9 tháng, Instagram ~30 tháng). Công nghệ thấm vào doanh nghiệp càng nhanh thì tác động lên việc làm đến càng sớm.',
-       stats:[{v:'2 tháng',l:'để ChatGPT chạm 100 triệu người dùng (UBS)'},{v:'5 ngày',l:'kỷ lục sau này của Threads — cho thấy tốc độ lan tỏa của ứng dụng AI'}],sources:['vc']}},
-    {label:'Công nghệ hội tụ: LLM + AI agent + robot học theo cấp số nhân',
-     detail:{desc:'Mô hình ngôn ngữ lớn kết hợp agent tự hành và robot học giúp AI không chỉ "nói" mà còn "làm": duyệt web, thao tác phần mềm, điều khiển dây chuyền — mở rộng phạm vi nghề bị tác động.',
-       stats:[{v:'30%',l:'giờ làm việc tại Mỹ có thể tự động hóa vào 2030 nhờ gen AI (McKinsey)'}],sources:['mck']}}
-  ]},
-{ id:'who', tag:'WHO', q:'Ai?', title:'Ai chịu tác động?', color:'#f472b6', side:'right', slot:2,
-  detail:{desc:'Nhóm phơi nhiễm cao nhất là lao động tác nghiệp lặp lại (văn phòng, hành chính, ngân hàng, nhập liệu). Nhưng khác các cuộc cách mạng trước, AI tạo sinh chạm cả lao động trí thức – sáng tạo. Phụ nữ và người trẻ chịu tác động lệch pha.',
-    stats:[{v:'24,1% vs 17,8%',l:'nữ vs nam lao động Việt Nam trong ngành chịu tác động GenAI (ILO)'},{v:'6,1%',l:'việc làm thanh niên toàn cầu thuộc ngành chịu tác động mạnh (ILO)'}],
-    sources:['ilo']},
-  children:[
-    {label:'Nhân viên văn phòng – hành chính (clerical) rủi ro cao nhất',
-     detail:{desc:'WEF 2025 xếp nhóm suy giảm nhanh nhất đến 2030 gồm: nhân viên bưu chính, giao dịch viên ngân hàng, nhân viên nhập liệu, thu ngân & bán vé — đều là nghề tác nghiệp lặp lại.',
-       stats:[{v:'Top 4 suy giảm',l:'bưu chính, giao dịch viên, nhập liệu, thu ngân (WEF 2025)'}],sources:['wef']}},
-    {label:'Lao động trí thức & sáng tạo không còn "vùng an toàn"',
-     detail:{desc:'Viết lách, dịch thuật, marketing, thiết kế, lập trình sơ cấp... đều bị AI tạo sinh chạm tới. Goldman Sachs ước tính tới ~25% công việc tại Mỹ có thể được tự động hóa bởi AI.',
-       stats:[{v:'~25%',l:'công việc tại Mỹ phơi nhiễm tự động hóa (Goldman Sachs 2023)'}],sources:['gs']}},
-    {label:'Phụ nữ chịu tác động lớn hơn nam giới',
-     detail:{desc:'Theo ILO, tại Việt Nam tỷ lệ lao động nữ làm trong ngành nghề chịu tác động của GenAI là 24,1%, cao hơn hẳn mức 17,8% của nam giới — do phụ nữ tập trung nhiều ở nghề văn phòng, dịch vụ.',
-       stats:[{v:'24,1% / 17,8%',l:'tỷ lệ nữ / nam phơi nhiễm GenAI tại Việt Nam (ILO)'}],sources:['ilo']}},
-    {label:'Người trẻ: cửa vào nghề hẹp lại ở vị trí khởi đầu',
-     detail:{desc:'ILO ước tính 6,1% việc làm do thanh niên 15–29 tuổi đảm nhiệm thuộc nhóm ngành chịu tác động mạnh từ AI. Khi việc "entry-level" bị tự động hóa, con đường tích lũy kinh nghiệm bị thu hẹp.',
-       stats:[{v:'6,1%',l:'việc làm thanh niên trong ngành chịu tác động mạnh (ILO)'}],sources:['ilo']}}
-  ]},
-{ id:'when', tag:'WHEN', q:'Khi nào?', title:'Diễn ra khi nào?', color:'#fbbf24', side:'left', slot:0,
-  detail:{desc:'Tác động KHÔNG phải chuyện tương lai xa: sa thải viện dẫn AI đã xuất hiện từ 2023 và tăng tốc; đỉnh tái cơ cấu dự báo quanh 2030; sau đó lan sang các nghề phức tạp hơn khi mô hình mạnh lên.',
-    stats:[{v:'>27.000',l:'việc làm Mỹ bị cắt do AI trong 2024–2025 (Challenger, Gray & Christmas)'},{v:'2030',l:'mốc đỉnh của tái cơ cấu lao động theo WEF & McKinsey'}],
-    sources:['cg','wef','mck']},
-  children:[
-    {label:'Đang diễn ra: làn sóng sa thải viện dẫn AI từ 2023',
-     detail:{desc:'Challenger, Gray & Christmas ghi nhận hơn 27.000 việc làm Mỹ bị cắt do AI trong 2024–2025; riêng tháng 5/2026 AI là lý do số 1 với 38.579 ca cắt giảm (~40% tổng số tháng), tháng thứ 3 liên tiếp.',
-       stats:[{v:'>27.000',l:'việc làm Mỹ bị cắt do AI giai đoạn 2024–2025'},{v:'38.579 (~40%)',l:'ca cắt giảm trong tháng 5/2026 — AI dẫn đầu lý do'}],sources:['cg']}},
-    {label:'Đến 2030: đỉnh tái cơ cấu lao động toàn cầu',
-     detail:{desc:'WEF dự báo 92 triệu việc làm bị thay thế vào 2030; McKinsey ước tính tới 30% giờ làm việc tại Mỹ có thể tự động hóa vào mốc này nhờ gen AI.',
-       stats:[{v:'92 triệu',l:'việc làm bị thay thế vào 2030 (WEF 2025)'},{v:'30%',l:'giờ làm việc tại Mỹ tự động hóa được vào 2030 (McKinsey)'}],sources:['wef','mck']}},
-    {label:'Sau 2030: lan sang nghề phức tạp hơn',
-     detail:{desc:'Khi mô hình mạnh lên và AI agent trưởng thành, phạm vi tác động mở rộng từ tác nghiệp lặp lại sang phân tích, ra quyết định, sáng tác — các nghề từng được coi là "khó thay thế".',
-       stats:[{v:'22%',l:'việc làm hiện tại bị xáo trộn trong giai đoạn 2025–2030 (WEF)'}],sources:['wef']}},
-    {label:'Tốc độ: nhanh hơn mọi cuộc cách mạng công nghiệp trước',
-     detail:{desc:'Hơi nước, điện, internet cần hàng chục năm để phổ cập; ChatGPT đạt 100 triệu người dùng trong ~2 tháng. Thị trường lao động không còn nhiều thập kỷ để thích nghi như trước.',
-       stats:[{v:'2 tháng vs 30 tháng',l:'ChatGPT so với Instagram để đạt 100 triệu người dùng'}],sources:['vc']}}
-  ]},
-{ id:'where', tag:'WHERE', q:'Ở đâu?', title:'Tác động ở đâu?', color:'#34d399', side:'left', slot:1,
-  detail:{desc:'Phơi nhiễm tập trung ở ngành nhiều tác vụ lặp lại và ở các nền kinh tế có cơ cấu việc làm văn phòng lớn. Việt Nam — trung tâm outsourcing — chịu tác động đáng kể ở mảng văn phòng, nội dung, IT gia công.',
-    stats:[{v:'60%',l:'việc làm ở nền kinh tế phát triển phơi nhiễm AI (IMF)'},{v:'20,8%',l:'việc làm Việt Nam phơi nhiễm GenAI (~11,5 triệu lao động, ILO)'}],
-    sources:['imf','ilo']},
-  children:[
-    {label:'Ngành rủi ro cao: sản xuất, CSKH, nội dung, outsourcing, tài chính',
-     detail:{desc:'Các ngành dày đặc tác vụ lặp lại: dây chuyền sản xuất, tổng đài chăm sóc khách hàng, sản xuất nội dung – truyền thông, IT gia công, kế toán – kiểm toán – ngân hàng.',
-       stats:[{v:'5 nhóm ngành',l:'được các báo cáo WEF/IMF xếp phơi nhiễm cao nhất'}],sources:['wef','imf']}},
-    {label:'Nước phát triển phơi nhiễm cao nhất: ~60% việc làm',
-     detail:{desc:'IMF: nền kinh tế phát triển ~60% việc làm phơi nhiễm; thị trường mới nổi ~40%; nước thu nhập thấp ~26%. Nghịch lý: nơi càng hiện đại, tỷ lệ phơi nhiễm càng cao nhưng cũng sẵn sàng hưởng lợi hơn.',
-       stats:[{v:'60% / 40% / 26%',l:'phơi nhiễm AI ở nhóm nước phát triển / mới nổi / thu nhập thấp (IMF)'}],sources:['imf']}},
-    {label:'Việt Nam: 20,8% việc làm phơi nhiễm GenAI ≈ 11,5 triệu người',
-     detail:{desc:'Báo cáo ILO: khoảng 20,8% việc làm tại Việt Nam (≈11,5 triệu lao động) thuộc ngành chịu tác động của GenAI; tuy nhiên chỉ ~1,8% có nguy cơ bị thay thế trực tiếp — phần lớn là biến đổi cách làm việc.',
-       stats:[{v:'20,8%',l:'việc làm Việt Nam phơi nhiễm GenAI (ILO)'},{v:'~1,8%',l:'có nguy cơ bị thay thế trực tiếp'}],sources:['ilo']}},
-    {label:'Vùng an toàn tương đối: nghề phi cấu trúc, chăm sóc, sáng tạo đỉnh cao',
-     detail:{desc:'Nghề đòi hỏi thao tác thủ công phi cấu trúc (thợ điện, thợ sửa), tương tác cảm xúc (y tế, giáo dục, tâm lý), sáng tạo nguyên bản và trách nhiệm pháp lý cao vẫn khó bị thay thế trong thập kỷ tới.',
-       stats:[{v:'Kỹ năng "AI-proof"',l:'tư duy phản biện, cảm xúc xã hội, sáng tạo — nhóm kỹ năng tăng giá trị nhanh nhất (WEF)'}],sources:['wef']}}
-  ]},
-{ id:'how', tag:'HOW', q:'Như thế nào?', title:'Diễn ra & ứng phó ra sao?', color:'#f87171', side:'left', slot:2,
-  detail:{desc:'Cơ chế thay thế đi theo 3 bậc: tự động hóa nhiệm vụ → bổ trợ con người → thay thế cả vị trí. Ứng phó hiệu quả là reskilling/upskilling ở cả 3 cấp: cá nhân, doanh nghiệp, nhà nước.',
-    stats:[{v:'59%',l:'lao động cần đào tạo lại trước 2030 (WEF)'},{v:'1 tỷ người',l:'mục tiêu reskilling của sáng kiến Reskilling Revolution (WEF)'}],
-    sources:['wef']},
-  children:[
-    {label:'Cơ chế: tự động hóa nhiệm vụ → bổ trợ → thay thế vị trí',
-     detail:{desc:'Ban đầu AI làm thay từng tác vụ (viết email, nhập liệu); sau đó thành "trợ lý" tăng năng suất; khi đủ tin cậy, doanh nghiệp bỏ hẳn vị trí chuyên làm tác vụ đó. Sa thải vì thế đến muộn hơn nhưng dồn dập.',
-       stats:[{v:'3 bậc tác động',l:'nhiệm vụ → vai trò → vị trí việc làm'}],sources:[]}},
-    {label:'Cá nhân: reskilling – upskilling, xây kỹ năng "AI-proof"',
-     detail:{desc:'WEF: 59/100 người lao động cần đào tạo lại trước 2030. Học kỹ năng dùng AI (prompt, đánh giá đầu ra), cộng với tư duy phản biện, giao tiếp, sáng tạo — thứ AI chưa thay được.',
-       stats:[{v:'59%',l:'lao động cần reskilling/upskilling trước 2030 (WEF 2025)'}],sources:['wef']}},
-    {label:'Doanh nghiệp: đào tạo lại nội bộ & bố trí lại nhân lực',
-     detail:{desc:'Trong 59 người cần đào tạo, ~29 người có thể upskill để giữ nguyên vị trí nếu doanh nghiệp đầu tư đào tạo; số còn lại cần chuyển nghề có hỗ trợ. Đào tạo lại rẻ và nhân văn hơn sa thải hàng loạt.',
-       stats:[{v:'29/100',l:'người lao động có thể upskill tại chỗ (WEF 2025)'}],sources:['wef']}},
-    {label:'Nhà nước & xã hội: cải cách giáo dục, an sinh, học tập suốt đời',
-     detail:{desc:'WEF đặt mục tiêu reskilling 1 tỷ người đến 2030 (Reskilling Revolution). Chính sách cần: cập nhật chương trình giáo dục, tín chỉ đào tạo lại, lưới an sinh cho người chuyển nghề.',
-       stats:[{v:'1 tỷ người',l:'mục tiêu được đào tạo lại đến 2030 (WEF Reskilling Revolution)'}],sources:['wef']}}
-  ]}
-];
-
-/* =========================================================
-   RENDER MINDMAP SVG
-========================================================= */
-const NS='http://www.w3.org/2000/svg';
-const svg=document.getElementById('mm');
-const world=document.createElementNS(NS,'g'); world.id='world'; svg.appendChild(world);
-const gLinks=document.createElementNS(NS,'g'); world.appendChild(gLinks);
-const gNodes=document.createElementNS(NS,'g'); world.appendChild(gNodes);
-
-const CX=850, CY=490, ROOT_W=300, ROOT_H=74;
-const BX={right:1160,left:540}, CHX={right:1460,left:240};
-const SLOT_Y=[190,490,790], CH_GAP=86;
-
-function el(tag,attrs){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);return e;}
-function wrapText(str,max){const words=str.split(' ');const lines=[];let cur='';for(const w of words){if((cur+' '+w).trim().length>max&&cur){lines.push(cur);cur=w;}else cur=(cur?cur+' ':'')+w;}if(cur)lines.push(cur);return lines;}
-function hexA(hex,a){const n=parseInt(hex.slice(1),16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`;}
-
-const nodeEls=[], linkEls=[], branchMeta={};
-let animIdx=0;
-
-/* ---- root ---- */
-const rootG=el('g',{class:'node pre'}); rootG.style.setProperty('--c','#38bdf8');
-rootG.appendChild(el('rect',{x:CX-ROOT_W/2,y:CY-ROOT_H/2,width:ROOT_W,height:ROOT_H,rx:22,fill:'#0e1a33',stroke:'#38bdf8','stroke-width':2}));
-rootG.appendChild(el('rect',{x:CX-ROOT_W/2+6,y:CY-ROOT_H/2+6,width:ROOT_W-12,height:ROOT_H-12,rx:17,fill:'rgba(56,189,248,.08)',stroke:'none'}));
-const rt=el('text',{'text-anchor':'middle',x:CX,y:CY-2,fill:'#ffffff','font-size':17,'font-weight':800}); rt.textContent='AI & NGUY CƠ MẤT VIỆC LÀM'; rootG.appendChild(rt);
-const rs=el('text',{'text-anchor':'middle',x:CX,y:CY+20,fill:'#7dd3fc','font-size':11,'font-weight':600,'letter-spacing':2}); rs.textContent='SƠ ĐỒ TƯ DUY 5W1H'; rootG.appendChild(rs);
-rootG.addEventListener('click',()=>{if(moved>5)return;openDrawer(ROOT.detail,ROOT.tag,ROOT.title,ROOT.color);});
-gNodes.appendChild(rootG); nodeEls.push(rootG);
-
-/* ---- branches & children ---- */
-BRANCHES.forEach(b=>{
-  const by=SLOT_Y[b.slot], bx=BX[b.side];
-  const tLines=wrapText(b.title,20);
-  const bw=Math.max(196, Math.max(...tLines.map(l=>l.length))*7.6+40);
-  const bh=30+tLines.length*17+14;
-  const meta={b,by,bx,bw,bh,collapsed:false,childNodes:[],childLinks:[],badgeTxt:null};
-  branchMeta[b.id]=meta;
-
-  /* link root -> branch */
-  const rx = b.side==='right'? CX+ROOT_W/2 : CX-ROOT_W/2;
-  const bEdge = b.side==='right'? bx-bw/2 : bx+bw/2;
-  const lk=el('path',{class:'link pre',d:`M ${rx} ${CY} C ${(rx+bEdge)/2} ${CY}, ${(rx+bEdge)/2} ${by}, ${bEdge} ${by}`,stroke:hexA(b.color,.55),'stroke-width':2.2});
-  gLinks.appendChild(lk); linkEls.push(lk);
-
-  /* branch node */
-  const g=el('g',{class:'node pre'}); g.style.setProperty('--c',b.color);
-  g.appendChild(el('rect',{x:bx-bw/2,y:by-bh/2,width:bw,height:bh,rx:16,fill:'#0f1a30',stroke:b.color,'stroke-width':1.8}));
-  const tag=el('text',{x:bx,y:by-bh/2+21,'text-anchor':'middle',fill:b.color,'font-size':11,'font-weight':800,'letter-spacing':3}); tag.textContent=b.tag; g.appendChild(tag);
-  tLines.forEach((ln,i)=>{const t=el('text',{x:bx,y:by-bh/2+39+i*17,'text-anchor':'middle',fill:'#f1f5fd','font-size':13,'font-weight':700}); t.textContent=ln; g.appendChild(t);});
-  /* collapse badge */
-  const bdx = b.side==='right'? bx+bw/2+14 : bx-bw/2-14;
-  const badge=el('g',{class:'badge-g',style:'cursor:pointer'});
-  badge.appendChild(el('circle',{cx:bdx,cy:by,r:11,fill:'#0f1a30',stroke:b.color,'stroke-width':1.5}));
-  const btxt=el('text',{x:bdx,y:by+4.5,'text-anchor':'middle',fill:b.color,'font-size':14,'font-weight':800}); btxt.textContent='−'; badge.appendChild(btxt);
-  meta.badgeTxt=btxt;
-  badge.addEventListener('click',e=>{e.stopPropagation();if(moved>5)return;toggleBranch(b.id);});
-  g.appendChild(badge);
-  g.addEventListener('click',()=>{if(moved>5)return;openDrawer(b.detail,b.tag,b.title,b.color);});
-  gNodes.appendChild(g); nodeEls.push(g);
-
-  /* children */
-  const n=b.children.length;
-  b.children.forEach((c,i)=>{
-    const cy=by+(i-(n-1)/2)*CH_GAP;
-    const lines=wrapText(c.label,30);
-    const cw=Math.min(252, Math.max(...lines.map(l=>l.length))*6.7+46);
-    const ch=lines.length*16+22;
-    const cEdge = b.side==='right'? cx0(cw,'right') : cx0(cw,'left');
-    function cx0(w,side){return side==='right'? CHX.right-w/2+ w/2 : CHX.left;}
-    const ccx=CHX[b.side];
-    const x1 = b.side==='right'? bx+bw/2 : bx-bw/2;
-    const x2 = b.side==='right'? ccx-cw/2 : ccx+cw/2;
-    const cl=el('path',{class:'link pre',d:`M ${x1} ${by} C ${(x1+x2)/2} ${by}, ${(x1+x2)/2} ${cy}, ${x2} ${cy}`,stroke:hexA(b.color,.4),'stroke-width':1.6});
-    gLinks.appendChild(cl); linkEls.push(cl); meta.childLinks.push(cl);
-
-    const cg=el('g',{class:'node pre'}); cg.style.setProperty('--c',b.color);
-    cg.appendChild(el('rect',{x:ccx-cw/2,y:cy-ch/2,width:cw,height:ch,rx:13,fill:'#0b1526',stroke:hexA(b.color,.65),'stroke-width':1.4}));
-    cg.appendChild(el('circle',{cx:ccx-cw/2+13,cy:cy,r:3.6,fill:b.color}));
-    lines.forEach((ln,j)=>{const t=el('text',{x:ccx+4,y:cy+(j-(lines.length-1)/2)*16+4,'text-anchor':'middle',fill:'#dbe7f8','font-size':12,'font-weight':600}); t.textContent=ln; cg.appendChild(t);});
-    cg.addEventListener('click',()=>{if(moved>5)return;openDrawer(c.detail,b.tag,c.label,b.color);});
-    gNodes.appendChild(cg); nodeEls.push(cg); meta.childNodes.push(cg);
-  });
-});
-
-/* entry animation */
-requestAnimationFrame(()=>{requestAnimationFrame(()=>{
-  [...linkEls,...nodeEls].forEach((e,i)=>{e.style.transitionDelay=(i*38)+'ms';e.classList.remove('pre');});
-  setTimeout(()=>{[...linkEls,...nodeEls].forEach(e=>e.style.transitionDelay='0ms');},2200);
-});});
-
-function toggleBranch(id){
-  const m=branchMeta[id]; m.collapsed=!m.collapsed;
-  m.childNodes.forEach(n=>n.classList.toggle('off',m.collapsed));
-  m.childLinks.forEach(l=>l.classList.toggle('off',m.collapsed));
-  m.badgeTxt.textContent=m.collapsed?'+':'−';
-}
-document.getElementById('btnExpand').onclick=()=>Object.keys(branchMeta).forEach(id=>{if(branchMeta[id].collapsed)toggleBranch(id);});
-document.getElementById('btnCollapse').onclick=()=>Object.keys(branchMeta).forEach(id=>{if(!branchMeta[id].collapsed)toggleBranch(id);});
-
-/* ---- zoom & pan ---- */
-let view={s:1,tx:0,ty:0}, moved=0;
-function applyView(){world.setAttribute('transform',`translate(${view.tx},${view.ty}) scale(${view.s})`);}
-function svgPoint(evt){const pt=svg.createSVGPoint();pt.x=evt.clientX;pt.y=evt.clientY;return pt.matrixTransform(svg.getScreenCTM().inverse());}
-function zoomAt(px,py,f){const ns=Math.min(3,Math.max(.45,view.s*f));const k=ns/view.s;view.tx=px-k*(px-view.tx);view.ty=py-k*(py-view.ty);view.s=ns;applyView();}
-document.getElementById('mmWrap').addEventListener('wheel',e=>{e.preventDefault();const p=svgPoint(e);zoomAt(p.x,p.y,e.deltaY<0?1.12:0.89);},{passive:false});
-let drag=false,last=null;
-svg.addEventListener('pointerdown',e=>{drag=true;moved=0;last=svgPoint(e);svg.setPointerCapture(e.pointerId);});
-svg.addEventListener('pointermove',e=>{if(!drag)return;const p=svgPoint(e);const dx=p.x-last.x,dy=p.y-last.y;moved+=Math.abs(dx)+Math.abs(dy);view.tx+=dx;view.ty+=dy;last=p;applyView();});
-svg.addEventListener('pointerup',()=>{drag=false;setTimeout(()=>moved=0,0);});
-svg.addEventListener('pointercancel',()=>{drag=false;});
-document.getElementById('btnZoomIn').onclick=()=>zoomAt(850,490,1.2);
-document.getElementById('btnZoomOut').onclick=()=>zoomAt(850,490,1/1.2);
-document.getElementById('btnReset').onclick=()=>{view={s:1,tx:0,ty:0};applyView();};
-
-/* ---- legend & hero chips ---- */
-const legend=document.getElementById('legend'), chips=document.getElementById('heroChips');
-BRANCHES.forEach(b=>{
-  const lg=document.createElement('span');lg.className='lg';
-  lg.innerHTML=`<i style="background:${b.color}"></i><b>${b.tag}</b>· ${b.q}`;
-  lg.onclick=()=>openDrawer(b.detail,b.tag,b.title,b.color);
-  legend.appendChild(lg);
-  const cp=document.createElement('span');cp.className='chip';cp.style.color=b.color;
-  cp.innerHTML=`<i style="background:${b.color}"></i><span style="color:#dbe7f8">${b.tag} — ${b.q}</span>`;
-  cp.onclick=()=>openDrawer(b.detail,b.tag,b.title,b.color);
-  chips.appendChild(cp);
-});
-
-/* =========================================================
-   DRAWER
-========================================================= */
-const drawer=document.getElementById('drawer'),scrim=document.getElementById('scrim');
-function openDrawer(d,tag,title,color){
-  document.getElementById('drTag').textContent=tag;
-  document.getElementById('drTag').style.cssText=`background:${hexA(color,.15)};color:${color};border:1px solid ${hexA(color,.45)}`;
-  document.getElementById('drTitle').textContent=title;
-  document.getElementById('drDesc').textContent=d.desc||'';
-  const st=document.getElementById('drStats');st.innerHTML='';
-  (d.stats||[]).forEach(s=>{const div=document.createElement('div');div.className='dr-stat';div.style.setProperty('--ac',color);div.innerHTML=`<div class="v">${s.v}</div><div class="l">${s.l}</div>`;st.appendChild(div);});
-  const sw=document.getElementById('drSrcWrap'),sl=document.getElementById('drSrc');sl.innerHTML='';
-  (d.sources||[]).forEach(k=>{const a=document.createElement('a');a.href=SRC[k].u;a.target='_blank';a.rel='noopener';a.textContent='↗ '+SRC[k].t;sl.appendChild(a);});
-  sw.style.display=(d.sources&&d.sources.length)?'block':'none';
-  drawer.classList.add('on');scrim.classList.add('on');
-}
-function closeDrawer(){drawer.classList.remove('on');scrim.classList.remove('on');}
-document.getElementById('drClose').onclick=closeDrawer;scrim.onclick=closeDrawer;
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
-
-/* =========================================================
-   HERO COUNTERS
-========================================================= */
-document.querySelectorAll('.kpi .num').forEach(elm=>{
-  const target=+elm.dataset.val,suf=elm.dataset.suf||'';const t0=performance.now(),dur=1600;
-  (function tick(t){const p=Math.min(1,(t-t0)/dur);const e=1-Math.pow(1-p,3);
-    elm.textContent=Math.round(target*e)+suf;if(p<1)requestAnimationFrame(tick);})(t0);
-});
-
-/* =========================================================
-   CHARTS
-========================================================= */
-Chart.defaults.font.family="'Be Vietnam Pro',sans-serif";
-Chart.defaults.color='#8fa3c0';
-Chart.defaults.borderColor='rgba(148,163,184,.12)';
-const tip={backgroundColor:'#0f1a30',borderColor:'rgba(148,163,184,.3)',borderWidth:1,titleColor:'#fff',bodyColor:'#cbd9ee',padding:10,cornerRadius:10};
-
-new Chart(document.getElementById('ch1'),{type:'bar',
-  data:{labels:['Việc làm mất đi','Việc làm tạo mới','Thay đổi ròng'],
-    datasets:[{data:[92,170,78],backgroundColor:['#f87171','#34d399','#38bdf8'],borderRadius:10,maxBarThickness:64}]},
-  options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tip,callbacks:{label:c=>` ${c.parsed.y} triệu việc làm đến 2030`}}},
-    scales:{y:{grid:{color:'rgba(148,163,184,.08)'},ticks:{callback:v=>v+' tr'}},x:{grid:{display:false}}}}});
-
-new Chart(document.getElementById('ch2'),{type:'bar',
-  data:{labels:['Nền KT phát triển (IMF)','Toàn cầu (IMF)','Nền KT mới nổi (IMF)','Thu nhập thấp (IMF)','Việt Nam – GenAI (ILO)'],
-    datasets:[{data:[60,40,40,26,20.8],backgroundColor:['#a78bfa','#38bdf8','#f472b6','#fbbf24','#34d399'],borderRadius:8,maxBarThickness:26}]},
-  options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tip,callbacks:{label:c=>` ${c.parsed.x}% việc làm phơi nhiễm AI`}}},
-    scales:{x:{max:70,grid:{color:'rgba(148,163,184,.08)'},ticks:{callback:v=>v+'%'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
-
-new Chart(document.getElementById('ch3'),{type:'bar',
-  data:{labels:['ChatGPT','TikTok','Instagram','Facebook'],
-    datasets:[{data:[2,9,30,54],backgroundColor:['#e11d48','#475569','#475569','#475569'],borderRadius:10,maxBarThickness:56}]},
-  options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tip,callbacks:{label:c=>` ${c.parsed.y} tháng để đạt 100 triệu người dùng`}}},
-    scales:{y:{grid:{color:'rgba(148,163,184,.08)'},ticks:{callback:v=>v+' tháng'}},x:{grid:{display:false}}}}});
-
-const centerText={id:'centerText',afterDraw(chart){if(chart.config.type!=='doughnut')return;const {ctx}=chart;const m=chart.getDatasetMeta(0).data[0];
-  ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#fbbf24';ctx.font="800 30px 'Be Vietnam Pro'";ctx.fillText('59%',m.x,m.y-8);
-  ctx.fillStyle='#8fa3c0';ctx.font="600 11px 'Be Vietnam Pro'";ctx.fillText('cần đào tạo lại',m.x,m.y+14);ctx.restore();}};
-new Chart(document.getElementById('ch4'),{type:'doughnut',
-  data:{labels:['Cần reskilling / upskilling','Không cần đào tạo lớn'],datasets:[{data:[59,41],backgroundColor:['#fbbf24','#1c2a44'],borderColor:'#0d1526',borderWidth:3,cutout:'66%'}]},
-  plugins:[centerText],
-  options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',padding:16,font:{size:11.5}}},tooltip:{...tip,callbacks:{label:c=>` ${c.parsed}% lực lượng lao động (trong 100 người)`}}}}});
-</script>
+<!-- Dá»¯ liá»‡u há»c thuáº­t & Logic tÆ°Æ¡ng tÃ¡c tÃ¡ch rá»i theo chuáº©n mÃ´-Ä‘un hÃ³a (tÆ°Æ¡ng thÃ­ch 100% file://) -->
+<script src="js/data-mindmap-charts.js"></script>
+<script src="js/mindmap-charts.js"></script>
 </body>
 </html>

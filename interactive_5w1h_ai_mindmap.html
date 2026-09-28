@@ -32,47 +32,10 @@
     }
   }
 </script>
-<style>
-  /* Custom scrollbar */
-  ::-webkit-scrollbar { width: 8px; height: 8px; }
-  ::-webkit-scrollbar-track { background: #050c18; }
-  ::-webkit-scrollbar-thumb { background: #1b385a; border-radius: 999px; }
-  ::-webkit-scrollbar-thumb:hover { background: #2a537f; }
-
-  /* Smooth SVG branch transitions */
-  .branch-line {
-    transition: stroke 0.3s ease, stroke-width 0.3s ease, stroke-dashoffset 0.5s ease;
-  }
-  .branch-line.active {
-    stroke-dasharray: 6 3;
-    animation: dashMove 20s linear infinite;
-  }
-  @keyframes dashMove {
-    to { stroke-dashoffset: -100; }
-  }
-
-  /* Canvas panning cursor */
-  .canvas-grab { cursor: grab; }
-  .canvas-grabbing { cursor: grabbing; user-select: none; }
-
-  /* Node hover glow */
-  .node-card {
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .node-card:hover {
-    transform: translateY(-3px) scale(1.015);
-  }
-
-  /* Pulse highlight for search match */
-  @keyframes searchPulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
-    50% { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
-  }
-  .highlight-match {
-    animation: searchPulse 1.8s infinite;
-    border-color: #38bdf8 !important;
-  }
-</style>
+<meta property="og:title" content="Mindmap 5W1H — AI và Tương Lai Việc Làm">
+<meta property="og:description" content="Khung tư duy 5W1H tương tác trực quan về AI và việc làm dựa trên dữ liệu ILO, WEF và IMF.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="css/mindmap-tailwind-custom.css">
 </head>
 <body class="bg-brand-bg text-slate-100 min-h-screen font-sans selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden">
 
@@ -104,35 +67,35 @@
           placeholder="Tìm từ khóa: clerical, kỹ năng, WEF..." 
           class="w-full bg-brand-surface/90 text-xs text-white pl-9 pr-7 py-2 rounded-xl border border-brand-border/80 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition"
         >
-        <button id="clear-search" class="hidden absolute right-2.5 text-slate-400 hover:text-white text-xs">✕</button>
+        <button id="clear-search" type="button" aria-label="Xóa từ khóa tìm kiếm" class="hidden absolute right-2.5 text-slate-400 hover:text-white text-xs">✕</button>
       </div>
 
       <!-- Right: View switchers & Quick Action buttons -->
       <div class="flex items-center gap-2">
         <!-- View Toggle Pills -->
         <div class="flex items-center bg-brand-surface p-1 rounded-xl border border-brand-border text-xs font-medium">
-          <button id="view-interactive-btn" class="px-2.5 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold transition flex items-center gap-1.5" title="Sơ đồ tư duy mở rộng">
+          <button id="view-interactive-btn" type="button" class="px-2.5 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold transition flex items-center gap-1.5" title="Sơ đồ tư duy mở rộng">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
             <span class="hidden sm:inline">Mindmap</span>
           </button>
-          <button id="view-matrix-btn" class="px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5" title="Khung 5W1H trực quan">
+          <button id="view-matrix-btn" type="button" class="px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5" title="Khung 5W1H trực quan">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
             <span class="hidden sm:inline">Ma trận 6 Nhánh</span>
           </button>
-          <button id="view-tree-btn" class="px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5" title="Dạng cây phân cấp">
+          <button id="view-tree-btn" type="button" class="px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5" title="Dạng cây phân cấp">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
             <span class="hidden sm:inline">Cây cây thư mục</span>
           </button>
         </div>
 
         <!-- Presentation Mode Button -->
-        <button id="presentation-btn" class="p-2 rounded-xl bg-brand-surface border border-brand-border text-slate-300 hover:text-cyan-300 hover:border-cyan-500/50 transition flex items-center gap-1 text-xs" title="Chế độ Thuyết trình từng bước">
+        <button id="presentation-btn" type="button" aria-label="Bật chế độ thuyết trình từng bước" class="p-2 rounded-xl bg-brand-surface border border-brand-border text-slate-300 hover:text-cyan-300 hover:border-cyan-500/50 transition flex items-center gap-1 text-xs" title="Chế độ Thuyết trình từng bước">
           <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
           <span class="hidden lg:inline font-medium">Thuyết trình</span>
         </button>
 
         <!-- Quick Copy Summary Button -->
-        <button id="copy-summary-btn" class="p-2 rounded-xl bg-brand-surface border border-brand-border text-slate-300 hover:text-white hover:border-slate-500 transition text-xs" title="Sao chép luận điểm">
+        <button id="copy-summary-btn" type="button" aria-label="Sao chép toàn bộ tóm tắt luận điểm" class="p-2 rounded-xl bg-brand-surface border border-brand-border text-slate-300 hover:text-white hover:border-slate-500 transition text-xs" title="Sao chép luận điểm">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
         </button>
       </div>
@@ -149,13 +112,13 @@
         <span id="pres-step-counter" class="text-slate-400 text-[11px]">(1/7)</span>
       </div>
       <div class="flex items-center gap-2">
-        <button id="pres-prev-btn" class="px-2.5 py-1 rounded-lg bg-brand-card hover:bg-slate-700 text-white font-medium border border-brand-border text-xs flex items-center gap-1">
+        <button id="pres-prev-btn" type="button" class="px-2.5 py-1 rounded-lg bg-brand-card hover:bg-slate-700 text-white font-medium border border-brand-border text-xs flex items-center gap-1">
           ‹ Trước
         </button>
-        <button id="pres-next-btn" class="px-3 py-1 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-1">
+        <button id="pres-next-btn" type="button" class="px-3 py-1 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-1">
           Tiếp theo ›
         </button>
-        <button id="pres-exit-btn" class="ml-2 text-slate-400 hover:text-white text-xs">
+        <button id="pres-exit-btn" type="button" class="ml-2 text-slate-400 hover:text-white text-xs">
           ✕ Thoát
         </button>
       </div>
@@ -236,20 +199,20 @@
         </div>
 
         <div class="flex items-center gap-1.5">
-          <button id="btn-zoom-in" class="p-1.5 rounded-lg bg-brand-card border border-brand-border hover:text-cyan-300 text-slate-300 transition" title="Phóng to">
+          <button id="btn-zoom-in" type="button" aria-label="Phóng to sơ đồ" class="p-1.5 rounded-lg bg-brand-card border border-brand-border hover:text-cyan-300 text-slate-300 transition" title="Phóng to">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
           </button>
-          <button id="btn-zoom-out" class="p-1.5 rounded-lg bg-brand-card border border-brand-border hover:text-cyan-300 text-slate-300 transition" title="Thu nhỏ">
+          <button id="btn-zoom-out" type="button" aria-label="Thu nhỏ sơ đồ" class="p-1.5 rounded-lg bg-brand-card border border-brand-border hover:text-cyan-300 text-slate-300 transition" title="Thu nhỏ">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
           </button>
-          <button id="btn-zoom-reset" class="px-2.5 py-1.5 rounded-lg bg-brand-card border border-brand-border hover:text-cyan-300 text-slate-300 transition text-[11px] font-medium" title="Đặt lại góc nhìn">
+          <button id="btn-zoom-reset" type="button" aria-label="Đặt lại góc nhìn sơ đồ" class="px-2.5 py-1.5 rounded-lg bg-brand-card border border-brand-border hover:text-cyan-300 text-slate-300 transition text-[11px] font-medium" title="Đặt lại góc nhìn">
             Reset
           </button>
           <div class="h-4 w-px bg-brand-border mx-1"></div>
-          <button id="btn-expand-all" class="px-2.5 py-1.5 rounded-lg bg-brand-card border border-brand-border hover:text-cyan-300 text-slate-300 transition text-[11px] font-medium">
+          <button id="btn-expand-all" type="button" aria-label="Mở tất cả các nhánh" class="px-2.5 py-1.5 rounded-lg bg-brand-card border border-brand-border hover:text-cyan-300 text-slate-300 transition text-[11px] font-medium">
             Mở tất cả
           </button>
-          <button id="btn-collapse-all" class="px-2.5 py-1.5 rounded-lg bg-brand-card border border-brand-border hover:text-cyan-300 text-slate-300 transition text-[11px] font-medium">
+          <button id="btn-collapse-all" type="button" aria-label="Thu gọn các nhánh phụ" class="px-2.5 py-1.5 rounded-lg bg-brand-card border border-brand-border hover:text-cyan-300 text-slate-300 transition text-[11px] font-medium">
             Thu gọn
           </button>
         </div>
@@ -793,7 +756,7 @@
   </main>
 
   <!-- Slide-over Drawer for Node Details -->
-  <aside id="node-drawer" class="fixed inset-y-0 right-0 w-full sm:w-[480px] bg-[#081527] border-l border-brand-border shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+  <aside id="node-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" class="fixed inset-y-0 right-0 w-full sm:w-[480px] bg-[#081527] border-l border-brand-border shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
     <!-- Drawer Header -->
     <div class="p-5 border-b border-brand-border flex items-center justify-between bg-brand-surface/70">
       <div class="flex items-center gap-2">
@@ -802,7 +765,7 @@
         </span>
         <h3 id="drawer-title" class="text-base font-black text-white">Chi tiết nhánh</h3>
       </div>
-      <button id="drawer-close-btn" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-brand-card transition text-sm">
+      <button id="drawer-close-btn" type="button" aria-label="Đóng chi tiết nhánh" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-brand-card transition text-sm">
         ✕
       </button>
     </div>
@@ -814,11 +777,11 @@
 
     <!-- Drawer Footer Actions -->
     <div class="p-4 border-t border-brand-border bg-brand-surface/70 flex items-center justify-between gap-3 text-xs">
-      <button id="drawer-copy-btn" class="flex-1 py-2 px-3 rounded-xl bg-brand-card border border-brand-border text-slate-200 hover:text-white hover:border-cyan-400 transition font-medium flex items-center justify-center gap-1.5">
+      <button id="drawer-copy-btn" type="button" class="flex-1 py-2 px-3 rounded-xl bg-brand-card border border-brand-border text-slate-200 hover:text-white hover:border-cyan-400 transition font-medium flex items-center justify-center gap-1.5">
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
         Sao chép nhánh này
       </button>
-      <button id="drawer-next-btn" class="py-2 px-4 rounded-xl bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition">
+      <button id="drawer-next-btn" type="button" class="py-2 px-4 rounded-xl bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition">
         Xem nhánh tiếp ›
       </button>
     </div>
@@ -839,764 +802,8 @@
     <p class="text-[11px] text-slate-400">Thiết kế tối ưu hiển thị độc lập, tích hợp đầy đủ tương tác thu phóng và tra cứu.</p>
   </footer>
 
-  <script>
-    // Detailed data structure for the 5W1H nodes & rich inspector details
-    const MINDMAP_DATA = {
-      center: {
-        id: 'center',
-        badge: 'CÂU HỎI TRUNG TÂM',
-        color: 'cyan',
-        title: 'AI có làm mất việc làm trong vài năm tới?',
-        subtitle: 'Bản chất: Chuyển dịch cấu trúc công việc & Phân công lao động mới',
-        quote: '“AI will not replace humans, but humans who use AI will probably replace humans who do not.”',
-        summary: 'Kết luận dựa trên bằng chứng khoa học từ ILO, WEF và IMF: Có sự sụt giảm nhân sự ở một số tác vụ và vai trò rập khuôn nhất định. Tuy nhiên, toàn bộ dữ liệu chỉ ra đây là làn sóng tái cơ cấu nội hàm công việc (task reconfiguration) thay vì sự biến mất hoàn toàn của các nghề nghiệp.',
-        sections: [
-          {
-            heading: '3 Sự Thật Cần Nắm Vững',
-            points: [
-              'Không đồng nhất "Phơi nhiễm với AI" (Exposure) với "Mất việc làm" (Job Displacement).',
-              'Sự xuất hiện của AI diễn ra đồng thời với quá trình mở rộng các ngành nghề chuyển đổi số và công nghệ mới.',
-              'Nhân tố cứu cánh của lực lượng lao động là khả năng kiểm chứng, đánh giá và trách nhiệm giải trình.'
-            ]
-          },
-          {
-            heading: 'Đối Chiếu Với Các Cuộc Cách Mạng Công Nghiệp Trước',
-            points: [
-              'Máy hơi nước: Thay thế cơ bắp nhưng mở ra hàng triệu việc làm trong logistics và sản xuất công nghiệp.',
-              'Máy vi tính cá nhân (1980s): Thay thế nhân viên đánh máy nhưng tạo ra ngành công nghệ phần mềm nghìn tỷ USD.',
-              'GenAI (Hiện tại): Thay thế tác vụ tổng hợp sơ cấp, mở rộng vai trò kiến trúc sư ý tưởng và điều phối viên dữ liệu.'
-            ]
-          }
-        ]
-      },
-      what: {
-        id: 'what',
-        badge: 'WHAT · CÁI GÌ?',
-        color: 'cyan',
-        title: 'Cái gì có thể “mất” và cái gì sẽ phát triển?',
-        subtitle: 'Phân định rõ ranh giới giữa Nhiệm vụ lặp (Tasks) và Vai trò toàn diện (Roles)',
-        quote: 'Nhiệm vụ có thể bị thay thế; giá trị con người nằm ở tính liên kết và trách nhiệm.',
-        summary: 'Các tác vụ có tính lặp lại, quy trình đóng khung và xử lý văn bản chuẩn hóa chịu tác động trực tiếp và nhanh nhất. Ngược lại, các công việc đòi hỏi trí tuệ cảm xúc, sự thấu cảm, phán đoán đa chiều và tương tác cơ học tinh vi trong môi trường thực vẫn an toàn.',
-        sections: [
-          {
-            heading: 'Nhiệm vụ có nguy cơ cao (High Exposure)',
-            points: [
-              'Nhập liệu, làm sạch dữ liệu bảng biểu, tạo báo cáo mẫu theo khuôn.',
-              'Tóm tắt tài liệu văn bản, soạn thảo email giao dịch thông thường.',
-              'Dịch thuật thô, viết code cơ bản (boilerplate code), kiểm thử phần mềm tự động sơ cấp.'
-            ]
-          },
-          {
-            heading: 'Nhiệm vụ khó có thể thay thế (Human Core)',
-            points: [
-              'Phán đoán đạo đức nghề nghiệp và chịu trách nhiệm pháp lý trước quyết định.',
-              'Tương tác con người sâu sắc: Đàm phán chiến lược, chăm sóc tâm lý, lãnh đạo truyền cảm hứng.',
-              'Sáng tạo đột phá phi logic và kỹ năng thích nghi vật lý trong thế giới thực.'
-            ]
-          },
-          {
-            heading: 'Vai trò mới xuất hiện',
-            points: [
-              'AI Prompt & Context Engineer (Kỹ sư ngữ cảnh AI).',
-              'AI Auditor & Ethicist (Chuyên viên kiểm định đạo đức và an toàn thuật toán).',
-              'Human-AI Collaboration Manager (Quản lý tích hợp quy trình người–máy).'
-            ]
-          }
-        ]
-      },
-      why: {
-        id: 'why',
-        badge: 'WHY · TẠI SAO?',
-        color: 'amber',
-        title: 'Vì sao doanh nghiệp ráo riết ứng dụng AI?',
-        subtitle: 'Động lực kinh tế học: Tối ưu chi phí biên và cạnh tranh thị trường',
-        quote: 'Trong một nền kinh tế phẳng, độ trễ phản hồi bằng 0 là lợi thế sống còn.',
-        summary: 'Doanh nghiệp tìm đến AI không chỉ để giảm thiểu chi phí quỹ lương ngắn hạn, mà chủ yếu nhằm giải quyết nút thắt về tốc độ phản hồi, xử lý lượng dữ liệu khổng lồ (Big Data) và nâng cao hiệu suất biên của nhân sự hiện hữu.',
-        sections: [
-          {
-            heading: 'Các động lực cốt lõi từ ban điều hành',
-            points: [
-              '<b>Năng suất & Tốc độ:</b> Hoàn thành bản thảo tài liệu, phân tích doanh số trong vài giây thay vì vài tuần.',
-              '<b>Khả năng mở rộng quy mô (Scalability):</b> Phục vụ hàng triệu khách hàng cùng lúc với chi phí biên gần bằng 0.',
-              '<b>Vận hành 24/7/365:</b> Xử lý giao dịch và hỗ trợ không phụ thuộc vào ca kíp hay khoảng cách địa lý.'
-            ]
-          },
-          {
-            heading: 'Sức ép cạnh tranh (FOMO & Survival)',
-            points: [
-              'Khi đối thủ cùng ngành giảm 40% thời gian ra mắt sản phẩm nhờ AI, mọi doanh nghiệp buộc phải thích ứng.',
-              'Kỳ vọng của khách hàng tăng vọt về trải nghiệm cá nhân hóa tức thời.'
-            ]
-          }
-        ]
-      },
-      where: {
-        id: 'where',
-        badge: 'WHERE · Ở ĐÂU?',
-        color: 'violet',
-        title: 'Những ngành và khu vực nào chịu áp lực lớn nhất?',
-        subtitle: 'Bản đồ phân hóa: Ngành văn phòng và các nền kinh tế phát triển',
-        quote: 'Sự phơi nhiễm tỷ lệ thuận với mức độ số hóa của nền kinh tế.',
-        summary: 'Báo cáo của ILO 2025 chỉ ra nhóm nghề hành chính/văn phòng (clerical work) là tâm điểm chịu ảnh hưởng. Đồng thời, IMF (2024) khẳng định các nước thu nhập cao có mức phơi nhiễm lên tới 60%, trong khi các nước thu nhập thấp chỉ khoảng 26%.',
-        sections: [
-          {
-            heading: 'Nhóm ngành chịu tác động mạnh nhất',
-            points: [
-              '<b>Hành chính & Trợ lý văn phòng:</b> Lập lịch, ghi chép biên bản, xử lý văn thư thông dụng.',
-              '<b>Chăm sóc khách hàng cấp độ 1:</b> Chatbot thông minh và Agentic AI giải quyết phần lớn yêu cầu căn bản.',
-              '<b>Dịch thuật, biên tập & Sản xuất nội dung đại trà:</b> Chuyển dịch sang vai trò hiệu đính chuyên sâu.'
-            ]
-          },
-          {
-            heading: 'Sự chênh lệch địa lý toàn cầu (IMF 2024)',
-            points: [
-              '<b>Nước phát triển (OECD):</b> 60% công việc phơi nhiễm; rủi ro dịch chuyển cao hơn nhưng cũng sẵn sàng hạ tầng để hấp thụ năng suất mới.',
-              '<b>Nước đang phát triển:</b> 40% việc làm phơi nhiễm; tiếp cận AI chậm hơn do hạ tầng số chưa đồng bộ.',
-              '<b>Nước thu nhập thấp:</b> Khoảng 26% do tỷ trọng nông nghiệp và kinh tế phi chính thức còn rất lớn.'
-            ]
-          }
-        ]
-      },
-      who: {
-        id: 'who',
-        badge: 'WHO · AI?',
-        color: 'emerald',
-        title: 'Ai là người chịu tác động và cần hành động?',
-        subtitle: '4 Chủ thể trong hệ sinh thái kinh tế cùng tái định vị',
-        quote: 'Không ai đứng ngoài vòng xoáy: Từ sinh viên năm nhất đến cơ quan hoạch định an sinh.',
-        summary: 'Tác động của AI không giới hạn ở một cá nhân riêng lẻ mà tạo ra chuỗi phản ứng dây chuyền trên 4 trụ cột xã hội: Người lao động, Nhà tuyển dụng, Cơ sở giáo dục và Nhà nước.',
-        sections: [
-          {
-            heading: '1. Người lao động & Sinh viên',
-            points: [
-              'Cần chuyển dịch từ "người ghi nhớ kiến thức" sang "người giám định chất lượng và đặt câu hỏi xuất sắc".',
-              'Trang bị bộ kỹ năng chữ T (T-shaped skills): Chuyên môn sâu một mảng kết hợp hiểu biết vận hành công cụ số.'
-            ]
-          },
-          {
-            heading: '2. Doanh nghiệp & Nhà tuyển dụng',
-            points: [
-              '77% doanh nghiệp trong báo cáo WEF 2025 ưu tiên tái đào tạo (Reskilling) nhân viên nội bộ.',
-              'Cần xây dựng văn hóa an toàn tâm lý và quy chuẩn đạo đức khi dùng AI của công ty.'
-            ]
-          },
-          {
-            heading: '3. Nhà trường & Cơ sở đào tạo',
-            points: [
-              'Bãi bỏ các bài kiểm tra rập khuôn chỉ đòi hỏi sao chép; hướng tới giải quyết bài toán tình huống thực tế.',
-              'Giảng dạy tư duy phản biện, phương pháp kiểm tra nguồn và đạo đức học thuật.'
-            ]
-          },
-          {
-            heading: '4. Chính phủ & An sinh xã hội',
-            points: [
-              'Thiết kế chính sách hỗ trợ chuyển đổi nghề nghiệp, bảo hiểm thất nghiệp cho lao động bị dịch chuyển.',
-              'Xây dựng khung pháp lý về bảo vệ dữ liệu và bản quyền trí tuệ.'
-            ]
-          }
-        ]
-      },
-      when: {
-        id: 'when',
-        badge: 'WHEN · KHI NÀO?',
-        color: 'rose',
-        title: 'Dòng thời gian biến chuyển: Vài năm tới hay ngay bây giờ?',
-        subtitle: 'Giai đoạn chuyển tiếp bản lề: 2025 — 2030',
-        quote: 'Tương lai không ập đến trong một ngày, nó thẩm thấu qua từng cập nhật phần mềm.',
-        summary: 'ILO và WEF chỉ rõ: Tác động đã bắt đầu hiện hữu từ 2023 và sẽ bước vào giai đoạn tái cấu trúc quy mô lớn trong khung thời gian 2025–2030 khi các hệ thống Agentic AI (AI tự hành) được thương mại hóa rộng rãi.',
-        sections: [
-          {
-            heading: 'Giai đoạn 1: Thử nghiệm & Thẩm thấu (2023 - 2025)',
-            points: [
-              'Phổ cập các mô hình như ChatGPT, Claude, Copilot vào công việc văn phòng thông thường.',
-              'Tác động chủ yếu dưới dạng hỗ trợ cá nhân (Assistant), chưa làm thay đổi toàn bộ cấu trúc phòng ban.'
-            ]
-          },
-          {
-            heading: 'Giai đoạn 2: Tự động hóa tác nhân quy trình (2026 - 2028)',
-            points: [
-              'AI Agents có khả năng tự động thực hiện chuỗi tác vụ phức tạp liên phần mềm (cross-app workflows).',
-              'Bắt đầu xuất hiện áp lực tinh giản biên chế ở các đội ngũ vận hành quy mô lớn thiếu kỹ năng công nghệ.'
-            ]
-          },
-          {
-            heading: 'Giai đoạn 3: Phân công lao động mới (2028 - 2030+)',
-            points: [
-              'Mô hình doanh nghiệp tinh gọn: Đội ngũ nhỏ kết hợp cùng hàng chục AI agents đảm đương khối lượng việc của cả tập đoàn trước đây.',
-              '170 triệu việc làm mới định hình rõ nét (dự báo WEF).'
-            ]
-          }
-        ]
-      },
-      how: {
-        id: 'how',
-        badge: 'HOW · NHƯ THẾ NÀO?',
-        color: 'sky',
-        title: 'Cơ chế biến đổi & Chiến lược thích ứng cá nhân',
-        subtitle: '3 Cơ chế vận hành: Automation, Augmentation & Reallocation',
-        quote: 'Làm việc CÙNG AI chứ không cạnh tranh VỚI AI.',
-        summary: 'Các nhà kinh tế học chỉ ra 3 cơ chế vận hành chính của AI vào thị trường lao động. Hiểu rõ cơ chế này giúp người lao động chủ động lựa chọn vị thế để hưởng lợi thay vì trở thành nạn nhân của làn sóng dịch chuyển.',
-        sections: [
-          {
-            heading: '3 Cơ chế biến đổi việc làm của AI',
-            points: [
-              '<b>1. Tự động hóa (Automation):</b> AI thay thế hoàn toàn một số tác vụ đơn lẻ, giảm thời gian tiêu tốn.',
-              '<b>2. Tăng cường (Augmentation):</b> AI như một siêu trợ lý giúp 1 chuyên viên làm việc hiệu quả gấp 3-5 lần.',
-              '<b>3. Tái phân bổ (Reallocation):</b> Doanh nghiệp chuyển nhân sự dôi dư sang các khâu chăm sóc khách hàng cao cấp, R&D hoặc phát triển thị trường mới.'
-            ]
-          },
-          {
-            heading: 'Chiến lược 4 bước để không bị đào thải',
-            points: [
-              '<b>Bước 1:</b> Phân rã công việc hàng ngày thành từng tác vụ cụ thể.',
-              '<b>Bước 2:</b> Chủ động dùng AI giải quyết 50% tác vụ nhàm chán nhất của bạn ngay hôm nay.',
-              '<b>Bước 3:</b> Dành thời gian tiết kiệm được để rèn luyện kỹ năng giải quyết vấn đề phức tạp và giao tiếp.',
-              '<b>Bước 4:</b> Trở thành chuyên gia kiểm chứng chất lượng đầu ra của AI trong lĩnh vực của mình.'
-            ]
-          }
-        ]
-      }
-    };
-
-    // Presentation sequence order
-    const PRES_ORDER = ['center', 'what', 'why', 'where', 'who', 'when', 'how'];
-    let currentPresIndex = 0;
-    let isPresentationActive = false;
-
-    // Mindmap Canvas Pan/Zoom State
-    let zoomLevel = 1;
-    let panX = 0;
-    let panY = 0;
-    let isPanning = false;
-    let startX = 0;
-    let startY = 0;
-
-    document.addEventListener('DOMContentLoaded', () => {
-      initMindmapConnections();
-      initCanvasPanZoom();
-      initViewSwitching();
-      initDrawerInteractions();
-      initSearchFilter();
-      initPresentationMode();
-      renderTreeView();
-      initCopySummary();
-
-      // Recalculate SVG lines on window resize
-      window.addEventListener('resize', () => {
-        requestAnimationFrame(updateSvgConnections);
-      });
-    });
-
-    // Helper to show custom Toast (replaces alert)
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      const toastText = document.getElementById('toast-text');
-      toastText.textContent = message;
-      toast.classList.remove('hidden');
-      toast.classList.remove('translate-y-3');
-      
-      setTimeout(() => {
-        toast.classList.add('translate-y-3');
-        setTimeout(() => toast.classList.add('hidden'), 250);
-      }, 2800);
-    }
-
-    function initMindmapConnections() {
-      updateSvgConnections();
-    }
-
-    function updateSvgConnections() {
-      const svgGroup = document.getElementById('svg-connections');
-      const centerNode = document.getElementById('node-center');
-      if (!svgGroup || !centerNode) return;
-
-      const nodes = ['what', 'why', 'where', 'who', 'when', 'how'];
-      const centerRect = centerNode.getBoundingClientRect();
-      const world = document.getElementById('mindmap-world');
-      const worldRect = world.getBoundingClientRect();
-
-      // Center node relative coordinate in the world
-      const cX = (centerRect.left + centerRect.width / 2 - worldRect.left) / zoomLevel;
-      const cY = (centerRect.top + centerRect.height / 2 - worldRect.top) / zoomLevel;
-
-      let pathsHtml = '';
-
-      nodes.forEach(nodeId => {
-        const targetNode = document.getElementById(`node-${nodeId}`);
-        if (!targetNode) return;
-
-        const targetRect = targetNode.getBoundingClientRect();
-        const tX = (targetRect.left + targetRect.width / 2 - worldRect.left) / zoomLevel;
-        const tY = (targetRect.top + targetRect.height / 2 - worldRect.top) / zoomLevel;
-
-        // Smooth cubic Bezier curve calculation
-        const dx = tX - cX;
-        const dy = tY - cY;
-        const ctrlX1 = cX + dx * 0.45;
-        const ctrlY1 = cY;
-        const ctrlX2 = cX + dx * 0.55;
-        const ctrlY2 = tY;
-
-        let strokeColor = '#2e4c69';
-        if (nodeId === 'what') strokeColor = '#38bdf8';
-        if (nodeId === 'why') strokeColor = '#fbbf24';
-        if (nodeId === 'where') strokeColor = '#a78bfa';
-        if (nodeId === 'who') strokeColor = '#34d399';
-        if (nodeId === 'when') strokeColor = '#fb7185';
-        if (nodeId === 'how') strokeColor = '#38bdf8';
-
-        pathsHtml += `
-          <path 
-            id="path-${nodeId}"
-            class="branch-line" 
-            d="M ${cX} ${cY} C ${ctrlX1} ${ctrlY1}, ${ctrlX2} ${ctrlY2}, ${tX} ${tY}" 
-            fill="none" 
-            stroke="${strokeColor}" 
-            stroke-width="2.5" 
-            stroke-opacity="0.65"
-          />
-        `;
-      });
-
-      svgGroup.innerHTML = pathsHtml;
-    }
-
-    function initCanvasPanZoom() {
-      const viewport = document.getElementById('mindmap-viewport');
-      const world = document.getElementById('mindmap-world');
-
-      function applyTransform() {
-        world.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomLevel})`;
-      }
-
-      // Mouse Drag / Pan
-      viewport.addEventListener('mousedown', (e) => {
-        // Only start pan if clicking on empty viewport or world background
-        if (e.target.closest('.node-card')) return;
-        isPanning = true;
-        viewport.classList.remove('canvas-grab');
-        viewport.classList.add('canvas-grabbing');
-        startX = e.clientX - panX;
-        startY = e.clientY - panY;
-      });
-
-      window.addEventListener('mousemove', (e) => {
-        if (!isPanning) return;
-        panX = e.clientX - startX;
-        panY = e.clientY - startY;
-        applyTransform();
-      });
-
-      window.addEventListener('mouseup', () => {
-        if (isPanning) {
-          isPanning = false;
-          viewport.classList.remove('canvas-grabbing');
-          viewport.classList.add('canvas-grab');
-        }
-      });
-
-      // Mouse Wheel Zoom
-      viewport.addEventListener('wheel', (e) => {
-        e.preventDefault();
-        const zoomDelta = e.deltaY < 0 ? 0.08 : -0.08;
-        zoomLevel = Math.min(Math.max(0.55, zoomLevel + zoomDelta), 1.6);
-        applyTransform();
-      }, { passive: false });
-
-      // Button Zoom Controls
-      document.getElementById('btn-zoom-in').addEventListener('click', () => {
-        zoomLevel = Math.min(1.6, zoomLevel + 0.15);
-        applyTransform();
-      });
-
-      document.getElementById('btn-zoom-out').addEventListener('click', () => {
-        zoomLevel = Math.max(0.55, zoomLevel - 0.15);
-        applyTransform();
-      });
-
-      document.getElementById('btn-zoom-reset').addEventListener('click', () => {
-        zoomLevel = 1;
-        panX = 0;
-        panY = 0;
-        applyTransform();
-      });
-
-      // Expand / Collapse all branches
-      document.getElementById('btn-expand-all').addEventListener('click', () => {
-        const nodes = document.querySelectorAll('.node-card:not(#node-center)');
-        nodes.forEach(n => n.classList.remove('opacity-20', 'scale-90'));
-        document.querySelectorAll('.branch-line').forEach(p => p.setAttribute('stroke-opacity', '0.7'));
-        showToast('Đã mở toàn bộ các nhánh trong sơ đồ');
-      });
-
-      document.getElementById('btn-collapse-all').addEventListener('click', () => {
-        const nodes = document.querySelectorAll('.node-card:not(#node-center)');
-        nodes.forEach(n => n.classList.add('opacity-20', 'scale-90'));
-        document.querySelectorAll('.branch-line').forEach(p => p.setAttribute('stroke-opacity', '0.15'));
-        showToast('Đã thu gọn các nhánh phụ');
-      });
-    }
-
-    function initViewSwitching() {
-      const btnInteractive = document.getElementById('view-interactive-btn');
-      const btnMatrix = document.getElementById('view-matrix-btn');
-      const btnTree = document.getElementById('view-tree-btn');
-
-      const containerInteractive = document.getElementById('interactive-mindmap-container');
-      const containerMatrix = document.getElementById('matrix-view-container');
-      const containerTree = document.getElementById('tree-view-container');
-
-      function setActiveView(view) {
-        // Reset buttons
-        [btnInteractive, btnMatrix, btnTree].forEach(b => {
-          b.className = 'px-2.5 py-1.5 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5';
-        });
-
-        // Hide all views
-        containerInteractive.classList.add('hidden');
-        containerMatrix.classList.add('hidden');
-        containerTree.classList.add('hidden');
-
-        if (view === 'interactive') {
-          btnInteractive.className = 'px-2.5 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold transition flex items-center gap-1.5';
-          containerInteractive.classList.remove('hidden');
-          requestAnimationFrame(updateSvgConnections);
-        } else if (view === 'matrix') {
-          btnMatrix.className = 'px-2.5 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold transition flex items-center gap-1.5';
-          containerMatrix.classList.remove('hidden');
-        } else if (view === 'tree') {
-          btnTree.className = 'px-2.5 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold transition flex items-center gap-1.5';
-          containerTree.classList.remove('hidden');
-        }
-      }
-
-      btnInteractive.addEventListener('click', () => setActiveView('interactive'));
-      btnMatrix.addEventListener('click', () => setActiveView('matrix'));
-      btnTree.addEventListener('click', () => setActiveView('tree'));
-    }
-
-    let currentDrawerNodeId = null;
-
-    function initDrawerInteractions() {
-      const drawer = document.getElementById('node-drawer');
-      const backdrop = document.getElementById('drawer-backdrop');
-      const closeBtn = document.getElementById('drawer-close-btn');
-
-      // Click listener for mindmap nodes
-      document.querySelectorAll('.node-card').forEach(node => {
-        node.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const nodeId = node.getAttribute('data-id');
-          openDrawer(nodeId);
-        });
-      });
-
-      closeBtn.addEventListener('click', closeDrawer);
-      backdrop.addEventListener('click', closeDrawer);
-
-      // Next node button in drawer
-      document.getElementById('drawer-next-btn').addEventListener('click', () => {
-        if (!currentDrawerNodeId) return;
-        const currentIndex = PRES_ORDER.indexOf(currentDrawerNodeId);
-        const nextIndex = (currentIndex + 1) % PRES_ORDER.length;
-        openDrawer(PRES_ORDER[nextIndex]);
-      });
-
-      // Copy node text button in drawer
-      document.getElementById('drawer-copy-btn').addEventListener('click', () => {
-        if (!currentDrawerNodeId) return;
-        const data = MINDMAP_DATA[currentDrawerNodeId];
-        let textToCopy = `[${data.badge}] ${data.title}\n`;
-        textToCopy += `${data.subtitle}\n\n`;
-        textToCopy += `Tóm tắt: ${data.summary}\n\n`;
-        data.sections.forEach(s => {
-          textToCopy += `* ${s.heading}:\n`;
-          s.points.forEach(p => textToCopy += `  - ${p.replace(/<[^>]*>/g, '')}\n`);
-        });
-
-        copyToClipboard(textToCopy);
-        showToast('Đã sao chép nội dung nhánh vào clipboard!');
-      });
-    }
-
-    function openDrawer(nodeId) {
-      const data = MINDMAP_DATA[nodeId];
-      if (!data) return;
-
-      currentDrawerNodeId = nodeId;
-      const drawer = document.getElementById('node-drawer');
-      const backdrop = document.getElementById('drawer-backdrop');
-
-      document.getElementById('drawer-badge').textContent = data.badge;
-      document.getElementById('drawer-title').textContent = data.title;
-
-      let html = `
-        <div class="space-y-4">
-          <p class="text-cyan-200 font-semibold text-xs">${data.subtitle}</p>
-          <div class="p-3.5 rounded-xl bg-brand-surface border border-brand-border/70 text-slate-300 italic">
-            ${data.quote}
-          </div>
-          <div class="text-xs leading-relaxed text-slate-200 bg-brand-card/60 p-3.5 rounded-xl border border-brand-border/40">
-            <b>Đánh giá cốt lõi:</b> ${data.summary}
-          </div>
-        </div>
-      `;
-
-      data.sections.forEach(sec => {
-        html += `
-          <div class="space-y-2 pt-2 border-t border-brand-border/60">
-            <h5 class="font-bold text-white text-xs uppercase tracking-wide text-cyan-300">${sec.heading}</h5>
-            <ul class="space-y-2">
-              ${sec.points.map(pt => `
-                <li class="flex items-start gap-2 text-slate-300">
-                  <span class="text-cyan-400 font-bold mt-0.5">•</span>
-                  <span class="leading-relaxed">${pt}</span>
-                </li>
-              `).join('')}
-            </ul>
-          </div>
-        `;
-      });
-
-      document.getElementById('drawer-content').innerHTML = html;
-
-      // Show drawer
-      backdrop.classList.remove('hidden');
-      drawer.classList.remove('translate-x-full');
-
-      // Highlight corresponding SVG connector
-      document.querySelectorAll('.branch-line').forEach(line => line.classList.remove('active'));
-      const activeLine = document.getElementById(`path-${nodeId}`);
-      if (activeLine) activeLine.classList.add('active');
-    }
-
-    function closeDrawer() {
-      const drawer = document.getElementById('node-drawer');
-      const backdrop = document.getElementById('drawer-backdrop');
-      drawer.classList.add('translate-x-full');
-      backdrop.classList.add('hidden');
-      document.querySelectorAll('.branch-line').forEach(line => line.classList.remove('active'));
-    }
-
-    function initSearchFilter() {
-      const searchInput = document.getElementById('mindmap-search');
-      const clearBtn = document.getElementById('clear-search');
-
-      function performSearch() {
-        const query = searchInput.value.trim().toLowerCase();
-
-        if (!query) {
-          clearBtn.classList.add('hidden');
-          // Reset all nodes
-          document.querySelectorAll('.node-card').forEach(n => {
-            n.classList.remove('highlight-match', 'opacity-25');
-          });
-          return;
-        }
-
-        clearBtn.classList.remove('hidden');
-
-        let matchCount = 0;
-        Object.keys(MINDMAP_DATA).forEach(key => {
-          const item = MINDMAP_DATA[key];
-          const nodeElem = document.getElementById(`node-${key}`);
-          const textCorpus = (
-            item.title + ' ' + 
-            item.subtitle + ' ' + 
-            item.summary + ' ' + 
-            JSON.stringify(item.sections)
-          ).toLowerCase();
-
-          if (textCorpus.includes(query)) {
-            matchCount++;
-            if (nodeElem) {
-              nodeElem.classList.add('highlight-match');
-              nodeElem.classList.remove('opacity-25');
-            }
-          } else {
-            if (nodeElem) {
-              nodeElem.classList.remove('highlight-match');
-              nodeElem.classList.add('opacity-25');
-            }
-          }
-        });
-      }
-
-      searchInput.addEventListener('input', performSearch);
-      clearBtn.addEventListener('click', () => {
-        searchInput.value = '';
-        performSearch();
-      });
-    }
-
-    function initPresentationMode() {
-      const presBtn = document.getElementById('presentation-btn');
-      const presBanner = document.getElementById('presentation-banner');
-      const presExitBtn = document.getElementById('pres-exit-btn');
-      const presPrevBtn = document.getElementById('pres-prev-btn');
-      const presNextBtn = document.getElementById('pres-next-btn');
-
-      function updatePresStep() {
-        const nodeId = PRES_ORDER[currentPresIndex];
-        const data = MINDMAP_DATA[nodeId];
-
-        document.getElementById('pres-step-title').textContent = `Đang xem: ${data.badge} - ${data.title}`;
-        document.getElementById('pres-step-counter').textContent = `(${currentPresIndex + 1}/${PRES_ORDER.length})`;
-
-        // Highlight active node in mindmap
-        document.querySelectorAll('.node-card').forEach(n => {
-          n.classList.remove('ring-4', 'ring-cyan-400', 'scale-105');
-          n.classList.add('opacity-40');
-        });
-
-        const activeNode = document.getElementById(`node-${nodeId}`);
-        if (activeNode) {
-          activeNode.classList.remove('opacity-40');
-          activeNode.classList.add('ring-4', 'ring-cyan-400', 'scale-105');
-          
-          // Auto pan canvas to center the active node
-          const world = document.getElementById('mindmap-world');
-          const viewport = document.getElementById('mindmap-viewport');
-          const nodeRect = activeNode.getBoundingClientRect();
-          const vpRect = viewport.getBoundingClientRect();
-
-          const targetX = (vpRect.left + vpRect.width / 2) - (nodeRect.left + nodeRect.width / 2);
-          const targetY = (vpRect.top + vpRect.height / 2) - (nodeRect.top + nodeRect.height / 2);
-
-          panX += targetX;
-          panY += targetY;
-          world.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomLevel})`;
-        }
-
-        // Open detailed drawer for deeper focus
-        openDrawer(nodeId);
-      }
-
-      presBtn.addEventListener('click', () => {
-        isPresentationActive = true;
-        presBanner.classList.remove('hidden');
-        currentPresIndex = 0;
-        updatePresStep();
-        showToast('Đã bắt đầu chế độ Thuyết trình 5W1H');
-      });
-
-      presExitBtn.addEventListener('click', () => {
-        isPresentationActive = false;
-        presBanner.classList.add('hidden');
-        document.querySelectorAll('.node-card').forEach(n => {
-          n.classList.remove('ring-4', 'ring-cyan-400', 'scale-105', 'opacity-40');
-        });
-        closeDrawer();
-      });
-
-      presPrevBtn.addEventListener('click', () => {
-        currentPresIndex = (currentPresIndex - 1 + PRES_ORDER.length) % PRES_ORDER.length;
-        updatePresStep();
-      });
-
-      presNextBtn.addEventListener('click', () => {
-        currentPresIndex = (currentPresIndex + 1) % PRES_ORDER.length;
-        updatePresStep();
-      });
-    }
-
-    function renderTreeView() {
-      const container = document.getElementById('tree-root-nodes');
-      if (!container) return;
-
-      const keys = ['what', 'why', 'where', 'who', 'when', 'how'];
-      let treeHtml = '';
-
-      keys.forEach(key => {
-        const item = MINDMAP_DATA[key];
-        treeHtml += `
-          <div class="border border-brand-border rounded-xl bg-brand-surface/60 overflow-hidden">
-            <button 
-              onclick="toggleTreeBranch('${key}')" 
-              class="w-full text-left p-3 flex items-center justify-between hover:bg-brand-card transition text-xs font-bold text-white"
-            >
-              <div class="flex items-center gap-2">
-                <span id="tree-icon-${key}" class="text-cyan-400 font-mono transition-transform">▼</span>
-                <span class="text-cyan-400 font-black tracking-wide">${item.badge}</span>
-                <span>— ${item.title}</span>
-              </div>
-              <span class="text-[10px] text-slate-400 hidden sm:inline">Nhấp để đóng/mở</span>
-            </button>
-
-            <div id="tree-branch-${key}" class="p-3.5 bg-brand-card/30 border-t border-brand-border/60 space-y-3 text-xs text-slate-300">
-              <p class="italic text-cyan-200">${item.summary}</p>
-              ${item.sections.map(sec => `
-                <div class="space-y-1.5 pl-3 border-l-2 border-brand-border">
-                  <div class="font-bold text-white text-[11px]">${sec.heading}</div>
-                  <ul class="space-y-1 pl-2">
-                    ${sec.points.map(pt => `<li class="list-disc list-inside text-slate-400">${pt}</li>`).join('')}
-                  </ul>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `;
-      });
-
-      container.innerHTML = treeHtml;
-    }
-
-    function toggleTreeBranch(key) {
-      const branch = document.getElementById(`tree-branch-${key}`);
-      const icon = document.getElementById(`tree-icon-${key}`);
-      if (branch.classList.contains('hidden')) {
-        branch.classList.remove('hidden');
-        icon.style.transform = 'rotate(0deg)';
-      } else {
-        branch.classList.add('hidden');
-        icon.style.transform = 'rotate(-90deg)';
-      }
-    }
-
-    function copyToClipboard(text) {
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).catch(() => {
-          fallbackCopyText(text);
-        });
-      } else {
-        fallbackCopyText(text);
-      }
-    }
-
-    function fallbackCopyText(text) {
-      const textArea = document.createElement("textarea");
-      textArea.value = text;
-      textArea.style.position = "fixed";
-      textArea.style.left = "-999999px";
-      textArea.style.top = "-999999px";
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      try {
-        document.execCommand('copy');
-      } catch (err) {
-        console.error('Fallback copy failed', err);
-      }
-      document.body.removeChild(textArea);
-    }
-
-    function initCopySummary() {
-      const copyBtn = document.getElementById('copy-summary-btn');
-      copyBtn.addEventListener('click', () => {
-        let summaryText = `MINDMAP 5W1H: AI VÀ TƯƠNG LAI VIỆC LÀM (Dữ liệu ILO 2025, WEF 2025, IMF 2024)\n\n`;
-        summaryText += `1. CÂU HỎI TRUNG TÂM: AI có làm mất việc làm không?\n`;
-        summaryText += `   -> Có mất ở một số nhiệm vụ chuẩn hóa, nhưng bản chất là "chuyển đổi nhiệm vụ và hợp tác người-máy".\n\n`;
-        summaryText += `2. WHAT: Mất nhiệm vụ lặp lại (nhập liệu, tóm tắt cơ bản), phát triển nhiệm vụ kiểm chứng, sáng tạo và đạo đức.\n`;
-        summaryText += `3. WHY: Doanh nghiệp muốn tối ưu năng suất, xử lý big data và vận hành 24/7.\n`;
-        summaryText += `4. WHERE: Khối nghề hành chính/văn phòng (clerical) và các quốc gia phát triển chịu tác động mạnh nhất.\n`;
-        summaryText += `5. WHO: Lao động, doanh nghiệp (77% reskilling), trường đại học và chính phủ cùng vào cuộc.\n`;
-        summaryText += `6. WHEN: Đang diễn ra và tăng tốc trong giai đoạn bản lề 2025 - 2030.\n`;
-        summaryText += `7. HOW: 3 cơ chế: Tự động hóa (Automation) + Tăng cường (Augmentation) + Tái phân bổ (Reallocation).\n`;
-
-        copyToClipboard(summaryText);
-        showToast('Đã sao chép toàn bộ tóm tắt Mindmap vào Clipboard!');
-      });
-    }
-  </script>
+  <!-- Dữ liệu học thuật & Logic tương tác tách rời theo chuẩn mô-đun hóa (tương thích 100% file://) -->
+  <script src="js/data-mindmap-overview.js"></script>
+  <script src="js/mindmap-overview.js"></script>
 </body>
 </html>
